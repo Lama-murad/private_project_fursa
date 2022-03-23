@@ -146,7 +146,7 @@ function CourseRegistration() {
       {/* //registration inputs */}
       <form onSubmit={handleRegister} className='inputDiv'>
    
-        <Box className='mybox' sx={{ minWidth: 120 }}>
+        {/* <Box className='mybox' sx={{ minWidth: 120 }}>
           <FormControl required fullWidth>
  
             <InputLabel id="demo-simple-select-label">Course</InputLabel>
@@ -162,7 +162,7 @@ function CourseRegistration() {
               <MenuItem value={30}>single lesson</MenuItem>
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
 
         <Box className='mybox1' sx={{ minWidth: 120 }}>
           <FormControl required fullWidth>

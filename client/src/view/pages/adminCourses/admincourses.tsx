@@ -11,7 +11,8 @@ import {Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AdminHeader from '../../components/adminHeader/adminHeader';
-import AddCourse from '../addCourse/addCourse'
+// import AddGroupCourse from '../addCourse/addGroupCourse';
+// import AddSingleCourse from '../addCourse/addSingleCourse';
 
 // interface courses {
 //   id: number;
@@ -23,22 +24,26 @@ import AddCourse from '../addCourse/addCourse'
 // }
 
 function AdminCourses() {
-  const [courses, setCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0}])
+  const [groupcourses, setGroupCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0,time:""}])
   const [details, setDetails] = useState<Array<any>>([{id: 0, name:"", participants:0,lessons:0,cost:0}]);
-
-  //using json db
-// useEffect(() => {
-//   axios.get('http://localhost:3004/courses').then(({ data }) => setDetails(data));
-// }, []);
+  const [singlecourses, setSingleCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0}])
 
 useEffect(()=>{
-
   //fetch courses using mongo
-fetch('/courses/get-all-courses')
+fetch('/courses/get-all-single-courses')
   .then(res=>res.json())
   .then(data=>{
     console.log(data);
-    setCourses(data.courses);
+    setSingleCourses(data.courses);
+  }).catch(err=>{
+    console.error(err);
+  })
+
+  fetch('/courses/get-all-group-courses')
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data);
+    setGroupCourses(data.courses);
   }).catch(err=>{
     console.error(err);
   })
@@ -76,12 +81,12 @@ function handleDelete(event:any){
                     <th>lessons</th>
                     <th>hours</th>
                     <th>cost</th>
-                    <th>Edit/Delete</th>
+                    <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                  
-              {courses.map((info,index)=>{
+              {singlecourses.map((info,index)=>{
               return(
                   <tr key={index}>
                       {/* <td>{info.id}</td> */}
@@ -93,7 +98,7 @@ function handleDelete(event:any){
                       <td>
                       <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
                       {/* <Link to={`/addCourse`}>    <Button className='addbtn'>Add</Button> </Link> */}
-      <Button>Edit</Button>
+      {/* <Button>Edit</Button> */}
       <Button onClick={handleDelete}>Delete</Button>
     </ButtonGroup>
                         </td>
@@ -106,7 +111,52 @@ function handleDelete(event:any){
                 </tbody>
             </table>
      </div>
-     <Link to={`/addCourse`}>    <Button className='addbtn'>Add new course</Button> </Link>
+     {/* <div> */}
+     <Link to={`/addSingleCourse`}>    <Button className='addbtn'>Add new single course</Button> </Link>
+        {/* </div> */}
+     <div className='tablediv'>
+     <table className="table table-striped">
+                <thead>
+                    <tr>
+                    {/* <th>Id</th> */}
+                    <th>Name</th>
+                    <th>participants</th>
+                    <th>lessons</th>
+                    <th>hours</th>
+                    <th>cost</th>
+                    <th>time</th>
+                    <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+              {groupcourses.map((info,index)=>{
+              return(
+                  <tr key={index}>
+                      {/* <td>{info.id}</td> */}
+                      <td>{info.name}</td>
+                      <td>{info.participants}</td>
+                      <td>{info.lessons}</td>
+                      <td>{info.hours}</td>
+                      <td>{info.cost}</td>
+                      <td>{info.time}</td>
+                      <td>
+                      <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
+                      {/* <Link to={`/addCourse`}>    <Button className='addbtn'>Add</Button> </Link> */}
+      {/* <Button>Edit</Button> */}
+      <Button onClick={handleDelete}>Delete</Button>
+    </ButtonGroup>
+                        </td>
+                  </tr>
+              )
+          }
+          
+      )}
+                    
+                </tbody>
+            </table>
+     </div>
+     <Link to={`/addGroupCourse`}>    <Button className='addbtn'>Add new group course</Button> </Link>
         </div>
   );
 }

@@ -22,7 +22,6 @@ import CourseRegistration from "./view/pages/courseRegistration/courseRegistrati
 import Data from "./view/pages/data/data";
 import AdminCourses from "./view/pages/adminCourses/admincourses";
 import AdminPage from "./view/pages/AdminPage/adminpage";
-import AddCourse from "./view/pages/addCourse/addCourse";
 import TableDatePicker from "./view/pages/TableDatePicker/TableDatePicker"
 import CalendarFun from "./view/pages/courseRegistration/courseregistration2";
 import AddOffer from './view/pages/addOffer/addOffer';
@@ -30,6 +29,10 @@ import UserLevel from './view/pages/courseRegistration/userLevel';
 import AddHorse from './view/pages/addHorse/addHorse';
 import AddTrainer from './view/pages/addTrainer/addTrainer';
 import UsercourseType from './view/components/courseSelection/courseSelection';
+import ChooseCourse from './view/pages/courseRegistration/choosecourse';
+import AddSingleCourse from './view/pages/addCourse/addSingleCourse';
+// import AddGroupCourse from './view/pages/addCourse/addGroupCourse';
+import AddGroupCourse from './view/pages/addCourse/addgroupCourse'
 
 
 ReactDOM.render(
@@ -50,8 +53,10 @@ ReactDOM.render(
       <Route path="horses" element={<Horses />} />
       <Route path="courses" element={<Courses />} />
       <Route path="data" element={<Data />} /> 
+      <Route path="choosecourse" element={<ChooseCourse />} /> 
       <Route path="adminpage" element={<AdminPage />} /> 
-      <Route path="addCourse" element={<AddCourse />} /> 
+      <Route path="addGroupCourse" element={<AddGroupCourse />} /> 
+      <Route path="addSingleCourse" element={<AddSingleCourse />} /> 
       <Route path="addOffer" element={<AddOffer />} /> 
       <Route path="TableDatePicker" element={<TableDatePicker />} /> 
       <Route path="admincourses" element={<AdminCourses />} /> 

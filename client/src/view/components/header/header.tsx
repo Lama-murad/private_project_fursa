@@ -46,7 +46,7 @@ function Header() {
                 </Link>
                 
                 {/* userLevel */}
-                <Link to="/courseRegistration">
+                <Link to="/choosecourse">
                     Register
                 </Link>
                 {/* <Link to="/TableDatePicker">
@@ -80,10 +80,6 @@ function Header() {
                     }}
                 >
 
-                    <MenuItem>
-                        <Link to="/SignIn"> SignIn</Link>  </MenuItem>
-
-                    <MenuItem>   <Link to="/SignUp"> SignUp</Link>   </MenuItem>
                     <MenuItem>  <Link to="/SignIn"> Logout</Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose1}>Close</MenuItem>

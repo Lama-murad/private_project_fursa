@@ -20,10 +20,14 @@ import Course from "./course";
 //     participants:string;
 //     cost:number;
 //   }
-const courses = [{ name: 'group lessons', hours: 5, lessons: 10, participants: "4-8", cost: 1000 },
-{ name: 'private lessons', hours: 5, lessons: 10, participants: "1", cost: 1200 },
-{ name: 'single lesson', hours: 0.5, lessons: 1, participants: "1-5", cost: 110 }];
+const courses = [{
+    name: 'group lessons', hours: 5, lessons: 10, participants: "5", cost: 1000,
+    description: 'Saturdays,Tuesdays or Wednesdays. one lesson a week (30 minutes). working hours:9:00-18:00'
+},
 
+{ name: 'single lesson', hours: 0.5, lessons: 1, participants: "1", cost: 110,
+description:'Sundays,Mondays or Thursdays .signle lesson (30 minutes). working hours:9:00-18:00'}];
+// { name: 'private lessons', hours: 5, lessons: 10, participants: "1", cost: 1200 },
 function Courses() {
 
     return (
@@ -33,9 +37,11 @@ function Courses() {
             <div className="courses">
                 {courses.map((c, i) => {
                     return <Course key={i} name={c.name} hours={c.hours}
-                        lessons={c.lessons} participants={c.participants} cost={c.cost} />
+                        lessons={c.lessons} participants={c.participants} cost={c.cost} description={c.description}/>
                 }
+
                 )}
+
                 <Outlet />
             </div>
         </div>

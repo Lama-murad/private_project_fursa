@@ -26,10 +26,13 @@ h3{
     top: 5vw;
 }
     .courses{
-    align-items: center;
+    // align-items: center;
+
         position: absolute;
-         left: 5vw;
+        //  left: 5vw;
         top: 10vw;
+        align-content: center;
+        justify-content: center;
         // width: 90vw;
         // height: 50vh;
         display: flex;

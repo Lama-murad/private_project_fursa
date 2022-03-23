@@ -7,27 +7,27 @@ import './addCourse.scss';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
 
-function AddCourse(){
-  const [courses, setCourses] = useState([])
+function AddSingleCourse(){
+  const [singleCourses, setSingleCourses] = useState([])
 
   useEffect(()=>{
 
     //fetch courses
-  fetch('/courses/get-all-courses')
+  fetch('/courses/get-all--single-courses')
     .then(res=>res.json())
     .then(data=>{
       console.log(data);
-      setCourses(data.courses);
+      setSingleCourses(data.courses);
     }).catch(err=>{
       console.error(err);
     })
   },[])
 
-  function addCourse(ev: any) {
+  function addSingleCourse(ev: any) {
     ev.preventDefault();
     const form = ev.target;
    console.log({form})
-    axios.post('/courses/add-new-course', { name: form[0].value, cost: form[1].value, participants: form[2].value,lessons:form[3].value,hours:form[4].value})
+    axios.post('/courses/add-new-single-course', { name: form[0].value, cost: form[1].value, participants: form[2].value,lessons:form[3].value,hours:form[4].value})
       .then(data => {
         console.log(data);
       }).catch(err => {
@@ -95,7 +95,7 @@ alert("course added successfully");
             </form> */} 
 
 
-            <form onSubmit={addCourse}>
+            <form onSubmit={addSingleCourse}>
           <input type="text" placeholder='insert course name' name='courseName' />
           <input type="number" name="cost" placeholder='insert course"s cost' />
           <input type="number" name="participants" placeholder='insert participants number' />
@@ -103,8 +103,8 @@ alert("course added successfully");
           <input type="double" name="hours" placeholder='how much hours' />
           <button type='submit'>Add</button>
         </form>
-        <h1>courses</h1>
-        {courses.map((course: any) => {
+        <h1>single lesson</h1>
+        {singleCourses.map((course: any) => {
           return <p key={course._id}>{course.name}</p>
         })}
 
@@ -114,4 +114,4 @@ alert("course added successfully");
 
 }
 
-export default AddCourse;
+export default AddSingleCourse;

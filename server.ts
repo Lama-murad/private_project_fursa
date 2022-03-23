@@ -1,5 +1,5 @@
 import { loginStatus } from './controllers/signInController';
-import Courses from './model/schema/coursesModel';
+import Courses from './model/schema/groupCourseModel';
 import User from './model/schema/userModel';
 require('dotenv').config();
 

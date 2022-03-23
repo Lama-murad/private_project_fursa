@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
 
-const CourseSchema = new mongoose.Schema({
+const singleCourseSchema = new mongoose.Schema({
     name: String,
     cost:Number,
     participants:Number,
     hours:Number,
     lessons:Number,
+
   });
 
 //the collection
-const Courses = mongoose.model("Courses", CourseSchema);
+const signleCourses = mongoose.model("signleCourses", singleCourseSchema);
 
-export default Courses;
+export default signleCourses;
