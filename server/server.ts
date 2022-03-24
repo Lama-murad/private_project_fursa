@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const app = express();
 const fs = require('fs');
-const port = 4007;
+const port = process.env.PORT || 4007;
 
 app.use(express.json());
 //cookies
