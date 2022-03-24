@@ -9,6 +9,7 @@ var react_1 = require("react");
 var trainer_1 = require("../../../features/trainersReducer/trainer");
 var offers_2 = require("../../../features/offersReducer/offers");
 var offers_3 = require("../../../features/offersReducer/offers");
+var header_1 = require("../../components/header/header");
 function Homepage() {
     var _a = react_1.useState("Zoro"), names = _a[0], Setname = _a[1];
     var _b = react_1.useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1yr60poUFJojpky70RI6hrTBtWx5Dm3ifwQ&usqp=CAU"), pics = _b[0], Setphoto = _b[1];
@@ -24,15 +25,7 @@ function Homepage() {
         //   setPpls(data);
         // })
         //fetch kittens
-        fetch('/get-all-kitens')
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-            console.log(data);
-            setKittens(data);
-        })["catch"](function (err) {
-            console.error(err);
-        });
-        fetch('/get-all-courses')
+        fetch('/courses/get-all-courses')
             .then(function (res) { return res.json(); })
             .then(function (data) {
             console.log(data);
@@ -53,16 +46,15 @@ function Homepage() {
     function handleGetOffers() {
         dispatch(offers_3.getOfferAsync());
     }
-    return (React.createElement("div", { className: 'maindiv' },
-        React.createElement("h3", { className: "h" }, "Welcome to our farm"),
-        React.createElement("div", null,
-            React.createElement("button", { onClick: handleGetOffers }, "get offers")),
-        React.createElement("div", { className: "offersDiv" }, offers.status !== 'loading' ? offers.arrOffers.map(function (offer, index) {
-            // return (<p key={index}>{offer.name}</p> )
-            return React.createElement(offers_1["default"], { key: index, name: offer.name, description: offer.description, cost: offer.cost });
-        }) : React.createElement("div", null, "loading")),
-        React.createElement(courses_1["default"], null),
-        React.createElement("div", { className: "ani" },
-            React.createElement("div", { className: 'animation' }))));
+    return (React.createElement("div", { className: 'maindivHP' },
+        React.createElement(header_1["default"], null),
+        React.createElement("div", { className: 'animation' }, " "),
+        React.createElement("div", { className: 'bodyDiv' },
+            React.createElement(courses_1["default"], null),
+            React.createElement("button", { className: 'offerBtn', onClick: handleGetOffers }, "get offers"),
+            React.createElement("div", { className: "offersDiv" }, offers.status !== 'loading' ? offers.arrOffers.map(function (offer, index) {
+                // return (<p key={index}>{offer.name}</p> )
+                return React.createElement(offers_1["default"], { key: index, name: offer.name, description: offer.description, cost: offer.cost });
+            }) : React.createElement("div", null, "loading")))));
 }
 exports["default"] = Homepage;

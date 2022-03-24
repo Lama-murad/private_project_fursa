@@ -70,25 +70,20 @@ function Homepage() {
   }
 
   return (
-    <div className='maindiv'>
+    <div className='maindivHP'>
       <Header></Header>
 
-      <div className='animation'>
+      <div className='animation'> </div>
+      <div className='bodyDiv'>
+        <Courses />
+        <button className='offerBtn' onClick={handleGetOffers}>get offers</button>
 
-      </div>
-      {/* <h3 className="h">Welcome to our farm</h3> */}
-      {/* <p className="firstP">Our course duration is 10 weeks, one lesson a week .</p> */}
-      {/* <div><button onClick={handleGetProducts}>get products</button></div> */}
-      <Courses />
-      <div>
-        <button className='offerBtn' onClick={handleGetOffers}>get offers</button></div>
-
-      <div className="offersDiv">
-        {offers.status !== 'loading' ? offers.arrOffers.map((offer, index) => {
-          // return (<p key={index}>{offer.name}</p> )
-          return <OffersCard key={index} name={offer.name} description={offer.description} cost={offer.cost}></OffersCard>
-        }) : <div>loading</div>}
-
+        <div className="offersDiv">
+          {offers.status !== 'loading' ? offers.arrOffers.map((offer, index) => {
+            // return (<p key={index}>{offer.name}</p> )
+            return <OffersCard key={index} name={offer.name} description={offer.description} cost={offer.cost}></OffersCard>
+          }) : <div>loading</div>}
+        </div>
       </div>
     </div>
 

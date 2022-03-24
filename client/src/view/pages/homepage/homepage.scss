@@ -1,32 +1,16 @@
 
-// html, body{
-//     margin: 0px;
-//     font-size: 15px;
-//     background-color: rgb(189, 171, 148);
-//     // color: white;
-//     color:black;
-// }
-
-
-.maindiv{
-  // margin-right: 50px;
+.maindivHP{
   position: relative;
   justify-content: center;
   text-align: center;
   color: black;
-  .firstP{
-  text-align: left;
-  margin-left: 100px;
-  width: 60vw;
-  }
-
+  height: 100vh;
   .animation{
     position: relative;
     left: 25%;
     width: 50vw;
     top: 5vw;
     height: 30vh;
-    // justify-content: center;
     background-image: url(https://i.pinimg.com/736x/7b/f8/04/7bf804b8d3e725b72778b6f7bcf74ed6.jpg);
     background-size: cover;
     background-repeat: no-repeat;
@@ -34,19 +18,21 @@
     animation-duration:10s;
     // animation-fill-mode: forwards;
     animation-iteration-count: infinite;
-    // animation-direction: alternate;
-    // animation-timing-function: ease-in-out;
   }
-
+  .bodyDiv{
+    justify-content: center;
+    align-content: center;
+  
   .offerBtn{
     position: relative;
     top: 35vh;
     width: 50vw;
   }
- 
 
   .offersDiv{
+
     position: absolute;
+    left: 20vw;
     bottom: 0%;
     display: grid;
     grid-template-rows:  auto ;
@@ -59,14 +45,6 @@
       margin: 50px;
        text-align: left;
     }
- 
-
-
-
-  button{
-    width: 20vw;
-    height: 5vh;
-  }
   
 }
 
@@ -108,7 +86,7 @@
       // background-size: 100px;
       background-repeat: no-repeat;
   }
-
+}
 
 
 }

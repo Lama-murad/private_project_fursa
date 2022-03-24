@@ -1,18 +1,17 @@
 .mydiv {
-    background-image: url( https://i.pinimg.com/736x/0d/94/af/0d94af013ad5ea0311d40b78e76ce0e2.jpg);
+    // background-image: url( https://i.pinimg.com/736x/0d/94/af/0d94af013ad5ea0311d40b78e76ce0e2.jpg);
    
     // https://i.pinimg.com/736x/0d/e5/09/0de5098fa5b9ba72a8b0b4c5e31b801f.jpg
     background-repeat: no-repeat;
     background-size: cover;
-    // align-content: center;
-    // justify-content: center;
+
        position: absolute;
         top: 0%;
     width: 100vw;
     height: 100vh;
     .backbtn {
         position: absolute;
-        bottom: 0%;
+        top: 0%;
         left: 0%;
         // justify-content: center;
     //  align-content: center;
@@ -23,6 +22,7 @@
 
     }
     .inputDiv{
+    
  flex: auto;
         // background-color: rgba(65, 61, 56, 0.26);
         // background-image: url(https://i.pinimg.com/736x/0d/94/af/0d94af013ad5ea0311d40b78e76ce0e2.jpg);
@@ -31,47 +31,37 @@
         // margin: auto;
         // padding: 10px;
         position: absolute;
+        white-space: 5px;
          top: 5vh;
          left: 5vw;
-        margin: auto;
-        width: 50vw;
-        height: 100vh;
+        padding: 20px;
+        width: 80vw;
+        // height: 100vh;
+        margin: 20px;
+     
         // border-style: double;
         justify-content: center;
-       
-
-        // .mybox {
-        //     position: absolute;
-        //     // top: 150px;
-        //     // left: 25%;
-        //     width: 50%;
-        //   }
-
-        //   .mybox1 {
-        //     position: absolute;
-        //     top: 220px;
-       
-        //     width: 50%;
-        //   }
     
-        // .txtfield {
+        .txtfield {
         //     position: absolute;
         //   left: 10px;
         //     top: 80px;
         //     width: 50%;
         //     height: 7vh;
+        padding: 5px;
     
     
-        // }
-        // .agefield {
-        //     position: absolute;
+        }
+        .agefield {
+            position: absolute;
+            padding: 5px;
         //   left: 10px;
         //     top: 150px;
         //     width: 50%;
         //     height: 7vh;
     
     
-        // }
+        }
         // .DateTimePicker{
         //     position: absolute;
         //     left: 25%;
@@ -117,6 +107,21 @@
         left: 40%;
         // height: 50vh;
         // width: 50vw;
+    }
+
+    .tablediv{
+        display: flex;
+        flex:1;
+        justify-content: space-evenly;
+        // position: relative;
+        // left: 35%;
+        // top: 100px;
+        // width: 100vw;
+        font-size: 1rem;
+        border: 1mm;
+        border-style: solid;
+    
+    
     }
 
     .aaa {

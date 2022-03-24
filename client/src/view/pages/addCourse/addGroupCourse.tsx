@@ -17,9 +17,10 @@ function AddGroupCourse() {
     fetch('/courses/get-all-group-courses')
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        console.log(1111);
         console.log(data);
         setCourses(data.courses);
+        // alert('course added successfully')
       }).catch(err => {
         console.error(err);
       })
@@ -32,6 +33,7 @@ function AddGroupCourse() {
     axios.post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value,time:form[5].value })
       .then(data => {
         console.log(data);
+        alert('course added successfully')
       }).catch(err => {
         console.error(err);
       })

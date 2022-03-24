@@ -22,6 +22,7 @@ import DatePicker from "react-datepicker";
 import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
 import { registration } from '../../../features/coursesRegistrations/registrationSlice';
 import { useNavigate } from "react-router-dom";
+import Header from '../../components/header/header';
 
 
 interface TimeManagement {
@@ -149,11 +150,7 @@ function ChooseCourse() {
     };
     return (
         <div className='mydiv'>
-
-            <Link to={`/homepage`}>
-                < button className='backbtn'>
-                    back </button>
-            </Link>
+ <Header></Header>
             {/* //registration inputs */}
             <form onSubmit={handleChooseCourse} className='inputDiv'>
 

@@ -1,54 +1,39 @@
 .mydiv {
-  background-image: url(https://i.pinimg.com/736x/0d/e5/09/0de5098fa5b9ba72a8b0b4c5e31b801f.jpg);
   background-repeat: no-repeat;
-  width: 80%;
+  background-size: cover;
+  position: absolute;
+  top: 0%;
+  width: 100vw;
+  height: 100vh;
 }
 .mydiv .backbtn {
   position: absolute;
   top: 0%;
   left: 0%;
-  width: 6vw;
-}
-.mydiv .inputDiv {
-  background-image: url(https://i.pinimg.com/736x/0d/94/af/0d94af013ad5ea0311d40b78e76ce0e2.jpg);
-  background-repeat: no-repeat;
-  margin: auto;
-  padding: 10px;
-  position: absolute;
-  top: 100px;
-  left: 40%;
-  width: 30vw;
-  height: 70vh;
-  justify-content: center;
-}
-.mydiv .inputDiv .mybox {
-  position: absolute;
-  width: 50%;
-}
-.mydiv .inputDiv .txtfield {
-  position: absolute;
-  left: 10px;
-  top: 80px;
-  width: 50%;
-  height: 7vh;
-}
-.mydiv .inputDiv .DateTimePicker {
-  position: absolute;
-  left: 25%;
-  top: 300px;
+  text-align: center;
   width: 10vw;
 }
-.mydiv .inputDiv #meeting-time {
+.mydiv .inputDiv {
+  flex: auto;
   position: absolute;
-  left: 10px;
-  top: 150px;
-  width: 50%;
+  white-space: 5px;
+  top: 5vh;
+  left: 5vw;
+  padding: 20px;
+  width: 80vw;
+  margin: 20px;
+  justify-content: center;
+}
+.mydiv .inputDiv .txtfield {
+  padding: 5px;
+}
+.mydiv .inputDiv .agefield {
+  position: absolute;
+  padding: 5px;
 }
 .mydiv .inputDiv .regBtn {
-  position: absolute;
-  left: 40%;
-  top: 480px;
-  width: 5vw;
+  position: relative;
+  top: 5vh;
   font-size: small;
 }
 .mydiv .cal {
@@ -64,6 +49,14 @@
   position: absolute;
   margin: 50px;
   left: 40%;
+}
+.mydiv .tablediv {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+  font-size: 1rem;
+  border: 1mm;
+  border-style: solid;
 }
 .mydiv .aaa {
   position: relative;

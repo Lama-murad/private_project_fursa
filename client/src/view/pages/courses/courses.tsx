@@ -22,7 +22,7 @@ import Course from "./course";
 //   }
 const courses = [{
     name: 'group lessons', hours: 5, lessons: 10, participants: "5", cost: 1000,
-    description: 'Saturdays,Tuesdays or Wednesdays. one lesson a week (30 minutes). working hours:9:00-18:00'
+    description: 'Saturdays,Tuesdays or Wednesdays.duration 10 weeks , one lesson a week (30 minutes). working hours:9:00-18:00'
 },
 
 { name: 'single lesson', hours: 0.5, lessons: 1, participants: "1", cost: 110,
