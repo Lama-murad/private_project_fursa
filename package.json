@@ -1,43 +1,20 @@
 {
-  "name": "api-server-starter",
+  "name": "private_project_fursa",
   "version": "1.0.0",
-  "description": "A lightweight starter kit for building a Node-based API server",
-  "main": "server.ts",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bpk68/api-server-starter.git"
+    "url": "git+https://github.com/Lama-murad/private_project_fursa.git"
   },
-  "keywords": [
-    "api",
-    "node",
-    "api-server",
-    "express",
-    "starter",
-    "kit"
-  ],
-  "author": "Rob Kendal",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bpk68/api-server-starter/issues"
+    "url": "https://github.com/Lama-murad/private_project_fursa/issues"
   },
-  "homepage": "https://github.com/bpk68/api-server-starter#readme",
-  "dependencies": {
-    "@mui/icons-material": "^5.5.1",
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.0.0",
-    "express": "^4.16.4",
-    "jsonwebtoken": "^8.5.1",
-    "jwt-simple": "^0.5.6",
-    "mongoose": "^6.2.4"
-  },
-  "devDependencies": {
-    "nodemon": "2.0.12",
-    "ts-node": "^10.6.0",
-    "typescript": "^4.6.2"
-  }
+  "homepage": "https://github.com/Lama-murad/private_project_fursa#readme"
 }

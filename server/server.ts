@@ -13,7 +13,7 @@ const port = 4007;
 app.use(express.json());
 //cookies
 app.use(cookieParser());
-app.use(express.static("client/build"));
+app.use(express.static("../client/build"));
 
 const mongoose = require('mongoose');
 const internal = require('stream');
