@@ -34,7 +34,7 @@ function Data() {
         React.createElement(adminHeader_1["default"], null),
         React.createElement(react_router_dom_1.Link, { to: "/" }),
         React.createElement("h4", null, "participants in courses management"),
-        React.createElement("div", { className: 'tablediv' },
+        React.createElement("div", { className: 'tablediv1' },
             React.createElement("table", { className: "table table-striped" },
                 React.createElement("thead", null,
                     React.createElement("tr", null,

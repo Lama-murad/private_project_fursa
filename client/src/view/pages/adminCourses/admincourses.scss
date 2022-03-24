@@ -1,36 +1,32 @@
 .admCouDiv{
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    font-size: 1rem;
+    // position: relative;
+    // align-content: center;
+    // justify-content: center;
+    // align-items: center;
+    // place-content: inherit;
     h4{
-        position: absolute;
-        left: 47%;
+      text-align: center;
     }
-    .backbtn{
-        position: absolute;
-        left: 0%;
-    }
-
 .tablediv{
-    justify-content: center;
-    position: relative;
+    display: flex;
+    flex:1;
+    justify-content: space-evenly;
+    // position: relative;
     // left: 35%;
-    top: 100px;
-    width: 80vw;
+    // top: 100px;
+    // width: 100vw;
+    font-size: 1rem;
     border-style: double;
-    .table{
-        width: 30vw;
-    }
-  
- 
 
-  
+
 }
 .addbtn{
-    width:10vw;
+    width:30vw;
     position: relative;
-    top:100px;
-
-     left: 45%;
+    left: 40vw;
+  
 }
 }

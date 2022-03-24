@@ -30,6 +30,7 @@ function AddSingleCourse(){
     axios.post('/courses/add-new-single-course', { name: form[0].value, cost: form[1].value, participants: form[2].value,lessons:form[3].value,hours:form[4].value})
       .then(data => {
         console.log(data);
+        console.log(data);
       }).catch(err => {
         console.error(err);
       })
@@ -48,47 +49,7 @@ alert("course added successfully");
 
     return(
         <div className="addCourse">
-            {/* <form onSubmit={handleAdd} className="formAddCourse" >
-            <TextField
-            className="txtfield1"
-                  autoComplete="given-name"
-                  name="Course Type"
-                  required
-                  fullWidth
-                  id="courseType"
-                  label="course type"
-                  autoFocus
-                />
-                      <TextField  
-            className="txtfield1"
-                  autoComplete="given-name"
-                  name="Cost"
-                  required
-                  fullWidth
-                  id="cost"
-                  label="cost"
-                  autoFocus
-                />
-                                  <TextField
-            className="txtfield1"
-                  autoComplete="given-name"
-                  name="participants"
-                  required
-                  fullWidth
-                  id="participants"
-                  label="participants"
-                  autoFocus
-                />                  <TextField
-            className="txtfield1"
-                  autoComplete="given-name"
-                  name="lessons"
-                  required
-                  fullWidth
-                  id="lessons"
-                  label="lessons"
-                  autoFocus
-                />
-                 {/* <Link to={`/addCourse`}>    */}
+     <h3> add new single lessons</h3>
                   <Button className='addbtn'  type="submit">Add</Button>
                   {/* </Link> */}
 {/* 

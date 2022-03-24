@@ -31,8 +31,7 @@ import AddTrainer from './view/pages/addTrainer/addTrainer';
 import UsercourseType from './view/components/courseSelection/courseSelection';
 import ChooseCourse from './view/pages/courseRegistration/choosecourse';
 import AddSingleCourse from './view/pages/addCourse/addSingleCourse';
-// import AddGroupCourse from './view/pages/addCourse/addGroupCourse';
-import AddGroupCourse from './view/pages/addCourse/addgroupCourse'
+import AddGroupCourse from './view/pages/addCourse/addGroupCourse';
 
 
 ReactDOM.render(

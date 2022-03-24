@@ -49,7 +49,7 @@ function Data() {
         }}> back</Button> */}
       </Link>
       <h4>participants in courses management</h4>
-      <div className='tablediv'>
+      <div className='tablediv1'>
         <table className="table table-striped">
           <thead>
             <tr>

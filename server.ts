@@ -18,6 +18,7 @@ app.use(express.static("client/build"));
 const mongoose = require('mongoose');
 const internal = require('stream');
 
+// app.use(express.static("client/build"));
 
 
 main().catch(err => console.log(err));

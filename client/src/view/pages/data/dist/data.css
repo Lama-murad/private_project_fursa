@@ -1,19 +1,19 @@
-.tablediv {
+.tablediv1 {
   justify-content: center;
   position: relative;
   left: 35%;
   width: 30vw;
   border-style: double;
 }
-.tablediv .backbtn {
+.tablediv1 .backbtn {
   position: relative;
 }
-.tablediv .table {
+.tablediv1 .table {
   width: 30vw;
 }
-.tablediv .editaddbtn {
+.tablediv1 .editaddbtn {
   width: 7vw;
 }
-.tablediv .grpbtn {
+.tablediv1 .grpbtn {
   width: 10vw;
 }

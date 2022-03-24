@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const signInController_1 = require("./controllers/signInController");
 const userModel_1 = __importDefault(require("./model/schema/userModel"));
 require('dotenv').config();
 const express = require('express');
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static("client/build"));
 const mongoose = require('mongoose');
 const internal = require('stream');
+// app.use(express.static("client/build"));
 main().catch(err => console.log(err));
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -63,6 +65,9 @@ const courseRoute = require('./routes/coursesRoute');
 app.use('/courses/', courseRoute);
 const userRoute = require('./routes/userRoute');
 app.use('/user', userRoute);
+const registartionRoute = require('./routes/registrationRoute');
+app.use('/registrations', registartionRoute);
+app.use(signInController_1.loginStatus);
 // const routes = require('./routes/routes.js')(app, fs);
 // app.use('/courses', routes);
 // const server = app.listen(4010, () => {

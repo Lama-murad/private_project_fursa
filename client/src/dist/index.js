@@ -19,9 +19,16 @@ var courseRegistration_1 = require("./view/pages/courseRegistration/courseRegist
 var data_1 = require("./view/pages/data/data");
 var admincourses_1 = require("./view/pages/adminCourses/admincourses");
 var adminpage_1 = require("./view/pages/AdminPage/adminpage");
-var addCourse_1 = require("./view/pages/addCourse/addCourse");
 var TableDatePicker_1 = require("./view/pages/TableDatePicker/TableDatePicker");
 var courseregistration2_1 = require("./view/pages/courseRegistration/courseregistration2");
+var addOffer_1 = require("./view/pages/addOffer/addOffer");
+var userLevel_1 = require("./view/pages/courseRegistration/userLevel");
+var addHorse_1 = require("./view/pages/addHorse/addHorse");
+var addTrainer_1 = require("./view/pages/addTrainer/addTrainer");
+var courseSelection_1 = require("./view/components/courseSelection/courseSelection");
+var choosecourse_1 = require("./view/pages/courseRegistration/choosecourse");
+var addSingleCourse_1 = require("./view/pages/addCourse/addSingleCourse");
+var addGroupCourse_1 = require("./view/pages/addCourse/addGroupCourse");
 react_dom_1["default"].render(react_1["default"].createElement(react_1["default"].StrictMode, null,
     react_1["default"].createElement(react_redux_1.Provider, { store: store_1.store },
         react_1["default"].createElement(react_router_dom_1.BrowserRouter, null,
@@ -36,10 +43,17 @@ react_dom_1["default"].render(react_1["default"].createElement(react_1["default"
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "horses", element: react_1["default"].createElement(horses_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "courses", element: react_1["default"].createElement(courses_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "data", element: react_1["default"].createElement(data_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "choosecourse", element: react_1["default"].createElement(choosecourse_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "adminpage", element: react_1["default"].createElement(adminpage_1["default"], null) }),
-                react_1["default"].createElement(react_router_dom_1.Route, { path: "addCourse", element: react_1["default"].createElement(addCourse_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "addGroupCourse", element: react_1["default"].createElement(addGroupCourse_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "addSingleCourse", element: react_1["default"].createElement(addSingleCourse_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "addOffer", element: react_1["default"].createElement(addOffer_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "TableDatePicker", element: react_1["default"].createElement(TableDatePicker_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "admincourses", element: react_1["default"].createElement(admincourses_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "addHorse", element: react_1["default"].createElement(addHorse_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "addTrainer", element: react_1["default"].createElement(addTrainer_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "courseSelection", element: react_1["default"].createElement(courseSelection_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "userLevel", element: react_1["default"].createElement(userLevel_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "courseRegistration", element: react_1["default"].createElement(courseRegistration_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "courseregistration2", element: react_1["default"].createElement(courseregistration2_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "course/:courseId", element: react_1["default"].createElement(course_1["default"], null) }))),

@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AdminHeader from '../../components/adminHeader/adminHeader';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 // import AddGroupCourse from '../addCourse/addGroupCourse';
 // import AddSingleCourse from '../addCourse/addSingleCourse';
 
@@ -96,11 +97,12 @@ function handleDelete(event:any){
                       <td>{info.hours}</td>
                       <td>{info.cost}</td>
                       <td>
-                      <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
+                      {/* <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group"> */}
                       {/* <Link to={`/addCourse`}>    <Button className='addbtn'>Add</Button> </Link> */}
       {/* <Button>Edit</Button> */}
-      <Button onClick={handleDelete}>Delete</Button>
-    </ButtonGroup>
+      {/* <Button onClick={handleDelete}>Delete</Button>
+    </ButtonGroup> */}
+      <DeleteOutlinedIcon onClick={handleDelete}/>
                         </td>
                   </tr>
               )
@@ -141,11 +143,12 @@ function handleDelete(event:any){
                       <td>{info.cost}</td>
                       <td>{info.time}</td>
                       <td>
-                      <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
+                      {/* <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
                       {/* <Link to={`/addCourse`}>    <Button className='addbtn'>Add</Button> </Link> */}
       {/* <Button>Edit</Button> */}
-      <Button onClick={handleDelete}>Delete</Button>
-    </ButtonGroup>
+      {/* <Button onClick={handleDelete}>Delete</Button>
+    </ButtonGroup> */} 
+    <DeleteOutlinedIcon onClick={handleDelete}/>
                         </td>
                   </tr>
               )
