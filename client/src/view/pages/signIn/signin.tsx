@@ -106,8 +106,8 @@ const responseGoogle = (response:any
           type="password"
         />
      
-      <br /><br />
-      <Button className='btn' size="small" variant="outlined" startIcon={<GoogleIcon />}> Google</Button>
+
+      {/* <Button className='btn' size="small" variant="outlined" startIcon={<GoogleIcon />}> Google</Button> */}
 
       <br></br><br></br>
       {/* <Link to={`/`}> */}
