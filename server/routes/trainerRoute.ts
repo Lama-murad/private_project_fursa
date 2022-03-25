@@ -5,9 +5,7 @@ import Trainer from '../model/schema/trainerModel';
 const trainerController = require('../controllers/trainerController');
 
 
-router.
-route('/trainerByLevel').
-post(trainerController.getTrainerByLevel);
+
 
 
 async function getTrainer():Promise<any> {
@@ -50,5 +48,7 @@ router.get('/get-all-trainer',async (req:any, res:any)=>{
       res.send({ error: err.message });
     }
   });
+
+  router.route('/getTrainerByLevel').post(trainerController.getTrainerByLevel);
 
 module.exports = router;

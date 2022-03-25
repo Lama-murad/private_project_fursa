@@ -22,8 +22,24 @@ router.get('/get-all-horses',async (req:any, res:any)=>{
     res.send({horses:horses});
   })
 
-
-  
+  router.post("/get-horse-by-level", async (req, res) => {
+    try {
+      const {level} = req.body;
+      console.log("hooooon")
+      if (!level ) throw new Error("No data");
+      const horses = await Horses.find({"level":level});
+      if(horses){
+        res.send({"log":true,"horses":horses})
+        console.log("trueeeeeee")
+    }
+    else{
+        res.send({"log":false})
+        console.log("falsee")
+    }
+}catch(err){
+    res.send({err});
+}
+  });
 
  
  

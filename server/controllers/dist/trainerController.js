@@ -46,6 +46,7 @@ exports.getTrainerByLevel = function (req, res) { return __awaiter(void 0, void 
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
+                console.log("fat 3l controller");
                 level = req.body.level;
                 return [4 /*yield*/, trainerModel_1["default"].find({ "level": level })];
             case 2:

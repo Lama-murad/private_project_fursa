@@ -24,14 +24,14 @@ const initialState: Trainers = {
 };
 
 export const fetchTrainerByLevel = createAsyncThunk(
-    'trainer/trainerByLevel',
+    'trainer/getTrainerByLevel',
     async (levell:any) => {
         try {
             const {level}=levell;
-            console.log("faaaaaaaaat")
-            const response = await axios.post('http://localhost:3000/trainer/trainerByLevel', { "level": level })
+            console.log("faaaaaaaaat",levell)
+            const response = await axios.post('/trainer/getTrainerByLevel', { "level": level })
             const data = response.data
-            console.log(data)
+            console.log("data",data)
             return data;
 
         } catch (error:any) {

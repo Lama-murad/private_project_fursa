@@ -72,8 +72,38 @@ router.get('/get-all-horses', function (req, res) { return __awaiter(void 0, voi
         }
     });
 }); });
+router.post("/get-horse-by-level", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var level, horses, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                level = req.body.level;
+                console.log("hooooon");
+                if (!level)
+                    throw new Error("No data");
+                return [4 /*yield*/, horsesModel_1["default"].find({ "level": level })];
+            case 1:
+                horses = _a.sent();
+                if (horses) {
+                    res.send({ "log": true, "horses": horses });
+                    console.log("trueeeeeee");
+                }
+                else {
+                    res.send({ "log": false });
+                    console.log("falsee");
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                res.send({ err: err_2 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
 router.post("/add-new-horse", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, age, level, description, image, newHorse, err_2;
+    var _a, name, age, level, description, image, newHorse, err_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -96,8 +126,8 @@ router.post("/add-new-horse", function (req, res) { return __awaiter(void 0, voi
                 res.send({ val: "OK" });
                 return [3 /*break*/, 3];
             case 2:
-                err_2 = _b.sent();
-                res.send({ error: err_2.message });
+                err_3 = _b.sent();
+                res.send({ error: err_3.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

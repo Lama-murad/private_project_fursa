@@ -40,9 +40,6 @@ var express = require('express');
 var router = express.Router();
 var trainerModel_1 = require("../model/schema/trainerModel");
 var trainerController = require('../controllers/trainerController');
-router.
-    route('/trainerByLevel').
-    post(trainerController.getTrainerByLevel);
 function getTrainer() {
     return __awaiter(this, void 0, Promise, function () {
         var trainers, err_1;
@@ -107,4 +104,5 @@ router.post("/add-new-trainer", function (req, res) { return __awaiter(void 0, v
         }
     });
 }); });
+router.route('/getTrainerByLevel').post(trainerController.getTrainerByLevel);
 module.exports = router;
