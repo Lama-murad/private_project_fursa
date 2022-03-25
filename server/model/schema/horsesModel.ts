@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 const HorseSchema = new mongoose.Schema({
     name: String,
     level:Number,
-    age:Number,
     description:String,
+    age:Number,
+ image:String
   });
 
 //the collection

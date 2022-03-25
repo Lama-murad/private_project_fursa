@@ -3,7 +3,7 @@ import './trainers.scss';
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Card from '../../components/trainersCard/card';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // import Nav from '../../components/nav/Nav';
 import Nav from '../../components/nav/Nav';
@@ -12,7 +12,7 @@ import Header from '../../components/header/header';
 
 
 function Trainers() {
-
+    const [trainerss, setTrainer] = useState([])
     interface Prop {
         name: string;
         image: string;
@@ -34,6 +34,20 @@ function Trainers() {
     { name: 'Monica', image: 'https://m.media-amazon.com/images/M/MV5BMTA4OTczNDExNDNeQTJeQWpwZ15BbWU3MDUyNTIzMTM@._V1_UY317_CR7,0,214,317_AL_.jpg',
     age:39,level:3,desc: "description" }]
 
+    useEffect(()=>{
+
+        //fetch courses
+      fetch('/trainer/get-all-trainer')
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data);
+         
+          setTrainer(data.trainers);
+        }).catch(err=>{
+          console.error(err);
+        })
+      },[])
+
 
 
     return (
@@ -43,10 +57,10 @@ function Trainers() {
             <h3>Our trainers</h3>
 
             <div className="maindiv2_card2">
-                {trainers.map((trainer, index) => {
+                {trainerss.map((trainer:any, index) => {
                     return <Card key={index} name={trainer.name} age={trainer.age}
                     level={trainer.level}
-                    image={trainer.image} desc={trainer.desc}></Card>
+                    image={trainer.image} desc={trainer.description}></Card>
                 })}
             </div>
         </div>

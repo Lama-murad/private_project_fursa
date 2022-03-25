@@ -32,6 +32,7 @@ import UsercourseType from './view/components/courseSelection/courseSelection';
 import ChooseCourse from './view/pages/courseRegistration/choosecourse';
 import AddSingleCourse from './view/pages/addCourse/addSingleCourse';
 import AddGroupCourse from './view/pages/addCourse/addGroupCourse';
+import PrivateCourseReg from './view/pages/courseRegistration/privateCourseReg';
 
 
 ReactDOM.render(
@@ -52,6 +53,7 @@ ReactDOM.render(
       <Route path="horses" element={<Horses />} />
       <Route path="courses" element={<Courses />} />
       <Route path="data" element={<Data />} /> 
+      <Route path="privateCourseReg" element={<PrivateCourseReg />} /> 
       <Route path="choosecourse" element={<ChooseCourse />} /> 
       <Route path="adminpage" element={<AdminPage />} /> 
       <Route path="addGroupCourse" element={<AddGroupCourse />} /> 

@@ -28,8 +28,8 @@ import TimePicker, { TimePickerValue } from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 //import { selectTreatment } from '../../../features/treatment/treatmentSlice';
-import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
-import { registration } from '../../../features/coursesRegistrations/registrationSlice';
+import { addAppointment, selectAppointment } from '../../../features/registrationSlice'
+import { registration } from '../../../features/registrationSlice';
 
 const locales = {
     "en-US": require("date-fns/locale/en-US"),

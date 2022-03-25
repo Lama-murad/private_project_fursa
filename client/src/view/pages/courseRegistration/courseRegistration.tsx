@@ -29,8 +29,8 @@ import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
-import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
-import { registration } from '../../../features/coursesRegistrations/registrationSlice';
+// import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
+// import { registration } from '../../../features/coursesRegistrations/registrationSlice';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -114,6 +114,12 @@ function CourseRegistration() {
   const [groupcourses, setGroupCourses] = useState<Array<any>>([{id:0, name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "" }])
   const nav = useNavigate();
   const dispatch = useAppDispatch();
+  const [isChecked, setIsChecked] = useState(false);
+  const [checkedState, setCheckedState] = useState(
+    new Array(groupcourses.length).fill(false)
+);
+const [total, setTotal] = useState(0);
+
 
   useEffect(() => {
     //fetch courses using mongo
@@ -176,15 +182,26 @@ function CourseRegistration() {
     setLevel(event.target.value);
   };
 
-  function changeStartDate(date: any) {
-    // date=>setStartDate(date)
-    setStartDate(date);
-    console.log(date.getHours.getMinutes)
-    setEndDate(date);
-  }
 
-  function handleCheck() {
+  function handleCheck(position:any) {
+    position.preventDefault();
+    const updatedCheckedState = checkedState.map((item, index) =>
+    index === position ? !item : item
+  );
 
+  setCheckedState(updatedCheckedState);
+
+  const totalPrice = updatedCheckedState.reduce(
+    (sum, currentState, index) => {
+      if (currentState === true) {
+        return sum + groupcourses[index].cost;
+      }
+      return sum;
+    },
+    0
+  );
+console.log("total" ,total)
+  setTotal(totalPrice);
   }
 
 
@@ -256,7 +273,7 @@ function CourseRegistration() {
       </TableRow>
     </TableHead>
     <TableBody>
-      {groupcourses.map((row) => (
+      {groupcourses.map((row,index) => (
         <StyledTableRow key={row._id} onClick={() => nav(`/${row._id}`)}>
        
           <StyledTableCell align="center">{row.name}</StyledTableCell>
@@ -266,9 +283,18 @@ function CourseRegistration() {
           <StyledTableCell align="center">{row.cost}</StyledTableCell>
           <StyledTableCell align="center">{row.time}</StyledTableCell>
           <StyledTableCell align="center">
-          <Checkbox
+          {/* <Checkbox
             color="primary"
-          />
+            onClick={handleCheck} 
+          /> */}
+          <input
+  type="checkbox"
+  id={`custom-checkbox-${index}`}
+  name={row.name}
+  value={row.name}
+  checked={checkedState[index]}
+  onChange={() => handleCheck(index)}
+/>
           </StyledTableCell>
 
   
@@ -350,7 +376,13 @@ function CourseRegistration() {
 
 
         </div>
+
       }
+
+<div className="result">
+        Above checkbox is {isChecked ? "checked" : "un-checked"}.
+        <div className="right-section">{total}</div>
+      </div>
 
 
 

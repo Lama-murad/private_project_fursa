@@ -70,6 +70,12 @@ app.use('/courses/', courseRoute);
 const userRoute = require('./routes/userRoute')
 app.use('/user', userRoute);
 
+const addHorseRoute = require('./routes/addHorseRoute')
+app.use('/addHorse/', addHorseRoute);
+
+const trainerRoute = require('./routes/trainerRoute')
+app.use('/trainer/', trainerRoute);
+
 const registartionRoute = require('./routes/registrationRoute')
 app.use('/registrations', registartionRoute);
 

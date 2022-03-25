@@ -17,21 +17,16 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "react-datetime-picker/dist/DateTimePicker.css";
-import format from "date-fns/format";
-import getDay from "date-fns/getDay";
-import parse from "date-fns/parse";
-import startOfWeek from "date-fns/startOfWeek";
-// import { registerLocale } from "react-datepicker";
-// import ro from 'date-fns/locale/ro';
+import Header from '../../components/header/header';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
-import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
-import { registration } from '../../../features/coursesRegistrations/registrationSlice';
-
-
+// import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
+// import { registration } from '../../../features/coursesRegistrations/registrationSlice';
+import  { fetchTrainerByLevel, getStatus } from '../../../features/trainerReducer';
+import {getTrainers} from '../../../features/trainerReducer';
 
 interface TimeManagement {
   start: Date;
@@ -52,44 +47,70 @@ const coursesRegis: Array<TimeManagement> = [
 ];
 
 
-function CourseRegistration() {
-  const [courseType, setcourseType] = React.useState('');
-  const [level, setLevel] = React.useState('');
+function PrivateCourseReg() {
+  const [levell, setLevel] = React.useState('');
   const [alertt, setAlert] = useState(false);
-  const [course, setCourse] = React.useState('');
-  const [dateState, setDateState] = useState(new Date())
-  // const [startDate, setStateDate] = useState(new Date())
   const [date, setDate] = useState(new Date());
+  const [dateState, setDateState] = useState(new Date())
   const [startDate, setStartDate] = useState(new Date());
   const [value, onChange] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [registration, setRegistration] = useState({ name: "", start: new Date(), end: new Date(), course: "" });
   const [allReg, setAllReg] = useState(coursesRegis);
-  let dt = new Date(2022, 3, 22, 7, 30);
-  const maxTime = dt.setDate(dt.getDate() + 5);
+  let dt = new Date();
+  // const maxTime = dt.setDate(dt.getDate() + 5);
   const includeDatesArray = [new Date('02-27-2022'), new Date('02-28-2022')]
   const [groupcourses, setGroupCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0,time:""}])
-
+  const [horsess, setHorse] = useState([])
+  const [chosenhorse, setchosenHorse] = useState([])
+  const [trainers, setTrainer] = useState([])
+  const [chosentrainer, setchosenTrainer] = useState([])
   const dispatch = useAppDispatch();
+  const trainerByLevel = useAppSelector(getTrainers)
+  const status = useAppSelector(getStatus)
 
-  useEffect(()=>{
-    //fetch courses using mongo
-    fetch('/courses/get-all-group-courses')
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      setGroupCourses(data.courses);
-    }).catch(err=>{
-      console.error(err);
-    })
-  },[])
+
+  
+ useEffect(()=>{
+
+
+
+  //fetch courses
+fetch('/trainer/get-all-trainer')
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data);
+    setTrainer(data.trainers);
+  }).catch(err=>{
+    console.error(err);
+  })
+
+
+
+  fetch('/addHorse/get-all-horses')
+  .then(res=>res.json())
+  .then(data=>{
+    console.log(data);
+   
+    setHorse(data.horses);
+    console.log(horsess);
+  }).catch(err=>{
+    console.error(err);
+  })
+
+
+
+},[])
+
+
+
 
   const filterDays = (date:any) => {
-    // Disable Weekends
-    if (date.getDay() === 0 || date.getDay() === 6) {
+    // Disable Weekends and group cpurses days
+    if (date.getDay() === 5 || date.getDay() === 6 || date.getDay() === 3 || date.getDay() === 2  ||  date.getMonth()<dt.getMonth() || (date.getDate()<dt.getDate() &&  date.getMonth()===dt.getMonth())) {
 
-        return false;
-    } else {
+    return false;
+  } else {
         return true;
     }
 }
@@ -117,45 +138,42 @@ function CourseRegistration() {
       })
   }
 
- 
-
-  const handleChoseCourse = (event: any) => {
- 
-    setCourse(event.target.value);
-    if(event.target.value==='private lessons'){
-      console.log('fat 3l if private lessons')
-      setAlert(true);
-    }
-   
-  };
-
   const handleChoseLevel = (event: any) => {
     setLevel(event.target.value);
+    // console.log(levell)
+    dispatch(fetchTrainerByLevel({ "level": levell }));
+    // console.log(levell)
+  };
+
+  const handleChoseHorse = (event: any) => {
+    setHorse(event.target.value);
+  };
+
+  const handleChoseTrainer = (event: any) => {
+    setTrainer(event.target.value);
   };
 
   function changeStartDate(date:any){
     // date=>setStartDate(date)
     setStartDate(date);
-    console.log(date.getHours.getMinutes)
+    // console.log(date.getHours.getMinutes)
     setEndDate(date);
   }
 
 
   const validate =  (event: any) => {
-
+    console.log(levell)
       event.preventDefault();
       setAlert(true);
       return;
     
       // setAlert(false);
  };
+
   return (
     <div className='mydiv'>
-
-      <Link to={`/homepage`}>
-        < button className='backbtn'>
-          back </button>
-      </Link>
+  <Header></Header>
+    
       {/* //registration inputs */}
       <form onSubmit={handleRegister} className='inputDiv'>
 
@@ -166,7 +184,7 @@ function CourseRegistration() {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select1"
-              value={level}
+              value={levell}
               label="Level"
               onChange={handleChoseLevel}
             >
@@ -219,40 +237,33 @@ id="meeting-time"
  onChange={changeStartDate}
   
 /> 
-  
 
-        {/* // min="2022-06-07T00:00" max="2022-06-14T00:00"> */}
+           <Button variant="contained" onClick={validate} className="nextBtn">next</Button>
 
-
-        {/* </input>  */}
-   
-
-           {/* <Register /> */}
-           <Button variant="contained" type="submit" className="regBtn">register</Button>
-      </form>
-
-       {/* <button onClick={validate}>Save</button> */}
-
-      {alertt &&
+           {alertt &&
            <div className="popup">
-             <span role="img" aria-label="allowed">✅</span> Alphanumeric Characters
+             {/* <span role="img" aria-label="allowed">✅</span> Alphanumeric Characters
              <br />
-             <span role="img" aria-label="not allowed">⛔️</span> *
-             <form>
-             <Box className='mybox' sx={{ minWidth: 120 }}>
+             <span role="img" aria-label="not allowed">⛔️</span> * */}
+             {/* <form> */}   
+
+        <Box className='mybox1' sx={{ minWidth: 120 }}>
           <FormControl required fullWidth>
  
-            <InputLabel id="demo-simple-select-label">Course</InputLabel>
+            <InputLabel id="demo-simple-select-label">choose preferred horse</InputLabel>
             <Select
               labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={course}
-              label="Course"
-              onChange={handleChoseCourse}
+              id="demo-simple-select1"
+              value={chosenhorse}
+              label="horse"
+              onChange={handleChoseHorse}
             >
-              <MenuItem value={10}>Group lessons</MenuItem>
-              <MenuItem value={20}>Private lessons</MenuItem>
-              <MenuItem value={30}>single lesson</MenuItem>
+                  {horsess.map((horse:any, index) => (
+     <MenuItem  key={horse.name} value={index}> {horse.name}</MenuItem>
+     ))}
+              {/* <MenuItem value={1}>Beginner</MenuItem>
+              <MenuItem value={2}>Intermediate</MenuItem>
+              <MenuItem value={3}>Advanced</MenuItem> */}
             </Select>
           </FormControl>
         </Box>
@@ -260,53 +271,39 @@ id="meeting-time"
         <Box className='mybox1' sx={{ minWidth: 120 }}>
           <FormControl required fullWidth>
  
-            <InputLabel id="demo-simple-select-label">Level</InputLabel>
+            <InputLabel id="demo-simple-select-label">choose preferred trainer</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select1"
-              value={level}
-              label="Level"
-              onChange={handleChoseLevel}
+              value={chosentrainer}
+              label="horse"
+              onChange={handleChoseTrainer}
             >
-              <MenuItem value={1}>Beginner</MenuItem>
-              <MenuItem value={2}>Intermediate</MenuItem>
-              <MenuItem value={3}>Advanced</MenuItem>
+                   {status === 'loading' ? <div>Loading...</div> : trainerByLevel.map((t: any, index: any) => (
+        
+            <MenuItem  key={t.name} value={index}> {t.name}</MenuItem>
+                   ))}
+                  {/* {trainers.map((t:any, index) => (
+     <MenuItem  key={t.name} value={index}> {t.name}</MenuItem>
+     ))} */}
+         
             </Select>
           </FormControl>
         </Box>
 
-             </form>
+             {/* </form> */}
 
 
 
            </div>
          }
-   
 
-
-      {/* <DatePicker
- showTimeSelect
- dateFormat="MMMM d, yyyy h:mmaa"
- selected={startDate}
- selectsEnd
- startDate={startDate}
- endDate={endDate}
- minDate={startDate}
- onChange={onChange}
- /> */}
-      {/* //  onChange={date => setEndDate(date)} */}
-
-
-      {/* <Calendar className='caldiv'
-        value={dateState}
-        onChange={changeDate}
-      />
-      <p className='aaa'>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p> */}
-
+<Button variant="contained" type="submit" className="regBtn">register</Button>
+      </form>
 
   
     </div>
   )
 }
 
-export default CourseRegistration;
+export default PrivateCourseReg;

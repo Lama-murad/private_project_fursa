@@ -2,14 +2,11 @@
 exports.__esModule = true;
 var react_1 = require("react");
 require("./App.scss");
-// import { Text, View } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-var header_1 = require("./view/components/header/header");
-var homepage_1 = require("./view/pages/homepage/homepage");
 // import TextInput from "./features/text/TextInput";
 var hooks_1 = require("../src/app/hooks");
-var products_1 = require("./features/productsReducer/products");
-var trainer_1 = require("./features/trainersReducer/trainer");
+var products_1 = require("./features/products");
+var trainerReducer_1 = require("./features/trainerReducer");
+var signin_1 = require("./view/pages/signIn/signin");
 // const students:Array<Place> = [{name:'Saleem', place:'Mashad'},{name:'Mona',place:"Nazereth"}];
 // interface Place{
 //   name:string;
@@ -19,11 +16,10 @@ var text = "hii all";
 function App() {
     var dispatch = hooks_1.useAppDispatch();
     var products = hooks_1.useAppSelector(products_1.selectProducts);
-    var trainers = hooks_1.useAppSelector(trainer_1.selectrainers);
+    var trainers = hooks_1.useAppSelector(trainerReducer_1.selectrainers);
     return (react_1["default"].createElement("div", { className: "App" },
         react_1["default"].createElement("header", { className: "App-header" },
-            react_1["default"].createElement(header_1["default"], null),
-            react_1["default"].createElement(homepage_1["default"], null),
+            react_1["default"].createElement(signin_1["default"], null),
             react_1["default"].createElement("div", null, products.status !== 'loading' ? products.arrProducts.map(function (product, index) {
                 return (react_1["default"].createElement("p", { key: index }, product.title));
             }) : react_1["default"].createElement("div", null, "loading")))));

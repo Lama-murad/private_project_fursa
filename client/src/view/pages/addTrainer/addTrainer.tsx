@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import './addTrainer.scss';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
+import AdminHeader from '../../components/adminHeader/adminHeader';
 
 function AddTrainer(){
   const [trainer, setTrainer] = useState([])
@@ -13,11 +14,11 @@ function AddTrainer(){
   useEffect(()=>{
 
     //fetch courses
-  fetch('/trainers/get-all-trainers')
+  fetch('/trainer/get-all-trainer')
     .then(res=>res.json())
     .then(data=>{
       console.log(data);
-      setTrainer(data.offers);
+      setTrainer(data.trainers);
     }).catch(err=>{
       console.error(err);
     })
@@ -27,7 +28,7 @@ function AddTrainer(){
     ev.preventDefault();
     const form = ev.target;
    console.log({form})
-    axios.post('/trainers/add-new-trainer', { name: form[0].value, cost: form[1].value, participants: form[2].value,lessons:form[3].value,hours:form[4].value})
+    axios.post('/trainer/add-new-trainer', {name: form[0].value, level: form[1].value, description: form[2].value,age:form[3].value,image:form[4].value})
       .then(data => {
         console.log(data);
       }).catch(err => {
@@ -38,13 +39,14 @@ function AddTrainer(){
 
     return(
         <div className="addOffer">
+             <AdminHeader/>
         <h3>add new trainer</h3>
             <form className='formAddOffer' onSubmit={addTrainer}>
-          <input type="text" placeholder='insert offer name' name='trainerName' />
+          <input type="text" placeholder='insert trainer"s name' name='trainerName' />
           <input type="number" name="level" placeholder='insert trainer"s level' />
-          <input type="number" name="phone" placeholder='insert trainer"s phone number' />
+          <input type="text" name="phone" placeholder='insert trainer"s description' />
           <input type="double" name="age" placeholder='insert trainer"s age' />
-          {/* <button type='submit'>Add</button> */}
+          <input type="text" name="phone" placeholder='insert trainers"s image' />
           <Button className='addbtn'  type="submit">Add</Button>
         </form>
         {/* <h1>courses</h1> */}

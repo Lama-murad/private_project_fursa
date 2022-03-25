@@ -19,8 +19,8 @@ import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
-import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
-import { registration } from '../../../features/coursesRegistrations/registrationSlice';
+import { addAppointment, selectAppointment } from '../../../features/registrationSlice'
+import { registration } from '../../../features/registrationSlice';
 import { useNavigate } from "react-router-dom";
 import Header from '../../components/header/header';
 
@@ -86,7 +86,7 @@ function ChooseCourse() {
 
         }
         if (form[0].value == "signle_lesson") {
-            navigate('/courseregistration2')
+            navigate('/privateCourseReg')
 
 
         }

@@ -36,49 +36,71 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.selectrainers = exports.TrainersReducer = exports.getTrainersAsync = void 0;
-var toolkit_1 = require("@reduxjs/toolkit");
-var axios_1 = require("axios");
-var initialState = {
-    arrTrainers: [],
-    status: 'idle'
-};
-exports.getTrainersAsync = toolkit_1.createAsyncThunk('trainers/fetchTrainers', function (_, thunkAPI) { return __awaiter(void 0, void 0, void 0, function () {
-    var response, data, error_1;
+var express = require('express');
+var router = express.Router();
+var horsesModel_1 = require("../model/schema/horsesModel");
+function getHorses() {
+    return __awaiter(this, void 0, Promise, function () {
+        var horses, err_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, horsesModel_1["default"].find({})];
+                case 1:
+                    horses = _a.sent();
+                    console.log(horses);
+                    return [2 /*return*/, horses];
+                case 2:
+                    err_1 = _a.sent();
+                    console.error(err_1);
+                    return [2 /*return*/, false];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+router.get('/get-all-horses', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var horses;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, axios_1["default"].get('http://localhost:3004/trainers')];
+            case 0: return [4 /*yield*/, getHorses()];
             case 1:
-                response = _a.sent();
-                data = response.data;
-                return [2 /*return*/, data];
+                horses = _a.sent();
+                res.send({ horses: horses });
+                return [2 /*return*/];
+        }
+    });
+}); });
+router.post("/add-new-horse", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, age, level, description, image, newHorse, err_2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, name = _a.name, age = _a.age, level = _a.level, description = _a.description, image = _a.image;
+                if (!name || !age || !level || !description || !image)
+                    throw new Error("No data");
+                newHorse = new horsesModel_1["default"]({
+                    name: name,
+                    age: age,
+                    level: level,
+                    description: description,
+                    image: image
+                });
+                return [4 /*yield*/, newHorse.save().then(function (res) {
+                        console.log(res);
+                    })];
+            case 1:
+                _b.sent();
+                res.send({ val: "OK" });
+                return [3 /*break*/, 3];
             case 2:
-                error_1 = _a.sent();
-                thunkAPI.rejectWithValue(error_1.response.data);
+                err_2 = _b.sent();
+                res.send({ error: err_2.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); });
-exports.TrainersReducer = toolkit_1.createSlice({
-    name: 'trainers',
-    initialState: initialState,
-    reducers: {},
-    extraReducers: function (builder) {
-        builder.addCase(exports.getTrainersAsync.pending, function (state) {
-            state.status = 'loading';
-        })
-            .addCase(exports.getTrainersAsync.fulfilled, function (state, action) {
-            state.status = 'idle';
-            state.arrTrainers = action.payload;
-        })
-            .addCase(exports.getTrainersAsync.rejected, function (state, action) {
-            state.status = 'failed';
-            // state.arrProducrs = action.payload;
-        });
-    }
-});
-exports.selectrainers = function (state) { return state.trainers; };
-exports["default"] = exports.TrainersReducer.reducer;
+module.exports = router;

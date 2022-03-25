@@ -6,43 +6,16 @@ var courses_1 = require("../courses/courses");
 var offers_1 = require("../../components/offersCard/offers");
 var hooks_1 = require("../../../app/hooks");
 var react_1 = require("react");
-var trainer_1 = require("../../../features/trainersReducer/trainer");
-var offers_2 = require("../../../features/offersReducer/offers");
-var offers_3 = require("../../../features/offersReducer/offers");
+var trainerReducer_1 = require("../../../features/trainerReducer");
+var offers_2 = require("../../../features/offers");
+var offers_3 = require("../../../features/offers");
 var header_1 = require("../../components/header/header");
 function Homepage() {
-    var _a = react_1.useState("Zoro"), names = _a[0], Setname = _a[1];
-    var _b = react_1.useState("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1yr60poUFJojpky70RI6hrTBtWx5Dm3ifwQ&usqp=CAU"), pics = _b[0], Setphoto = _b[1];
-    var names2 = ["Simba", "Ice", "Gucci", "Sun", "Ben"];
-    var _c = react_1.useState([]), kitttens = _c[0], setKittens = _c[1];
-    var _d = react_1.useState([]), courses = _d[0], setCourses = _d[1];
+    var _a = react_1.useState([]), kitttens = _a[0], setKittens = _a[1];
+    var _b = react_1.useState([]), courses = _b[0], setCourses = _b[1];
     var offers = hooks_1.useAppSelector(offers_2.selectOffers);
-    var trainers = hooks_1.useAppSelector(trainer_1.selectrainers);
+    var trainers = hooks_1.useAppSelector(trainerReducer_1.selectrainers);
     var dispatch = hooks_1.useAppDispatch();
-    react_1.useEffect(function () {
-        // fetch('/get-all-users').then(res=>res.json()).then(data=>{
-        //   console.log(data)
-        //   setPpls(data);
-        // })
-        //fetch kittens
-        fetch('/courses/get-all-courses')
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-            console.log(data);
-            setCourses(data);
-        })["catch"](function (err) {
-            console.error(err);
-        });
-    }, []);
-    function changename(e) {
-        e.preventDefault();
-        var nameInArr = names2[Math.floor(Math.random() * names2.length)];
-        Setname(nameInArr);
-    }
-    //using redux
-    // function handleGetProducts(){
-    //   dispatch(getProductAsync());
-    // }
     function handleGetOffers() {
         dispatch(offers_3.getOfferAsync());
     }

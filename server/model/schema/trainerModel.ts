@@ -5,6 +5,7 @@ const TrainerSchema = new mongoose.Schema({
     level:Number,
     age:Number,
     description:String,
+    image:String,
   });
 
 //the collection

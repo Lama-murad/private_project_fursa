@@ -29,6 +29,7 @@ var courseSelection_1 = require("./view/components/courseSelection/courseSelecti
 var choosecourse_1 = require("./view/pages/courseRegistration/choosecourse");
 var addSingleCourse_1 = require("./view/pages/addCourse/addSingleCourse");
 var addGroupCourse_1 = require("./view/pages/addCourse/addGroupCourse");
+var privateCourseReg_1 = require("./view/pages/courseRegistration/privateCourseReg");
 react_dom_1["default"].render(react_1["default"].createElement(react_1["default"].StrictMode, null,
     react_1["default"].createElement(react_redux_1.Provider, { store: store_1.store },
         react_1["default"].createElement(react_router_dom_1.BrowserRouter, null,
@@ -43,6 +44,7 @@ react_dom_1["default"].render(react_1["default"].createElement(react_1["default"
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "horses", element: react_1["default"].createElement(horses_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "courses", element: react_1["default"].createElement(courses_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "data", element: react_1["default"].createElement(data_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "privateCourseReg", element: react_1["default"].createElement(privateCourseReg_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "choosecourse", element: react_1["default"].createElement(choosecourse_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "adminpage", element: react_1["default"].createElement(adminpage_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "addGroupCourse", element: react_1["default"].createElement(addGroupCourse_1["default"], null) }),

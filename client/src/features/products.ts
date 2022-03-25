@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import internal from 'stream';
-import { RootState, AppThunk } from '../../app/store';
+import { RootState, AppThunk } from '../app/store';
 import axios from "axios";
 
 interface Product {

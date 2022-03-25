@@ -9,9 +9,9 @@ import Homepage from './view/pages/homepage/homepage';
 import ProfileButton from './view/pages/signIn/signin';
 // import TextInput from "./features/text/TextInput";
 import { useAppSelector, useAppDispatch } from '../src/app/hooks';
-import { selectProducts } from './features/productsReducer/products';
- import { selectrainers } from './features/trainersReducer/trainer';
- import { selectOffers} from './features/offersReducer/offers'
+import { selectProducts } from './features/products';
+ import { selectrainers } from './features/trainerReducer';
+ import { selectOffers} from './features/offers'
 import SignUp from './view/pages/signUp/signup';
 import SignIn from './view/pages/signIn/signin';
 
@@ -40,7 +40,7 @@ function App() {
 
         {/* <Homepage /> */}
         <div>
-          {products.status !== 'loading' ? products.arrProducts.map((product, index) => {
+          {products.status !== 'loading' ? products.arrProducts.map((product:any, index:any) => {
             return (<p key={index}>{product.title}</p>
 
             )

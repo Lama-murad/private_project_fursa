@@ -3,7 +3,7 @@ import  './horses.scss';
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Card from '../../components/trainersCard/card';
-import{useState} from'react';
+import { useState, useEffect  } from 'react';
 import {Link} from 'react-router-dom';
 // import Nav from '../../components/nav/Nav';
 import Nav from '../../components/nav/Nav';
@@ -12,7 +12,7 @@ import Header from '../../components/header/header';
 
 
 function Horses() {
-
+    const [horsess, setHorse] = useState([])
     interface Prop {
         name: string;
         image: string;
@@ -38,6 +38,21 @@ function Horses() {
     {name: 'Vanilla', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo9dosAVnCaOYGIlt7zThLnmpHDz-xv0V_dA&usqp=CAU',
     age:3,level:1,desc: "description"}]
 
+    useEffect(()=>{
+
+        //fetch courses
+      fetch('/addHorse/get-all-horses')
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data);
+         
+          setHorse(data.horses);
+          console.log(horsess);
+        }).catch(err=>{
+          console.error(err);
+        })
+      },[])
+
 
 
     return (
@@ -48,8 +63,9 @@ function Horses() {
             <h3>Our horses</h3>
        
         <div className="maindivhorses_card">
-            {horses.map((horse, index) => {
-                return <Card key={index}  name={horse.name} age={horse.age} level={horse.level} image={horse.image} desc={horse.desc}></Card>
+            {horsess.map((horse:any, index) => {
+                //  return <p key={index}>{horse.name}</p>
+                return <Card key={index}  name={horse.name} age={horse.age} level={horse.level} image={horse.image} desc={horse.description}></Card>
             })}
         </div>
     </div>

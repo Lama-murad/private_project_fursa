@@ -39,7 +39,7 @@ require("react-datepicker/dist/react-datepicker.css");
 require("react-time-picker/dist/TimePicker.css");
 var hooks_1 = require("../../../app/hooks");
 //import { selectTreatment } from '../../../features/treatment/treatmentSlice';
-var registrationSlice_1 = require("../../../features/coursesRegistrations/registrationSlice");
+var registrationSlice_1 = require("../../../features/registrationSlice");
 var locales = {
     "en-US": require("date-fns/locale/en-US")
 };

@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import './addOffer.scss';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
+import AdminHeader from '../../components/adminHeader/adminHeader';
 
 function AddOffer(){
   const [offers, setOffers] = useState([])
@@ -38,6 +39,7 @@ function AddOffer(){
 
     return(
         <div className="addOffer">
+          <AdminHeader/>
         <h3>add new offer</h3>
             <form className='formAddOffer' onSubmit={addOffer}>
           <input type="text" placeholder='insert offer name' name='offerName' />

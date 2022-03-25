@@ -13,7 +13,6 @@ var react_2 = require("react");
 var react_3 = require("react");
 var styles_1 = require("@mui/material/styles");
 require("react-calendar/dist/Calendar.css");
-var Checkbox_1 = require("@mui/material/Checkbox");
 var react_router_dom_1 = require("react-router-dom");
 var Box_1 = require("@mui/material/Box");
 var InputLabel_1 = require("@mui/material/InputLabel");
@@ -91,6 +90,9 @@ function CourseRegistration() {
     var _m = react_2.useState([{ id: 0, name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "" }]), groupcourses = _m[0], setGroupCourses = _m[1];
     var nav = react_router_dom_1.useNavigate();
     var dispatch = hooks_1.useAppDispatch();
+    var _o = react_2.useState(false), isChecked = _o[0], setIsChecked = _o[1];
+    var _p = react_2.useState(new Array(groupcourses.length).fill(false)), checkedState = _p[0], setCheckedState = _p[1];
+    var _q = react_2.useState(0), total = _q[0], setTotal = _q[1];
     react_3.useEffect(function () {
         //fetch courses using mongo
         fetch('/courses/get-all-group-courses')
@@ -140,13 +142,20 @@ function CourseRegistration() {
     var handleChoseLevel = function (event) {
         setLevel(event.target.value);
     };
-    function changeStartDate(date) {
-        // date=>setStartDate(date)
-        setStartDate(date);
-        console.log(date.getHours.getMinutes);
-        setEndDate(date);
-    }
-    function handleCheck() {
+    function handleCheck(position) {
+        position.preventDefault();
+        var updatedCheckedState = checkedState.map(function (item, index) {
+            return index === position ? !item : item;
+        });
+        setCheckedState(updatedCheckedState);
+        var totalPrice = updatedCheckedState.reduce(function (sum, currentState, index) {
+            if (currentState === true) {
+                return sum + groupcourses[index].cost;
+            }
+            return sum;
+        }, 0);
+        console.log("total", total);
+        setTotal(totalPrice);
     }
     var validate = function (event) {
         event.preventDefault();
@@ -177,7 +186,7 @@ function CourseRegistration() {
                             react_1["default"].createElement(StyledTableCell, { align: "center" }, " cost "),
                             react_1["default"].createElement(StyledTableCell, { align: "center" }, " time "),
                             react_1["default"].createElement(StyledTableCell, { align: "center" }, " choose "))),
-                    react_1["default"].createElement(TableBody_1["default"], null, groupcourses.map(function (row) { return (react_1["default"].createElement(StyledTableRow, { key: row._id, onClick: function () { return nav("/" + row._id); } },
+                    react_1["default"].createElement(TableBody_1["default"], null, groupcourses.map(function (row, index) { return (react_1["default"].createElement(StyledTableRow, { key: row._id, onClick: function () { return nav("/" + row._id); } },
                         react_1["default"].createElement(StyledTableCell, { align: "center" }, row.name),
                         react_1["default"].createElement(StyledTableCell, { align: "center" }, row.participants),
                         react_1["default"].createElement(StyledTableCell, { align: "center" }, row.lessons),
@@ -185,7 +194,7 @@ function CourseRegistration() {
                         react_1["default"].createElement(StyledTableCell, { align: "center" }, row.cost),
                         react_1["default"].createElement(StyledTableCell, { align: "center" }, row.time),
                         react_1["default"].createElement(StyledTableCell, { align: "center" },
-                            react_1["default"].createElement(Checkbox_1["default"], { color: "primary" })))); })))),
+                            react_1["default"].createElement("input", { type: "checkbox", id: "custom-checkbox-" + index, name: row.name, value: row.name, checked: checkedState[index], onChange: function () { return handleCheck(index); } })))); })))),
             react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" }, "register")),
         alertt &&
             react_1["default"].createElement("div", { className: "popup" },
@@ -208,6 +217,11 @@ function CourseRegistration() {
                             react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select1", value: level, label: "Level", onChange: handleChoseLevel },
                                 react_1["default"].createElement(MenuItem_1["default"], { value: 1 }, "Beginner"),
                                 react_1["default"].createElement(MenuItem_1["default"], { value: 2 }, "Intermediate"),
-                                react_1["default"].createElement(MenuItem_1["default"], { value: 3 }, "Advanced"))))))));
+                                react_1["default"].createElement(MenuItem_1["default"], { value: 3 }, "Advanced")))))),
+        react_1["default"].createElement("div", { className: "result" },
+            "Above checkbox is ",
+            isChecked ? "checked" : "un-checked",
+            ".",
+            react_1["default"].createElement("div", { className: "right-section" }, total))));
 }
 exports["default"] = CourseRegistration;

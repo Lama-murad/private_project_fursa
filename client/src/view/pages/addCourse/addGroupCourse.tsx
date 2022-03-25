@@ -7,6 +7,7 @@ import './addCourse.scss';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AdminHeader from '../../components/adminHeader/adminHeader';
 
 function AddGroupCourse() {
   const [courses, setCourses] = useState([])
@@ -52,6 +53,7 @@ function AddGroupCourse() {
 
   return (
     <div className="addCourse">
+      <AdminHeader />
 <h3> add new group courses</h3>
       {/* <Button className='addbtn' type="submit">Add</Button> */}
 

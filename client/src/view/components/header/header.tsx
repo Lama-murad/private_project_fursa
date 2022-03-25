@@ -10,6 +10,10 @@ import Nav from '../../components/nav/Nav';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import HomeIcon from '@mui/icons-material/Home';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
+import PersonIcon from '@mui/icons-material/Person';
+import { Icon } from '@iconify/react';
 
 
 function Header() {
@@ -36,19 +40,21 @@ function Header() {
             <div className="mainheader__left">
 
                 <Link to="/homepage">
-                    HomePage
+                    <HomeIcon></HomeIcon>
+                </Link>
+                <Link to="/choosecourse">
+                <HowToRegIcon></HowToRegIcon>
                 </Link>
                 <Link to="/horses">
-                    Our Horses
+                    <Icon icon="mdi:horse" />   
+                    {/* Our Horses */}
                 </Link>
                 <Link to="/trainers">
                     Our trainers
                 </Link>
                 
                 {/* userLevel */}
-                <Link to="/choosecourse">
-                    Register
-                </Link>
+             
                 {/* <Link to="/TableDatePicker">
                     Register2
                 </Link> */}
@@ -61,15 +67,11 @@ function Header() {
                 </Link> */}
             </div>
             <div className="mainheader__right">
-                <Button
-                    id="basic-button"
+            <PersonIcon  id="basic-button"
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
-                >
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfyK_uZ7ZiiOIKc2i9NOiwn3fzsWWzc96ojA&usqp=CAU" />
-                </Button>
+                    onClick={handleClick}>  </PersonIcon>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

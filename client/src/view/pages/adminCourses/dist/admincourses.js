@@ -8,30 +8,12 @@ var Button_1 = require("@mui/material/Button");
 var react_router_dom_1 = require("react-router-dom");
 var adminHeader_1 = require("../../components/adminHeader/adminHeader");
 var DeleteOutlined_1 = require("@mui/icons-material/DeleteOutlined");
-// import AddGroupCourse from '../addCourse/addGroupCourse';
-// import AddSingleCourse from '../addCourse/addSingleCourse';
-// interface courses {
-//   id: number;
-//   name:string;
-//   participants: number;
-//   lessons:number;
-//hours:number
-//   cost:number;
-// }
 function AdminCourses() {
     var _a = react_2.useState([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "" }]), groupcourses = _a[0], setGroupCourses = _a[1];
     var _b = react_2.useState([{ id: 0, name: "", participants: 0, lessons: 0, cost: 0 }]), details = _b[0], setDetails = _b[1];
     var _c = react_2.useState([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0 }]), singlecourses = _c[0], setSingleCourses = _c[1];
     react_1.useEffect(function () {
         //fetch courses using mongo
-        fetch('/courses/get-all-single-courses')
-            .then(function (res) { return res.json(); })
-            .then(function (data) {
-            console.log(data);
-            setSingleCourses(data.courses);
-        })["catch"](function (err) {
-            console.error(err);
-        });
         fetch('/courses/get-all-group-courses')
             .then(function (res) { return res.json(); })
             .then(function (data) {
@@ -53,30 +35,6 @@ function AdminCourses() {
     return (React.createElement("div", { className: 'admCouDiv' },
         React.createElement(adminHeader_1["default"], null),
         React.createElement("h4", null, "courses"),
-        React.createElement("div", { className: 'tablediv' },
-            React.createElement("table", { className: "table table-striped" },
-                React.createElement("thead", null,
-                    React.createElement("tr", null,
-                        React.createElement("th", null, "Name"),
-                        React.createElement("th", null, "participants"),
-                        React.createElement("th", null, "lessons"),
-                        React.createElement("th", null, "hours"),
-                        React.createElement("th", null, "cost"),
-                        React.createElement("th", null, "Delete"))),
-                React.createElement("tbody", null, singlecourses.map(function (info, index) {
-                    return (React.createElement("tr", { key: index },
-                        React.createElement("td", null, info.name),
-                        React.createElement("td", null, info.participants),
-                        React.createElement("td", null, info.lessons),
-                        React.createElement("td", null, info.hours),
-                        React.createElement("td", null, info.cost),
-                        React.createElement("td", null,
-                            React.createElement(DeleteOutlined_1["default"], { onClick: handleDelete }))));
-                })))),
-        React.createElement(react_router_dom_1.Link, { to: "/addSingleCourse" },
-            "    ",
-            React.createElement(Button_1["default"], { className: 'addbtn' }, "Add new single course"),
-            " "),
         React.createElement("div", { className: 'tablediv' },
             React.createElement("table", { className: "table table-striped" },
                 React.createElement("thead", null,

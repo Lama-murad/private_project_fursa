@@ -1,0 +1,20 @@
+.addOffer {
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.addOffer .formAddOffer {
+  align-content: center;
+  position: relative;
+  border: 1mm;
+  border-style: solid;
+  width: 30vw;
+  left: 35%;
+}
+.addOffer input {
+  width: 29vw;
+}
+.addOffer .textfield1 {
+  height: 10vh;
+}
