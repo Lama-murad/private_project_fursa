@@ -15,8 +15,9 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@iconify/react';
 
-
+<script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
 function Header() {
+  
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -40,17 +41,20 @@ function Header() {
             <div className="mainheader__left">
 
                 <Link to="/homepage">
-                    <HomeIcon></HomeIcon>
+                    {/* <HomeIcon></HomeIcon> */}
+                    <Icon icon="ant-design:home-outlined" width="25" height="25" />
                 </Link>
                 <Link to="/choosecourse">
-                <HowToRegIcon></HowToRegIcon>
+                {/* <HowToRegIcon></HowToRegIcon> */}
+                <Icon icon="ic:outline-app-registration" width="25" height="25" />
                 </Link>
                 <Link to="/horses">
-                    <Icon icon="mdi:horse" />   
-                    {/* Our Horses */}
+                    {/* <Icon icon="mdi:horse" />  */}
+                    <Icon icon="emojione-monotone:horse-face" width="25" height="25" />
+              
                 </Link>
                 <Link to="/trainers">
-                    Our trainers
+                <Icon icon="emojione-monotone:horse-racing" width="25" height="25" />
                 </Link>
                 
                 {/* userLevel */}
@@ -82,9 +86,9 @@ function Header() {
                     }}
                 >
 
-                    <MenuItem>  <Link to="/SignIn"> Logout</Link>
+                    <MenuItem>  <Link to="/SignIn"><Icon icon="clarity:logout-line" width="25" height="25" /></Link>
                     </MenuItem>
-                    <MenuItem onClick={handleClose1}>Close</MenuItem>
+                    <MenuItem onClick={handleClose1}><Icon icon="ci:off-close" width="25" height="25" /></MenuItem>
                 </Menu>
             </div>
         </div>

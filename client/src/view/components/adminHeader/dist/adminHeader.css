@@ -1,6 +1,5 @@
 .mainheader {
   position: relative;
-  display: flex;
   width: 100vw;
   height: 4rem;
   border-style: solid;
@@ -8,19 +7,16 @@
 }
 .mainheader__left {
   position: absolute;
-  left: 0%;
-  display: flex;
   width: 50%;
-  height: 3rem;
-  justify-content: left;
+  height: 4rem;
+  margin-top: 3%;
+  justify-content: space-between;
 }
 .mainheader__left a {
   color: black;
-  text-align: center;
-  padding: 20px 24px;
-  font-size: 15px;
+  align-items: center;
   font-family: Inter;
-  height: 6rem;
+  height: 4rem;
 }
 .mainheader__left a:hover {
   font-size: 20px;
@@ -30,9 +26,8 @@
   position: absolute;
   right: 0%;
   width: 10%;
-  height: 5rem;
-  display: flex;
-  margin-top: 10px;
+  height: 4rem;
+  margin-top: 3%;
 }
 .mainheader__right img {
   width: 30px;
@@ -40,7 +35,7 @@
   border-radius: 50px;
 }
 .mainheader__right #basic-menu {
-  width: 20vw;
+  width: 30vw;
   height: 10vh;
 }
 

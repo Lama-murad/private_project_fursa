@@ -7,6 +7,7 @@ const groupCourseSchema = new mongoose.Schema({
     hours:Number,
     lessons:Number,
     time:String,
+    level:String,
   });
 
 //the collection

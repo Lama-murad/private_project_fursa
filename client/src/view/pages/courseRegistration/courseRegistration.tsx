@@ -97,28 +97,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function CourseRegistration() {
   const [courseType, setcourseType] = React.useState('');
-  const [level, setLevel] = React.useState('');
   const [alertt, setAlert] = useState(false);
-  const [course, setCourse] = React.useState('');
-  const [dateState, setDateState] = useState(new Date())
-  // const [startDate, setStateDate] = useState(new Date())
-  const [date, setDate] = useState(new Date());
-  const [startDate, setStartDate] = useState(new Date());
-  const [value, onChange] = useState(new Date());
+  const [level, setLevel] = React.useState('');
   const [endDate, setEndDate] = useState(new Date());
   const [registration, setRegistration] = useState({ name: "", start: new Date(), end: new Date(), course: "" });
   const [allReg, setAllReg] = useState(coursesRegis);
   let dt = new Date(2022, 3, 22, 7, 30);
-  const maxTime = dt.setDate(dt.getDate() + 5);
-  const includeDatesArray = [new Date('02-27-2022'), new Date('02-28-2022')]
   const [groupcourses, setGroupCourses] = useState<Array<any>>([{id:0, name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "" }])
   const nav = useNavigate();
   const dispatch = useAppDispatch();
+    const [coursesByLvl, setcoursesByLvl] = useState([])
   const [isChecked, setIsChecked] = useState(false);
   const [checkedState, setCheckedState] = useState(
     new Array(groupcourses.length).fill(false)
 );
 const [total, setTotal] = useState(0);
+const [chosenCourse, setChosenCourse] = useState([]);
 
 
   useEffect(() => {
@@ -143,10 +137,6 @@ const [total, setTotal] = useState(0);
     }
   }
 
-  const changeDate = (e: any) => {
-    setDateState(e)
-  }
-
   function handleRegistration() {
     setAllReg([...allReg, registration]);
     console.log(allReg);
@@ -157,49 +147,57 @@ const [total, setTotal] = useState(0);
     ev.preventDefault();
     const form = ev.target;
     console.log({ form })
-    axios.post('/registrations/add-new-registration', { course: form[0].value, level: form[2].value, name: form[4].value, age: form[6].value, date: form[8].value })
+    axios.post('/registrations/add-new-registration', { level: level, name: form[2].value, age: form[4].value, course:chosenCourse})
       .then(data => {
         console.log(data);
         alert("you have successfully registered")
+        nav('/homepage')
       }).catch(err => {
         console.error(err);
       })
   }
 
 
-
-  const handleChoseCourse = (event: any) => {
-
-    setCourse(event.target.value);
-    if (event.target.value === 'private lessons') {
-      console.log('fat 3l if private lessons')
-      setAlert(true);
-    }
-
-  };
+  async function getCoursesByLevel(req: any) {
+      console.log(req.level)
+      await axios.post('/courses/get-course-by-level', { level:req.level})
+        .then(data => {
+          console.log(data, "dataaaa");
+          setcoursesByLvl(data.data.courses);
+          console.log(data.data.courses);
+        }).catch(err => {
+          console.error(err);
+        })
+        }
 
   const handleChoseLevel = (event: any) => {
+    setAlert(true);
     setLevel(event.target.value);
+       getCoursesByLevel({ "level": event.target.value });
   };
 
-
-  function handleCheck(position:any) {
-    position.preventDefault();
+  // position:any,value:any
+  function handleCheck(event:any) {
+     // position.preventDefault();
+    console.log(event)
+    console.log(event.target)
     const updatedCheckedState = checkedState.map((item, index) =>
-    index === position ? !item : item
+    index === event.target.id ? item : !item
+    // console.log(item)
   );
-
   setCheckedState(updatedCheckedState);
-
+  console.log(updatedCheckedState)
   const totalPrice = updatedCheckedState.reduce(
     (sum, currentState, index) => {
-      if (currentState === true) {
+      if (currentState === false) {
         return sum + groupcourses[index].cost;
       }
       return sum;
     },
     0
   );
+  console.log(event.target.name)
+  setChosenCourse(event.target.name)
 console.log("total" ,total)
   setTotal(totalPrice);
   }
@@ -210,8 +208,6 @@ console.log("total" ,total)
     event.preventDefault();
     setAlert(true);
     return;
-
-    // setAlert(false);
   };
   return (
     <div className='mydiv'>
@@ -255,8 +251,9 @@ console.log("total" ,total)
           autoFocus
  />
 
-
-      
+      {alertt &&
+        <div className="popup">
+             
 <TableContainer className="table" component={Paper}>
   <Table sx={{ minWidth: 300 }} aria-label="customized table">
     <TableHead>
@@ -273,8 +270,8 @@ console.log("total" ,total)
       </TableRow>
     </TableHead>
     <TableBody>
-      {groupcourses.map((row,index) => (
-        <StyledTableRow key={row._id} onClick={() => nav(`/${row._id}`)}>
+      {coursesByLvl.map((row:any ,index:any) => (
+        <StyledTableRow key={index}>
        
           <StyledTableCell align="center">{row.name}</StyledTableCell>
           <StyledTableCell align="center">{row.participants}</StyledTableCell>
@@ -283,17 +280,13 @@ console.log("total" ,total)
           <StyledTableCell align="center">{row.cost}</StyledTableCell>
           <StyledTableCell align="center">{row.time}</StyledTableCell>
           <StyledTableCell align="center">
-          {/* <Checkbox
-            color="primary"
-            onClick={handleCheck} 
-          /> */}
           <input
   type="checkbox"
-  id={`custom-checkbox-${index}`}
+  id={index}
   name={row.name}
   value={row.name}
   checked={checkedState[index]}
-  onChange={() => handleCheck(index)}
+  onChange={handleCheck}
 />
           </StyledTableCell>
 
@@ -308,105 +301,13 @@ console.log("total" ,total)
 
 
 
-        {/* <DateTimePicker className='DateTimePicker' onChange={onChange} value={value}
-      //  includeDates={includeDatesArray} 
-      /> */}
-        {/* <input type="datetime-local" id="meeting-time"
-        name="meeting-time"
-        // filterDate={filterDays}
-        > */}
-
-
-        {/* // min="2022-06-07T00:00" max="2022-06-14T00:00"> */}
-
-
-        {/* </input>  */}
-
-
-        {/* <Register /> */}
-        <Button variant="contained" type="submit" className="regBtn">register</Button>
-      </form>
-
-      {/* <button onClick={validate}>Save</button> */}
-
-      {alertt &&
-        <div className="popup">
-          <span role="img" aria-label="allowed">✅</span> Alphanumeric Characters
-          <br />
-          <span role="img" aria-label="not allowed">⛔️</span> *
-          <form>
-            <Box className='mybox' sx={{ minWidth: 120 }}>
-              <FormControl required fullWidth>
-
-                <InputLabel id="demo-simple-select-label">Course</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={course}
-                  label="Course"
-                  onChange={handleChoseCourse}
-                >
-                  <MenuItem value={10}>Group lessons</MenuItem>
-                  <MenuItem value={20}>Private lessons</MenuItem>
-                  <MenuItem value={30}>single lesson</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-            <Box className='mybox1' sx={{ minWidth: 120 }}>
-              <FormControl required fullWidth>
-
-                <InputLabel id="demo-simple-select-label">Level</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select1"
-                  value={level}
-                  label="Level"
-                  onChange={handleChoseLevel}
-                >
-                  <MenuItem value={1}>Beginner</MenuItem>
-                  <MenuItem value={2}>Intermediate</MenuItem>
-                  <MenuItem value={3}>Advanced</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-
-          </form>
-
-
-
         </div>
 
       }
 
-<div className="result">
-        Above checkbox is {isChecked ? "checked" : "un-checked"}.
-        <div className="right-section">{total}</div>
-      </div>
 
-
-
-      {/* <DatePicker
- showTimeSelect
- dateFormat="MMMM d, yyyy h:mmaa"
- selected={startDate}
- selectsEnd
- startDate={startDate}
- endDate={endDate}
- minDate={startDate}
- onChange={onChange}
- /> */}
-      {/* //  onChange={date => setEndDate(date)} */}
-
-
-      {/* <Calendar className='caldiv'
-        value={dateState}
-        onChange={changeDate}
-      />
-      <p className='aaa'>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p> */}
-
-
-
+<Button variant="contained" type="submit" className="regBtn">register</Button>
+      </form>
     </div>
   )
 }

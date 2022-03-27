@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-import Registrations from '../model/schema/registrationModel';
+import groupCourseRegistrations from '../model/schema/registrationModel';
+// import Registrations from '../model/schema/registrationModel';
 
 async function getRegistrations(): Promise<any> {
     try {
 
-        const registrations = await Registrations.find({});
+        const registrations = await groupCourseRegistrations.find({});
         console.log(registrations);
         return registrations;
     } catch (err: any) {
@@ -21,15 +22,14 @@ router.get('/get-all-registrations', async (req: any, res: any) => {
 
 router.post("/add-new-registration", async (req, res) => {
     try {
-        const { course, level,name, age,  date } = req.body;
-        if (!name || !course || !age || !level || !date) throw new Error("No data");
+        const {level,name, age,  course } = req.body;
+        if (!level || !name || !age || !course) throw new Error("No data");
 
-        const newRegis = new Registrations({
-            course: course,
+        const newRegis = new groupCourseRegistrations({
             level: level,
             name: name,
             age: age,
-            date: date,
+            course: course,
         });
         await newRegis.save().then((res) => {
             console.log(res);

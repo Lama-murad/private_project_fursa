@@ -16,6 +16,25 @@ async function getSingleCourses():Promise<any> {
     }
   }
 
+  router.post("/get-course-by-level", async (req, res) => {
+    try {
+      const {level} = req.body;
+      console.log("hooooon")
+      if (!level ) throw new Error("No data");
+      const courses = await groupCourses.find({"level":level});
+      if(courses){
+        res.send({"log":true,"courses":courses})
+        console.log(courses)
+    }
+    else{
+        res.send({"log":false})
+        console.log("falsee")
+    }
+}catch(err){
+    res.send({err});
+}
+  });
+
 router.get('/get-all-single-courses',async (req:any, res:any)=>{
     const courses = await getSingleCourses();
     res.send({courses:courses});
@@ -64,8 +83,8 @@ router.get('/get-all-group-courses',async (req:any, res:any)=>{
   router.use(loginStatus)
   router.post("/add-new-group-course", async (req, res) => {
     try {
-      const { name, cost, participants,lessons,hours,time } = req.body;
-      if (!name || !cost || !participants || !lessons || !hours || !time) throw new Error("No data");
+      const { name, cost, participants,lessons,hours,time,level } = req.body;
+      if (!name || !cost || !participants || !lessons || !hours || !time || !level) throw new Error("No data");
     
       const newCourse = new groupCourses({
         name: name,
@@ -74,6 +93,7 @@ router.get('/get-all-group-courses',async (req:any, res:any)=>{
         lessons:lessons,
         hours:hours,
         time:time,
+        level:level
 
       });
       await newCourse.save().then((res) => {

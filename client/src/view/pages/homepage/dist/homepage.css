@@ -21,6 +21,7 @@
 .maindivHP .bodyDiv {
   justify-content: center;
   align-content: center;
+  position: relative;
 }
 .maindivHP .bodyDiv .offerBtn {
   position: relative;
@@ -28,8 +29,6 @@
   width: 50vw;
 }
 .maindivHP .bodyDiv .offersDiv {
-  position: absolute;
-  left: 20vw;
   bottom: 0%;
   display: grid;
   grid-template-rows: auto;

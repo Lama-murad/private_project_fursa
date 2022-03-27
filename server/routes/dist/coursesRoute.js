@@ -38,15 +38,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
-var coursesModel_1 = require("../model/schema/coursesModel");
-function getCourses() {
+var signInController_1 = require("../controllers/signInController");
+var singleCourseModel_1 = require("../model/schema/singleCourseModel");
+var groupCourseModel_1 = require("../model/schema/groupCourseModel");
+function getSingleCourses() {
     return __awaiter(this, void 0, Promise, function () {
         var courses, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, coursesModel_1["default"].find({})];
+                    return [4 /*yield*/, singleCourseModel_1["default"].find({})];
                 case 1:
                     courses = _a.sent();
                     console.log(courses);
@@ -60,11 +62,41 @@ function getCourses() {
         });
     });
 }
-router.get('/get-all-courses', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.post("/get-course-by-level", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var level, courses, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                level = req.body.level;
+                console.log("hooooon");
+                if (!level)
+                    throw new Error("No data");
+                return [4 /*yield*/, groupCourseModel_1["default"].find({ "level": level })];
+            case 1:
+                courses = _a.sent();
+                if (courses) {
+                    res.send({ "log": true, "courses": courses });
+                    console.log(courses);
+                }
+                else {
+                    res.send({ "log": false });
+                    console.log("falsee");
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                res.send({ err: err_2 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+router.get('/get-all-single-courses', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var courses;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getCourses()];
+            case 0: return [4 /*yield*/, getSingleCourses()];
             case 1:
                 courses = _a.sent();
                 res.send({ courses: courses });
@@ -72,8 +104,9 @@ router.get('/get-all-courses', function (req, res) { return __awaiter(void 0, vo
         }
     });
 }); });
-router.post("/add-new-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, cost, participants, lessons, hours, newCourse, err_2;
+router.use(signInController_1.loginStatus);
+router.post("/add-new-single-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, cost, participants, lessons, hours, newCourse, err_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -81,8 +114,7 @@ router.post("/add-new-course", function (req, res) { return __awaiter(void 0, vo
                 _a = req.body, name = _a.name, cost = _a.cost, participants = _a.participants, lessons = _a.lessons, hours = _a.hours;
                 if (!name || !cost || !participants || !lessons || !hours)
                     throw new Error("No data");
-                console.log(name);
-                newCourse = new coursesModel_1["default"]({
+                newCourse = new singleCourseModel_1["default"]({
                     name: name,
                     cost: cost,
                     participants: participants,
@@ -97,8 +129,75 @@ router.post("/add-new-course", function (req, res) { return __awaiter(void 0, vo
                 res.send({ val: "OK" });
                 return [3 /*break*/, 3];
             case 2:
-                err_2 = _b.sent();
-                res.send({ error: err_2.message });
+                err_3 = _b.sent();
+                res.send({ error: err_3.message });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+function getGroupCourses() {
+    return __awaiter(this, void 0, Promise, function () {
+        var courses, err_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, groupCourseModel_1["default"].find({})];
+                case 1:
+                    courses = _a.sent();
+                    console.log(courses);
+                    return [2 /*return*/, courses];
+                case 2:
+                    err_4 = _a.sent();
+                    console.error(err_4);
+                    return [2 /*return*/, false];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+router.get('/get-all-group-courses', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var courses;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getGroupCourses()];
+            case 1:
+                courses = _a.sent();
+                res.send({ courses: courses });
+                return [2 /*return*/];
+        }
+    });
+}); });
+router.use(signInController_1.loginStatus);
+router.post("/add-new-group-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, cost, participants, lessons, hours, time, level, newCourse, err_5;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, name = _a.name, cost = _a.cost, participants = _a.participants, lessons = _a.lessons, hours = _a.hours, time = _a.time, level = _a.level;
+                if (!name || !cost || !participants || !lessons || !hours || !time || !level)
+                    throw new Error("No data");
+                newCourse = new groupCourseModel_1["default"]({
+                    name: name,
+                    cost: cost,
+                    participants: participants,
+                    lessons: lessons,
+                    hours: hours,
+                    time: time,
+                    level: level
+                });
+                return [4 /*yield*/, newCourse.save().then(function (res) {
+                        console.log(res);
+                    })];
+            case 1:
+                _b.sent();
+                res.send({ val: "OK" });
+                return [3 /*break*/, 3];
+            case 2:
+                err_5 = _b.sent();
+                res.send({ error: err_5.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

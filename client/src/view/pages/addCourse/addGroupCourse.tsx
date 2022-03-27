@@ -31,7 +31,7 @@ function AddGroupCourse() {
     ev.preventDefault();
     const form = ev.target;
     console.log({ form })
-    axios.post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value,time:form[5].value })
+    axios.post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value,time:form[5].value ,level:form[6].value })
       .then(data => {
         console.log(data);
         alert('course added successfully')
@@ -64,6 +64,7 @@ function AddGroupCourse() {
         <input type="number" name="lessons" placeholder=' how many lessons' />
         <input type="double" name="hours" placeholder='how much hours' />
         <input type="text" name="time" placeholder='time' />
+        <input type="text" name="level" placeholder='insert 1-3 level' />
         <button type='submit'>Add</button>
       </form>
       <h1>courses</h1>

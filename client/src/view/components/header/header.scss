@@ -2,20 +2,22 @@
     position: relative;
     top: 0%;
     display: flex;
-    width: 100vw;
+    // width: 100vw;
     height: 4rem;
     border-style: solid;
     background-color: #eed9c4a8;
 
     &__left {
         position: absolute;
-        left: 0%;
-        display: flex;
-        width: 50%;
-        height: 5rem;
+        // left: 0%;
+        // display: flex;
+        // flex-direction: row;
+        // width: 50%;
+        // height: 5rem;
         justify-content: left;
 
         a {
+            // position: absolute;
             color: black;
             text-align: center;
             padding: 20px 24px;

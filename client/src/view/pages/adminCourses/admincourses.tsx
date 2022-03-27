@@ -1,21 +1,16 @@
 import {useEffect} from 'react';
 import axios from 'axios';
-import logo from '../../../logo.svg';
 import './admincourses.scss';
 import { useState } from "react";
-import JsonData from '../../../../db.json';
-// import 'db.json';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
-import DeleteIcon from '@mui/icons-material/Delete';
-import ButtonGroup from '@mui/material/ButtonGroup';
 import AdminHeader from '../../components/adminHeader/adminHeader';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 
 function AdminCourses() {
-  const [groupcourses, setGroupCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0,time:""}])
+  const [groupcourses, setGroupCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0,time:"",level:""}])
   const [details, setDetails] = useState<Array<any>>([{id: 0, name:"", participants:0,lessons:0,cost:0}]);
   const [singlecourses, setSingleCourses] = useState<Array<any>>([{name:"", participants:0,lessons:0,hours:0,cost:0}])
 
@@ -46,11 +41,6 @@ function handleDelete(event:any){
       
  <div className='admCouDiv'>
 <AdminHeader />
-{/* <Link to={`/`}>
-   <Button className='backbtn' variant="outlined"   onClick={() => {
-    alert('clicked');
-  }}> back</Button>
-  </Link> */}
 
      <h4>courses</h4>
      <div className='tablediv'>
@@ -64,6 +54,7 @@ function handleDelete(event:any){
                     <th>hours</th>
                     <th>cost</th>
                     <th>time</th>
+                    <th>level</th>
                     <th>Delete</th>
                     </tr>
                 </thead>
@@ -79,12 +70,9 @@ function handleDelete(event:any){
                       <td>{info.hours}</td>
                       <td>{info.cost}</td>
                       <td>{info.time}</td>
+                      <td>{info.level}</td>
                       <td>
-                      {/* <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
-                      {/* <Link to={`/addCourse`}>    <Button className='addbtn'>Add</Button> </Link> */}
-      {/* <Button>Edit</Button> */}
-      {/* <Button onClick={handleDelete}>Delete</Button>
-    </ButtonGroup> */} 
+     
     <DeleteOutlinedIcon onClick={handleDelete}/>
                         </td>
                   </tr>

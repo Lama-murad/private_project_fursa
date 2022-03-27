@@ -273,7 +273,7 @@ function PrivateCourseReg() {
             {/* <form> */}
 
             <Box className='mybox1' sx={{ minWidth: 120 }}>
-              <FormControl required fullWidth>
+              <FormControl fullWidth>
 
                 <InputLabel id="demo-simple-select-label">choose preferred horse</InputLabel>
                 <Select
@@ -294,7 +294,7 @@ function PrivateCourseReg() {
             </Box>
 
             <Box className='mybox1' sx={{ minWidth: 120 }}>
-              <FormControl required fullWidth>
+              <FormControl fullWidth>
 
                 <InputLabel id="demo-simple-select-label">choose preferred trainer</InputLabel>
                 <Select

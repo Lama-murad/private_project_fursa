@@ -24,7 +24,7 @@ function AddGroupCourse() {
         ev.preventDefault();
         var form = ev.target;
         console.log({ form: form });
-        axios_1["default"].post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value, time: form[5].value })
+        axios_1["default"].post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value, time: form[5].value, level: form[6].value })
             .then(function (data) {
             console.log(data);
             alert('course added successfully');
@@ -54,6 +54,7 @@ function AddGroupCourse() {
             React.createElement("input", { type: "number", name: "lessons", placeholder: ' how many lessons' }),
             React.createElement("input", { type: "double", name: "hours", placeholder: 'how much hours' }),
             React.createElement("input", { type: "text", name: "time", placeholder: 'time' }),
+            React.createElement("input", { type: "text", name: "level", placeholder: 'insert 1-3 level' }),
             React.createElement("button", { type: 'submit' }, "Add")),
         React.createElement("h1", null, "courses"),
         courses.map(function (course) {

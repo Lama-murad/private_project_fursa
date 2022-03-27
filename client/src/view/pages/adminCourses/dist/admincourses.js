@@ -9,7 +9,7 @@ var react_router_dom_1 = require("react-router-dom");
 var adminHeader_1 = require("../../components/adminHeader/adminHeader");
 var DeleteOutlined_1 = require("@mui/icons-material/DeleteOutlined");
 function AdminCourses() {
-    var _a = react_2.useState([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "" }]), groupcourses = _a[0], setGroupCourses = _a[1];
+    var _a = react_2.useState([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "", level: "" }]), groupcourses = _a[0], setGroupCourses = _a[1];
     var _b = react_2.useState([{ id: 0, name: "", participants: 0, lessons: 0, cost: 0 }]), details = _b[0], setDetails = _b[1];
     var _c = react_2.useState([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0 }]), singlecourses = _c[0], setSingleCourses = _c[1];
     react_1.useEffect(function () {
@@ -45,6 +45,7 @@ function AdminCourses() {
                         React.createElement("th", null, "hours"),
                         React.createElement("th", null, "cost"),
                         React.createElement("th", null, "time"),
+                        React.createElement("th", null, "level"),
                         React.createElement("th", null, "Delete"))),
                 React.createElement("tbody", null, groupcourses.map(function (info, index) {
                     return (React.createElement("tr", { key: index },
@@ -54,6 +55,7 @@ function AdminCourses() {
                         React.createElement("td", null, info.hours),
                         React.createElement("td", null, info.cost),
                         React.createElement("td", null, info.time),
+                        React.createElement("td", null, info.level),
                         React.createElement("td", null,
                             React.createElement(DeleteOutlined_1["default"], { onClick: handleDelete }))));
                 })))),

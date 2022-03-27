@@ -2,17 +2,12 @@
   position: relative;
   top: 0%;
   display: flex;
-  width: 100vw;
   height: 4rem;
   border-style: solid;
   background-color: #eed9c4a8;
 }
 .mainheader__left {
   position: absolute;
-  left: 0%;
-  display: flex;
-  width: 50%;
-  height: 5rem;
   justify-content: left;
 }
 .mainheader__left a {
@@ -21,7 +16,7 @@
   padding: 20px 24px;
   font-size: 15px;
   font-family: Inter;
-  height: 6rem;
+  height: 3rem;
 }
 .mainheader__left a:hover {
   font-size: 20px;
@@ -33,7 +28,6 @@
   width: 10%;
   height: 6rem;
   display: flex;
-  margin-top: 10px;
 }
 .mainheader__right img {
   width: 30px;
@@ -66,7 +60,6 @@
 .menu__left img {
   margin-top: 20px;
   width: 3%;
-  height: 70%;
 }
 
 #basic-menu {

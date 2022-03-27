@@ -22,6 +22,8 @@
   .bodyDiv{
     justify-content: center;
     align-content: center;
+    position: relative;
+    // left: 10vw;
   
   .offerBtn{
     position: relative;
@@ -31,8 +33,7 @@
 
   .offersDiv{
 
-    position: absolute;
-    left: 20vw;
+   
     bottom: 0%;
     display: grid;
     grid-template-rows:  auto ;

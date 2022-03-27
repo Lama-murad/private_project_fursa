@@ -15,15 +15,15 @@ function Card(prop: cardProp) {
     return (
         <div className="MainCard">
             <img className='imgMainCard' src={prop.image}></img>
-            <p className='imgMaintxt'>
-              name:  {prop.name}
-                <br />
-               age: {prop.age}
-                <br></br>
-               level: {prop.level}
-                <br></br>
-                {prop.desc}
-            </p>
+            <div className='imgMaintxt'>
+            <div> name:  {prop.name}</div> 
+           
+            <div>age: {prop.age}</div> 
+        
+            <div>level: {prop.level}</div> 
+           
+            <div>{prop.desc}</div> 
+            </div>
         </div>
 
     )

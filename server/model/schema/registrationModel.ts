@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-
+// groupCourseRegistrations
 const RegistrationSchema = new mongoose.Schema({
-    course: String,
+
     name:String,
     age:Number,
     level:String,
-    date:Date,
+    course: String,
   });
 
 //the collection
-const Registrations = mongoose.model("Registrations", RegistrationSchema);
+const groupCourseRegistrations = mongoose.model("groupCourseRegistrations", RegistrationSchema);
 
-export default Registrations;
+export default groupCourseRegistrations;

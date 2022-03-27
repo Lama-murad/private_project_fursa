@@ -5,10 +5,9 @@ var React = require("react");
 var react_router_dom_1 = require("react-router-dom");
 var Menu_1 = require("@mui/material/Menu");
 var MenuItem_1 = require("@mui/material/MenuItem");
-var Home_1 = require("@mui/icons-material/Home");
-var HowToReg_1 = require("@mui/icons-material/HowToReg");
 var Person_1 = require("@mui/icons-material/Person");
 var react_1 = require("@iconify/react");
+React.createElement("script", { src: "https://code.iconify.design/2/2.2.0/iconify.min.js" });
 function Header() {
     var _a = React.useState(null), anchorEl = _a[0], setAnchorEl = _a[1];
     var open = Boolean(anchorEl);
@@ -25,12 +24,13 @@ function Header() {
     return (React.createElement("div", { className: "mainheader" },
         React.createElement("div", { className: "mainheader__left" },
             React.createElement(react_router_dom_1.Link, { to: "/homepage" },
-                React.createElement(Home_1["default"], null)),
+                React.createElement(react_1.Icon, { icon: "ant-design:home-outlined", width: "25", height: "25" })),
             React.createElement(react_router_dom_1.Link, { to: "/choosecourse" },
-                React.createElement(HowToReg_1["default"], null)),
+                React.createElement(react_1.Icon, { icon: "ic:outline-app-registration", width: "25", height: "25" })),
             React.createElement(react_router_dom_1.Link, { to: "/horses" },
-                React.createElement(react_1.Icon, { icon: "mdi:horse" })),
-            React.createElement(react_router_dom_1.Link, { to: "/trainers" }, "Our trainers")),
+                React.createElement(react_1.Icon, { icon: "emojione-monotone:horse-face", width: "25", height: "25" })),
+            React.createElement(react_router_dom_1.Link, { to: "/trainers" },
+                React.createElement(react_1.Icon, { icon: "emojione-monotone:horse-racing", width: "25", height: "25" }))),
         React.createElement("div", { className: "mainheader__right" },
             React.createElement(Person_1["default"], { id: "basic-button", "aria-controls": open ? 'basic-menu' : undefined, "aria-haspopup": "true", "aria-expanded": open ? 'true' : undefined, onClick: handleClick }, "  "),
             React.createElement(Menu_1["default"], { id: "basic-menu", anchorEl: anchorEl, open: open, onClose: handleClose, MenuListProps: {
@@ -38,8 +38,10 @@ function Header() {
                 } },
                 React.createElement(MenuItem_1["default"], null,
                     "  ",
-                    React.createElement(react_router_dom_1.Link, { to: "/SignIn" }, " Logout")),
-                React.createElement(MenuItem_1["default"], { onClick: handleClose1 }, "Close"))))
+                    React.createElement(react_router_dom_1.Link, { to: "/SignIn" },
+                        React.createElement(react_1.Icon, { icon: "clarity:logout-line", width: "25", height: "25" }))),
+                React.createElement(MenuItem_1["default"], { onClick: handleClose1 },
+                    React.createElement(react_1.Icon, { icon: "ci:off-close", width: "25", height: "25" })))))
     // </div>
     );
 }

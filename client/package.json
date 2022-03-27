@@ -37,6 +37,7 @@
     "react-datetime-picker": "^3.5.0",
     "react-dom": "^17.0.2",
     "react-google-login": "^5.2.2",
+    "react-icons": "^4.3.1",
     "react-modal": "^3.14.4",
     "react-native": "^0.67.2",
     "react-redux": "^7.2.6",
@@ -72,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "@iconify/react": "^3.2.0",
     "@types/react-big-calendar": "^0.36.2",
     "@types/react-datepicker": "^4.3.4",
     "@types/react-datetime-picker": "^3.4.1",
