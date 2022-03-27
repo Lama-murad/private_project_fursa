@@ -63,12 +63,14 @@ app.get('/lama', (req, res) => {
 });
 const courseRoute = require('./routes/coursesRoute');
 app.use('/courses/', courseRoute);
+const offersRoute = require('./routes/offersRoute');
+app.use('/offers', offersRoute);
 const userRoute = require('./routes/userRoute');
 app.use('/user', userRoute);
 const addHorseRoute = require('./routes/addHorseRoute');
-app.use('/addHorse/', addHorseRoute);
+app.use('/addHorse', addHorseRoute);
 const trainerRoute = require('./routes/trainerRoute');
-app.use('/trainer/', trainerRoute);
+app.use('/trainer', trainerRoute);
 const registartionRoute = require('./routes/registrationRoute');
 app.use('/registrations', registartionRoute);
 app.use(signInController_1.loginStatus);

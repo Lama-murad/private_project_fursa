@@ -72,6 +72,8 @@ var TableHead_1 = require("@mui/material/TableHead");
 var TableRow_1 = require("@mui/material/TableRow");
 var material_1 = require("@mui/material");
 var header_1 = require("../../components/header/header");
+var colors_1 = require("@mui/material/colors");
+var primary = colors_1.orange[100]; // #f44336
 var coursesRegis = [
     {
         start: new Date(2022, 3, 22, 4, 30),
@@ -85,7 +87,8 @@ var StyledTableCell = styles_1.styled(TableCell_1["default"])(function (_a) {
     var theme = _a.theme;
     return (_b = {},
         _b["&." + TableCell_1.tableCellClasses.head] = {
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.secondary.light,
+            // backgroundColor:{main},
             color: theme.palette.common.white,
             innerWidth: 10
         },

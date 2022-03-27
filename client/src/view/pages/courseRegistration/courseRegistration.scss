@@ -10,7 +10,7 @@
     width: 100vw;
     height: 100vh;
     .backbtn {
-        position: absolute;
+        position: fixed;
         top: 0%;
         left: 0%;
         // justify-content: center;
@@ -78,10 +78,12 @@
         // }
         
     .regBtn {
-        position: relative;
+        position: fixed;
         // left: 5vw;
-         top: 5vh;
+        //  top: 5vh;
         // width: 5vw;
+        left:10%;
+        bottom: 20%;
         font-size: small;
 
     }

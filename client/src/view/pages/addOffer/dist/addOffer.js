@@ -23,9 +23,10 @@ function AddOffer() {
         ev.preventDefault();
         var form = ev.target;
         console.log({ form: form });
-        axios_1["default"].post('/offers/add-new-offer', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value })
+        axios_1["default"].post('/offers/add-new-offer', { name: form[0].value, description: form[1].value, cost: form[2].value })
             .then(function (data) {
             console.log(data);
+            alert("offer is added successfully");
         })["catch"](function (err) {
             console.error(err);
         });
@@ -35,9 +36,8 @@ function AddOffer() {
         React.createElement("h3", null, "add new offer"),
         React.createElement("form", { className: 'formAddOffer', onSubmit: addOffer },
             React.createElement("input", { type: "text", placeholder: 'insert offer name', name: 'offerName' }),
-            React.createElement("input", { type: "number", name: "cost", placeholder: 'insert offer"s cost' }),
-            React.createElement("input", { type: "number", name: "participants", placeholder: 'insert participants number' }),
-            React.createElement("input", { type: "double", name: "hours", placeholder: 'how much hours' }),
+            React.createElement("input", { type: "text", name: "cost", placeholder: 'insert offer"s description' }),
+            React.createElement("input", { type: "number", name: "participants", placeholder: 'insert offer"s cost' }),
             React.createElement(Button_1["default"], { className: 'addbtn', type: "submit" }, "Add")),
         offers.map(function (offer) {
             return React.createElement("p", { key: offer._id }, offer.name);

@@ -26,9 +26,12 @@
     // left: 10vw;
   
   .offerBtn{
-    position: relative;
-    top: 35vh;
-    width: 50vw;
+    position: fixed;
+    border: none;
+bottom:1%;
+left: 1%;
+background-color:transparent;
+    // width: 50vw;
   }
 
   .offersDiv{

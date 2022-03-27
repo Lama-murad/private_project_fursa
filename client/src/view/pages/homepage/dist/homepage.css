@@ -24,9 +24,11 @@
   position: relative;
 }
 .maindivHP .bodyDiv .offerBtn {
-  position: relative;
-  top: 35vh;
-  width: 50vw;
+  position: fixed;
+  border: none;
+  bottom: 1%;
+  left: 1%;
+  background-color: transparent;
 }
 .maindivHP .bodyDiv .offersDiv {
   bottom: 0%;

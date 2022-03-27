@@ -12,3 +12,4 @@ const RegistrationSchema = new mongoose.Schema({
 const groupCourseRegistrations = mongoose.model("groupCourseRegistrations", RegistrationSchema);
 
 export default groupCourseRegistrations;
+

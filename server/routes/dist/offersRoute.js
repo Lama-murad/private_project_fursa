@@ -38,20 +38,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
-var registrationModel_1 = require("../model/schema/registrationModel");
-var singleCourseRegModel_1 = require("../model/schema/singleCourseRegModel");
-function getRegistrations() {
+var offersModel_1 = require("../model/schema/offersModel");
+function getOffers() {
     return __awaiter(this, void 0, Promise, function () {
-        var registrations, err_1;
+        var offers, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, registrationModel_1["default"].find({})];
+                    return [4 /*yield*/, offersModel_1["default"].find({})];
                 case 1:
-                    registrations = _a.sent();
-                    console.log(registrations);
-                    return [2 /*return*/, registrations];
+                    offers = _a.sent();
+                    return [2 /*return*/, offers];
                 case 2:
                     err_1 = _a.sent();
                     console.error(err_1);
@@ -61,34 +59,33 @@ function getRegistrations() {
         });
     });
 }
-router.get('/get-all-registrations', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var registrations;
+router.get('/get-all-offers', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var offers;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getRegistrations()];
+            case 0: return [4 /*yield*/, getOffers()];
             case 1:
-                registrations = _a.sent();
-                res.send({ registrations: registrations });
+                offers = _a.sent();
+                res.send({ offers: offers });
                 return [2 /*return*/];
         }
     });
 }); });
-router.post("/add-new-registration", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, level, name, age, course, newRegis, err_2;
+router.post("/add-new-offer", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, description, cost, newOffer, err_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, level = _a.level, name = _a.name, age = _a.age, course = _a.course;
-                if (!level || !name || !age || !course)
+                _a = req.body, name = _a.name, description = _a.description, cost = _a.cost;
+                if (!name || !cost || !description)
                     throw new Error("No data");
-                newRegis = new registrationModel_1["default"]({
-                    level: level,
+                newOffer = new offersModel_1["default"]({
                     name: name,
-                    age: age,
-                    course: course
+                    description: description,
+                    cost: cost
                 });
-                return [4 /*yield*/, newRegis.save().then(function (res) {
+                return [4 /*yield*/, newOffer.save().then(function (res) {
                         console.log(res);
                     })];
             case 1:
@@ -98,39 +95,6 @@ router.post("/add-new-registration", function (req, res) { return __awaiter(void
             case 2:
                 err_2 = _b.sent();
                 res.send({ error: err_2.message });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); });
-router.post("/add-new-single-registration", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, level, name, age, date, horse, trainer, newRegis, err_3;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, level = _a.level, name = _a.name, age = _a.age, date = _a.date, horse = _a.horse, trainer = _a.trainer;
-                if (!level || !name || !age || !date || !horse || !trainer)
-                    throw new Error("No data");
-                newRegis = new singleCourseRegModel_1["default"]({
-                    level: level,
-                    name: name,
-                    age: age,
-                    date: date,
-                    horse: horse,
-                    trainer: trainer
-                });
-                return [4 /*yield*/, newRegis.save().then(function (res) {
-                        console.log("yessssssssss");
-                        console.log(res);
-                    })];
-            case 1:
-                _b.sent();
-                res.send({ val: "OK" });
-                return [3 /*break*/, 3];
-            case 2:
-                err_3 = _b.sent();
-                res.send({ error: err_3.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

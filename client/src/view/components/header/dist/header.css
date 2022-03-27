@@ -8,6 +8,7 @@
 }
 .mainheader__left {
   position: absolute;
+  display: flex;
   justify-content: left;
 }
 .mainheader__left a {

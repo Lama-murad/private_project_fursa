@@ -12,6 +12,7 @@ import { selectrainers } from '../../../features/trainerReducer';
 import { selectOffers } from '../../../features/offers'
 import { getOfferAsync } from '../../../features/offers';
 import Header from '../../components/header/header';
+import { Icon } from '@iconify/react';
 
 interface horse {
   name: string;
@@ -42,7 +43,7 @@ function Homepage() {
       <div className='animation'> </div>
       <div className='bodyDiv'>
         <Courses />
-        <button className='offerBtn' onClick={handleGetOffers}>get offers</button>
+        <button className='offerBtn' onClick={handleGetOffers}><Icon icon="ooui:special-pages-ltr" width="25" height="25" /></button>
 
         <div className="offersDiv">
           {offers.status !== 'loading' ? offers.arrOffers.map((offer:any, index:any) => {

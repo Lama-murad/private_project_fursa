@@ -28,9 +28,10 @@ function AddOffer(){
     ev.preventDefault();
     const form = ev.target;
    console.log({form})
-    axios.post('/offers/add-new-offer', { name: form[0].value, cost: form[1].value, participants: form[2].value,lessons:form[3].value,hours:form[4].value})
+    axios.post('/offers/add-new-offer', { name: form[0].value, description: form[1].value, cost: form[2].value})
       .then(data => {
         console.log(data);
+        alert("offer is added successfully")
       }).catch(err => {
         console.error(err);
       })
@@ -43,10 +44,8 @@ function AddOffer(){
         <h3>add new offer</h3>
             <form className='formAddOffer' onSubmit={addOffer}>
           <input type="text" placeholder='insert offer name' name='offerName' />
-          <input type="number" name="cost" placeholder='insert offer"s cost' />
-          <input type="number" name="participants" placeholder='insert participants number' />
-          <input type="double" name="hours" placeholder='how much hours' />
-          {/* <button type='submit'>Add</button> */}
+          <input type="text" name="cost" placeholder='insert offer"s description' />
+          <input type="number" name="participants" placeholder='insert offer"s cost' />
           <Button className='addbtn'  type="submit">Add</Button>
         </form>
         {/* <h1>courses</h1> */}

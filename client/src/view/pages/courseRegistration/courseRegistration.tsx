@@ -42,6 +42,9 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { Paper } from '@mui/material';
 import Header from '../../components/header/header';
+import { orange} from '@mui/material/colors';
+
+const primary = orange[100]; // #f44336
 interface TimeManagement {
   start: Date;
   end: Date;
@@ -73,7 +76,8 @@ const coursesRegis: Array<TimeManagement> = [
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.light,
+    // backgroundColor:{main},
     color: theme.palette.common.white,
     innerWidth:10,
   },

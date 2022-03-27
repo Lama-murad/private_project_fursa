@@ -19,17 +19,17 @@ router.get('/get-all-offers',async (req:any, res:any)=>{
     res.send({offers:offers});
   })
   
-  router.use(loginStatus)
-  router.post("/add-new-offer",isAdmin, async (req, res) => {
+
+  router.post("/add-new-offer",async (req, res) => {
     try {
-      const { name, cost, description,hours } = req.body;
-      if (!name || !cost || !description  || !hours) throw new Error("No data");
+      const { name, description, cost} = req.body;
+      if (!name || !cost || !description) throw new Error("No data");
     
       const newOffer = new Offers({
         name: name,
-        cost: cost,
         description: description,
-        hours:hours,
+        cost: cost,
+   
       });
       await newOffer.save().then((res) => {
         console.log(res);

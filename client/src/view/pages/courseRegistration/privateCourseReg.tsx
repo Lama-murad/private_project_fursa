@@ -22,6 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import axios from 'axios';
+import { Icon } from '@iconify/react';
 // import Horses from '../../../../../server/model/schema/horsesModel';
 
 import DatePicker from "react-datepicker";
@@ -151,7 +152,9 @@ function PrivateCourseReg() {
     ev.preventDefault();
     const form = ev.target;
     console.log({ form })
-    axios.post('/registrations/add-new-registration', { course: form[0].value, level: form[2].value, name: form[4].value, age: form[6].value, date: form[8].value })
+    console.log(chosenhorse, " aaaaaaaaaaaaaaaaa",chosentrainer)
+    axios.post('/registrations/add-new-single-registration', { level: form[0].value, name: form[2].value, age: form[4].value, date: form[6].value,chosenhorse,chosentrainer })
+    
       .then(data => {
         console.log(data);
         alert("you have successfully registered")
@@ -171,11 +174,13 @@ function PrivateCourseReg() {
   };
 
   const handleChoseHorse = (event: any) => {
-    setHorse(event.target.value);
+    console.log(event.target.value,"122222")
+    setchosenHorse(event.target.value);
   };
 
   const handleChoseTrainer = (event: any) => {
-    setTrainer(event.target.value);
+    console.log(event.target.value,"111111")
+    setchosenTrainer(event.target.value);
   };
 
   function changeStartDate(date: any) {
@@ -262,8 +267,10 @@ function PrivateCourseReg() {
           onChange={changeStartDate}
 
         />
-
-        <Button variant="contained" onClick={validate} className="nextBtn">next</Button>
+{/* 
+        <Button variant="contained" onClick={validate} className="nextBtn"> */}
+          <Icon icon="carbon:next-outline" onClick={validate} width="25" height="25" />
+        {/* </Button> */}
 
         {alertt &&
           <div className="popup">
@@ -278,13 +285,13 @@ function PrivateCourseReg() {
                 <InputLabel id="demo-simple-select-label">choose preferred horse</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
-                  id="demo-simple-select1"
+                  id="demo-simple-select"
                   value={chosenhorse}
                   label="horse"
                   onChange={handleChoseHorse}
                 >
                   {horsesByLvl.map((horse: any, index) => (
-                    <MenuItem value={index}> {horse.name}</MenuItem>
+                    <MenuItem value={horse.name}> {horse.name}</MenuItem>
                   ))}
                   {/* <MenuItem value={1}>Beginner</MenuItem>
               <MenuItem value={2}>Intermediate</MenuItem>
@@ -299,14 +306,14 @@ function PrivateCourseReg() {
                 <InputLabel id="demo-simple-select-label">choose preferred trainer</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
-                  id="demo-simple-select1"
+                  id="demo-simple-select"
                   value={chosentrainer}
                   label="horse"
                   onChange={handleChoseTrainer}
                 >
                   {status === 'loading' ? <div>Loading...</div> : trainerByLevel.map((t: any, index: any) => (
 
-                    <MenuItem value={index}> {t.name} {index}</MenuItem>
+                    <MenuItem value={t.name}> {t.name} {index}</MenuItem>
                   ))}
                   {/* {trainers.map((t:any, index) => (
      <MenuItem  key={t.name} value={index}> {t.name}</MenuItem>

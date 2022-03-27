@@ -63,6 +63,7 @@ require("react-datepicker/dist/react-datepicker.css");
 require("react-time-picker/dist/TimePicker.css");
 var hooks_1 = require("../../../app/hooks");
 var axios_1 = require("axios");
+var react_4 = require("@iconify/react");
 // import Horses from '../../../../../server/model/schema/horsesModel';
 var react_datepicker_1 = require("react-datepicker");
 // import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
@@ -173,7 +174,8 @@ function PrivateCourseReg() {
         ev.preventDefault();
         var form = ev.target;
         console.log({ form: form });
-        axios_1["default"].post('/registrations/add-new-registration', { course: form[0].value, level: form[2].value, name: form[4].value, age: form[6].value, date: form[8].value })
+        console.log(chosenhorse, " aaaaaaaaaaaaaaaaa", chosentrainer);
+        axios_1["default"].post('/registrations/add-new-single-registration', { level: form[0].value, name: form[2].value, age: form[4].value, date: form[6].value, chosenhorse: chosenhorse, chosentrainer: chosentrainer })
             .then(function (data) {
             console.log(data);
             alert("you have successfully registered");
@@ -190,10 +192,12 @@ function PrivateCourseReg() {
         console.log("passed the horses func call");
     };
     var handleChoseHorse = function (event) {
-        setHorse(event.target.value);
+        console.log(event.target.value, "122222");
+        setchosenHorse(event.target.value);
     };
     var handleChoseTrainer = function (event) {
-        setTrainer(event.target.value);
+        console.log(event.target.value, "111111");
+        setchosenTrainer(event.target.value);
     };
     function changeStartDate(date) {
         // date=>setStartDate(date)
@@ -223,19 +227,19 @@ function PrivateCourseReg() {
             react_1["default"].createElement(react_datepicker_1["default"], { id: "meeting-time", isClearable: true, placeholderText: "Select Start Date", showTimeSelect: true, dateFormat: "MMMM d, yyyy h:mmaa", selected: startDate, selectsStart: true, startDate: startDate, endDate: endDate, 
                 //  includeDates={includeDatesArray}
                 filterDate: filterDays, onChange: changeStartDate }),
-            react_1["default"].createElement(Button_1["default"], { variant: "contained", onClick: validate, className: "nextBtn" }, "next"),
+            react_1["default"].createElement(react_4.Icon, { icon: "carbon:next-outline", onClick: validate, width: "25", height: "25" }),
             alertt &&
                 react_1["default"].createElement("div", { className: "popup" },
                     react_1["default"].createElement(Box_1["default"], { className: 'mybox1', sx: { minWidth: 120 } },
                         react_1["default"].createElement(FormControl_1["default"], { fullWidth: true },
                             react_1["default"].createElement(InputLabel_1["default"], { id: "demo-simple-select-label" }, "choose preferred horse"),
-                            react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select1", value: chosenhorse, label: "horse", onChange: handleChoseHorse }, horsesByLvl.map(function (horse, index) { return (react_1["default"].createElement(MenuItem_1["default"], { value: index },
+                            react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select", value: chosenhorse, label: "horse", onChange: handleChoseHorse }, horsesByLvl.map(function (horse, index) { return (react_1["default"].createElement(MenuItem_1["default"], { value: horse.name },
                                 " ",
                                 horse.name)); })))),
                     react_1["default"].createElement(Box_1["default"], { className: 'mybox1', sx: { minWidth: 120 } },
                         react_1["default"].createElement(FormControl_1["default"], { fullWidth: true },
                             react_1["default"].createElement(InputLabel_1["default"], { id: "demo-simple-select-label" }, "choose preferred trainer"),
-                            react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select1", value: chosentrainer, label: "horse", onChange: handleChoseTrainer }, status === 'loading' ? react_1["default"].createElement("div", null, "Loading...") : trainerByLevel.map(function (t, index) { return (react_1["default"].createElement(MenuItem_1["default"], { value: index },
+                            react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select", value: chosentrainer, label: "horse", onChange: handleChoseTrainer }, status === 'loading' ? react_1["default"].createElement("div", null, "Loading...") : trainerByLevel.map(function (t, index) { return (react_1["default"].createElement(MenuItem_1["default"], { value: t.name },
                                 " ",
                                 t.name,
                                 " ",
