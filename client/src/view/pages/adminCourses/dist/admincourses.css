@@ -8,9 +8,10 @@
 }
 .admCouDiv .tablediv {
   display: flex;
-  flex: 1;
-  justify-content: space-evenly;
+  flex: 2;
+  justify-content: center;
   font-size: 1rem;
+  border: 1ch;
   border-style: double;
 }
 .admCouDiv .addbtn {

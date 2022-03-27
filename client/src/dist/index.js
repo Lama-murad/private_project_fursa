@@ -16,7 +16,7 @@ var horses_1 = require("./view/pages/horses/horses");
 var courses_1 = require("./view/pages/courses/courses");
 var course_1 = require("./view/pages/course/course");
 var courseRegistration_1 = require("./view/pages/courseRegistration/courseRegistration");
-var data_1 = require("./view/pages/data/data");
+var participantsInCour_1 = require("./view/pages/data/participantsInCour");
 var admincourses_1 = require("./view/pages/adminCourses/admincourses");
 var adminpage_1 = require("./view/pages/AdminPage/adminpage");
 var TableDatePicker_1 = require("./view/pages/TableDatePicker/TableDatePicker");
@@ -43,7 +43,7 @@ react_dom_1["default"].render(react_1["default"].createElement(react_1["default"
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "trainers", element: react_1["default"].createElement(trainers_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "horses", element: react_1["default"].createElement(horses_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "courses", element: react_1["default"].createElement(courses_1["default"], null) }),
-                react_1["default"].createElement(react_router_dom_1.Route, { path: "data", element: react_1["default"].createElement(data_1["default"], null) }),
+                react_1["default"].createElement(react_router_dom_1.Route, { path: "data", element: react_1["default"].createElement(participantsInCour_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "privateCourseReg", element: react_1["default"].createElement(privateCourseReg_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "choosecourse", element: react_1["default"].createElement(choosecourse_1["default"], null) }),
                 react_1["default"].createElement(react_router_dom_1.Route, { path: "adminpage", element: react_1["default"].createElement(adminpage_1["default"], null) }),

@@ -4,7 +4,7 @@ const singleCourseRegistrationSchema = new mongoose.Schema({
     level: String,
     name: String,
     age: Number,
-    date: Date,
+    date: String,
     horse: String,
     trainer: String,
 });

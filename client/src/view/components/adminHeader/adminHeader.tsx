@@ -10,6 +10,8 @@ import Nav from '../../components/nav/Nav';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import PersonIcon from '@mui/icons-material/Person';
+import { Icon } from '@iconify/react';
 
 
 function AdminHeader() {
@@ -36,31 +38,27 @@ function AdminHeader() {
             <div className="mainheader__left">
 
                 <Link to="/data">
-                    participants 
+                <Icon icon="fa-solid:users" width="25" height="25" />
                 </Link>
                 <Link to="/admincourses">
-                    courses
+                <Icon icon="carbon:data-vis-2" width="25" height="25" />
                 </Link>
                 <Link to="/addOffer">
-                    offers
+                <Icon icon="ic:outline-local-offer" width="25" height="25" />
                 </Link>
                 <Link to="/addTrainer">
-                    trainers
+                <Icon icon="emojione-monotone:horse-racing" width="25" height="25" />
                 </Link>
                 <Link to="/addHorse">
-                    horses
+                <Icon icon="emojione-monotone:horse-face" width="25" height="25" />
                 </Link>
             </div>
             <div className="mainheader__right">
-                <Button
-                    id="basic-button"
+            <PersonIcon  id="basic-button"
                     aria-controls={open ? 'basic-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
-                    onClick={handleClick}
-                >
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfyK_uZ7ZiiOIKc2i9NOiwn3fzsWWzc96ojA&usqp=CAU" />
-                </Button>
+                    onClick={handleClick}>  </PersonIcon>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
@@ -68,16 +66,10 @@ function AdminHeader() {
                     onClose={handleClose}
                     MenuListProps={{
                         'aria-labelledby': 'basic-button',
-                    }}
-                >
-
-                    <MenuItem>
-                        <Link to="/SignIn"> SignIn</Link>  </MenuItem>
-
-                    <MenuItem>   <Link to="/SignUp"> SignUp</Link>   </MenuItem>
-                    <MenuItem>  <Link to="/SignIn"> Logout</Link>
+                    }}>
+                    <MenuItem>  <Link to="/SignIn"><Icon icon="clarity:logout-line" width="25" height="25" /></Link>
                     </MenuItem>
-                    <MenuItem onClick={handleClose1}>Close</MenuItem>
+                    <MenuItem onClick={handleClose1}><Icon icon="ci:off-close" width="25" height="25" /></MenuItem>
                 </Menu>
             </div>
         </div>

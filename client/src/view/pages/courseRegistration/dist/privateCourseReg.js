@@ -132,21 +132,7 @@ function PrivateCourseReg() {
                                 console.log(horsesByLvl);
                             })["catch"](function (err) {
                                 console.error(err);
-                            })
-                            //   try {
-                            //     const {level} = req.body;
-                            //     if (!level ) throw new Error("No data");
-                            //     const horses = await Horses.find({"level":level});
-                            //     if(horses){
-                            //       console.log("true");
-                            //   }
-                            //   else{
-                            //       console.error("false")
-                            //   }
-                            // }catch(err){
-                            //   console.error(err);
-                            // }
-                        ];
+                            })];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -166,18 +152,14 @@ function PrivateCourseReg() {
     var changeDate = function (e) {
         setDateState(e);
     };
-    function handleRegistration() {
-        setAllReg(__spreadArrays(allReg, [registration]));
-        console.log(allReg);
-    }
     function handleRegister(ev) {
         ev.preventDefault();
         var form = ev.target;
         console.log({ form: form });
-        console.log(chosenhorse, " aaaaaaaaaaaaaaaaa", chosentrainer);
-        axios_1["default"].post('/registrations/add-new-single-registration', { level: form[0].value, name: form[2].value, age: form[4].value, date: form[6].value, chosenhorse: chosenhorse, chosentrainer: chosentrainer })
+        axios_1["default"].post('/registrations/add-new-single-registration', { level: levell, name: form[2].value, age: form[4].value, date: form[6].value, horse: chosenhorse, trainer: chosentrainer })
             .then(function (data) {
-            console.log(data);
+            console.log(data.data);
+            setAllReg(__spreadArrays(allReg, [registration]));
             alert("you have successfully registered");
         })["catch"](function (err) {
             console.error(err);
@@ -241,9 +223,7 @@ function PrivateCourseReg() {
                             react_1["default"].createElement(InputLabel_1["default"], { id: "demo-simple-select-label" }, "choose preferred trainer"),
                             react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select", value: chosentrainer, label: "horse", onChange: handleChoseTrainer }, status === 'loading' ? react_1["default"].createElement("div", null, "Loading...") : trainerByLevel.map(function (t, index) { return (react_1["default"].createElement(MenuItem_1["default"], { value: t.name },
                                 " ",
-                                t.name,
-                                " ",
-                                index)); }))))),
+                                t.name)); }))))),
             react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" }, "register"))));
 }
 exports["default"] = PrivateCourseReg;

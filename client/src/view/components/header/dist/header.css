@@ -26,44 +26,11 @@
 .mainheader__right {
   position: absolute;
   right: 0%;
-  width: 10%;
+  width: 20%;
   height: 6rem;
   display: flex;
-}
-.mainheader__right img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
 }
 .mainheader__right #basic-menu {
   width: 20vw;
   height: 10vh;
-}
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100vw;
-  height: 5vh;
-  justify-content: center;
-  align-items: center;
-  gap: 180px;
-}
-.menu__left {
-  display: flex;
-  gap: 30px;
-  width: 80%;
-  height: 100%;
-  margin-left: 10px;
-  margin-top: 20px;
-}
-.menu__left img {
-  margin-top: 20px;
-  width: 3%;
-}
-
-#basic-menu {
-  width: 10vw;
-  height: 20vh;
 }

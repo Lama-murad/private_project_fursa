@@ -100,7 +100,7 @@ function PrivateCourseReg() {
 
   async function getHorsesByLevel(req: any) {
     console.log(req.level)
-    await axios.post('/addHorse/get-horse-by-level', { level:req.level})
+    await axios.post('/addHorse/get-horse-by-level', { level: req.level })
       .then(data => {
         console.log(data, "dataaaa");
         setHorsesByLvl(data.data.horses);
@@ -108,20 +108,6 @@ function PrivateCourseReg() {
       }).catch(err => {
         console.error(err);
       })
-
-    //   try {
-    //     const {level} = req.body;
-    //     if (!level ) throw new Error("No data");
-    //     const horses = await Horses.find({"level":level});
-    //     if(horses){
-    //       console.log("true");
-    //   }
-    //   else{
-    //       console.error("false")
-    //   }
-    // }catch(err){
-    //   console.error(err);
-    // }
 
   }
 
@@ -142,22 +128,17 @@ function PrivateCourseReg() {
     setDateState(e)
   }
 
-  function handleRegistration() {
-    setAllReg([...allReg, registration]);
-    console.log(allReg);
-
-  }
 
   function handleRegister(ev: any) {
     ev.preventDefault();
     const form = ev.target;
     console.log({ form })
-    console.log(chosenhorse, " aaaaaaaaaaaaaaaaa",chosentrainer)
-    axios.post('/registrations/add-new-single-registration', { level: form[0].value, name: form[2].value, age: form[4].value, date: form[6].value,chosenhorse,chosentrainer })
-    
+    axios.post('/registrations/add-new-single-registration', { level: levell, name: form[2].value, age: form[4].value, date: form[6].value, horse: chosenhorse, trainer: chosentrainer })
       .then(data => {
-        console.log(data);
-        alert("you have successfully registered")
+        console.log(data.data);
+        setAllReg([...allReg, registration]);
+        alert("you have successfully registered");
+
       }).catch(err => {
         console.error(err);
       })
@@ -174,12 +155,12 @@ function PrivateCourseReg() {
   };
 
   const handleChoseHorse = (event: any) => {
-    console.log(event.target.value,"122222")
+    console.log(event.target.value, "122222")
     setchosenHorse(event.target.value);
   };
 
   const handleChoseTrainer = (event: any) => {
-    console.log(event.target.value,"111111")
+    console.log(event.target.value, "111111")
     setchosenTrainer(event.target.value);
   };
 
@@ -267,9 +248,9 @@ function PrivateCourseReg() {
           onChange={changeStartDate}
 
         />
-{/* 
+        {/* 
         <Button variant="contained" onClick={validate} className="nextBtn"> */}
-          <Icon icon="carbon:next-outline" onClick={validate} width="25" height="25" />
+        <Icon icon="carbon:next-outline" onClick={validate} width="25" height="25" />
         {/* </Button> */}
 
         {alertt &&
@@ -313,7 +294,7 @@ function PrivateCourseReg() {
                 >
                   {status === 'loading' ? <div>Loading...</div> : trainerByLevel.map((t: any, index: any) => (
 
-                    <MenuItem value={t.name}> {t.name} {index}</MenuItem>
+                    <MenuItem value={t.name}> {t.name}</MenuItem>
                   ))}
                   {/* {trainers.map((t:any, index) => (
      <MenuItem  key={t.name} value={index}> {t.name}</MenuItem>

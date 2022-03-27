@@ -17,15 +17,14 @@
   flex: auto;
   position: absolute;
   white-space: 5px;
-  top: 5vh;
-  left: 5vw;
+  top: 10vh;
   padding: 20px;
   width: 80vw;
   margin: 20px;
   justify-content: center;
 }
 .mydiv .inputDiv .txtfield {
-  padding: 5px;
+  padding-top: 5px;
 }
 .mydiv .inputDiv .agefield {
   position: absolute;

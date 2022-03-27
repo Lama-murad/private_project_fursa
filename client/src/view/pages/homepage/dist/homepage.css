@@ -23,6 +23,10 @@
   align-content: center;
   position: relative;
 }
+.maindivHP .bodyDiv #keep-mounted-modal-title {
+  text-decoration: underline;
+  font-weight: bold;
+}
 .maindivHP .bodyDiv .offerBtn {
   position: fixed;
   border: none;

@@ -19,7 +19,7 @@ import Horses from "./view/pages/horses/horses";
 import Courses from "./view/pages/courses/courses";
 import Course from "./view/pages/course/course";
 import CourseRegistration from "./view/pages/courseRegistration/courseRegistration";
-import Data from "./view/pages/data/data";
+import Data from "./view/pages/data/participantsInCour";
 import AdminCourses from "./view/pages/adminCourses/admincourses";
 import AdminPage from "./view/pages/AdminPage/adminpage";
 import TableDatePicker from "./view/pages/TableDatePicker/TableDatePicker"

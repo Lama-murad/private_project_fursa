@@ -85,7 +85,6 @@ function Header() {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-
                     <MenuItem>  <Link to="/SignIn"><Icon icon="clarity:logout-line" width="25" height="25" /></Link>
                     </MenuItem>
                     <MenuItem onClick={handleClose1}><Icon icon="ci:off-close" width="25" height="25" /></MenuItem>

@@ -109,6 +109,7 @@ router.post("/add-new-single-registration", function (req, res) { return __await
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
+                console.log("fat 3la add new 46");
                 _a = req.body, level = _a.level, name = _a.name, age = _a.age, date = _a.date, horse = _a.horse, trainer = _a.trainer;
                 if (!level || !name || !age || !date || !horse || !trainer)
                     throw new Error("No data");

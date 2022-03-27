@@ -43,6 +43,7 @@ router.post("/add-new-registration", async (req, res) => {
 
 router.post("/add-new-single-registration", async (req, res) => {
     try {
+        console.log("fat 3la add new 46")
         const {level,name, age,  date,horse,trainer } = req.body;
         if (!level || !name || !age || !date || !horse || !trainer) throw new Error("No data");
         const newRegis = new singleRegistrations({

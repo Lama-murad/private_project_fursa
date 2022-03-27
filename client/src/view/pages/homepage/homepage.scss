@@ -24,6 +24,11 @@
     align-content: center;
     position: relative;
     // left: 10vw;
+
+    #keep-mounted-modal-title{
+      text-decoration:underline ;
+      font-weight: bold;
+    }
   
   .offerBtn{
     position: fixed;
@@ -51,6 +56,8 @@ background-color:transparent;
     }
   
 }
+
+
 
 @keyframes move {
   25% {
