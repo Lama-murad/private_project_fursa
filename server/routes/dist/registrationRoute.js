@@ -40,6 +40,7 @@ var express = require('express');
 var router = express.Router();
 var registrationModel_1 = require("../model/schema/registrationModel");
 var singleCourseRegModel_1 = require("../model/schema/singleCourseRegModel");
+var groupCourseModel_1 = require("../model/schema/groupCourseModel");
 function getRegistrations() {
     return __awaiter(this, void 0, Promise, function () {
         var registrations, err_1;
@@ -74,14 +75,26 @@ router.get('/get-all-registrations', function (req, res) { return __awaiter(void
     });
 }); });
 router.post("/add-new-registration", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, level, name, age, course, newRegis, err_2;
+    var _a, level, name, age, course, courseName, filter, updatedAvailable, update, newRegis, err_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
+                _b.trys.push([0, 4, , 5]);
                 _a = req.body, level = _a.level, name = _a.name, age = _a.age, course = _a.course;
                 if (!level || !name || !age || !course)
                     throw new Error("No data");
+                return [4 /*yield*/, groupCourseModel_1["default"].find({ "name": course })];
+            case 1:
+                courseName = _b.sent();
+                console.log(courseName, "aaaaaaaaaaa");
+                if (!courseName) return [3 /*break*/, 3];
+                console.log;
+                filter = { name: courseName[0].name };
+                updatedAvailable = (courseName[0].availableSpaces) - 1;
+                console.log(updatedAvailable, "aavailableeeeeeeeee");
+                update = { availableSpaces: updatedAvailable };
+                console.log(update, "updateee");
+                groupCourseModel_1["default"].findOneAndUpdate(filter, update);
                 newRegis = new registrationModel_1["default"]({
                     level: level,
                     name: name,
@@ -91,15 +104,16 @@ router.post("/add-new-registration", function (req, res) { return __awaiter(void
                 return [4 /*yield*/, newRegis.save().then(function (res) {
                         console.log(res);
                     })];
-            case 1:
+            case 2:
                 _b.sent();
                 res.send({ val: "OK" });
-                return [3 /*break*/, 3];
-            case 2:
+                _b.label = 3;
+            case 3: return [3 /*break*/, 5];
+            case 4:
                 err_2 = _b.sent();
                 res.send({ error: err_2.message });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); });

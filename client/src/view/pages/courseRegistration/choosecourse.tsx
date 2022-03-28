@@ -23,6 +23,7 @@ import { addAppointment, selectAppointment } from '../../../features/registratio
 import { registration } from '../../../features/registrationSlice';
 import { useNavigate } from "react-router-dom";
 import Header from '../../components/header/header';
+import { Icon } from '@iconify/react';
 
 
 interface TimeManagement {
@@ -171,8 +172,8 @@ function ChooseCourse() {
                     </FormControl>
                 </Box>
 
-
-                <Button variant="contained" type="submit" className="regBtn">next</Button>
+                {/* variant="contained" */}
+                <Button  type="submit" className="regBtn"><Icon icon="carbon:next-outline" width="25" height="25" /></Button>
             </form>
 
 

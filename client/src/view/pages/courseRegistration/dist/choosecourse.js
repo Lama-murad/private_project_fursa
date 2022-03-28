@@ -24,6 +24,7 @@ var hooks_1 = require("../../../app/hooks");
 var axios_1 = require("axios");
 var react_router_dom_1 = require("react-router-dom");
 var header_1 = require("../../components/header/header");
+var react_3 = require("@iconify/react");
 var coursesRegis = [
     {
         start: new Date(2022, 3, 22, 4, 30),
@@ -119,6 +120,7 @@ function ChooseCourse() {
                     react_1["default"].createElement(Select_1["default"], { labelId: "demo-simple-select-label", id: "demo-simple-select", value: course, label: "Course", onChange: handleChoseCourse },
                         react_1["default"].createElement(MenuItem_1["default"], { value: "group_lesson" }, "Group lessons"),
                         react_1["default"].createElement(MenuItem_1["default"], { value: "signle_lesson" }, "Single lesson")))),
-            react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" }, "next"))));
+            react_1["default"].createElement(Button_1["default"], { type: "submit", className: "regBtn" },
+                react_1["default"].createElement(react_3.Icon, { icon: "carbon:next-outline", width: "25", height: "25" })))));
 }
 exports["default"] = ChooseCourse;

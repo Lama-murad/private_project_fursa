@@ -1,33 +1,37 @@
-.admCouDiv{
+.admCouDiv {
     width: 100vw;
     height: 100vh;
     font-size: 1rem;
+
     // position: relative;
     // align-content: center;
     // justify-content: center;
     // align-items: center;
     // place-content: inherit;
-    h4{
-      text-align: center;
+    h4 {
+        text-align: center;
     }
-.tablediv{
-    display: flex;
-    flex:2;
-    justify-content:center;
-    // position: relative;
-    // left: 35%;
-    // top: 100px;
-    // width: 100vw;
-    font-size: 1rem;
-    border: 1ch;
-    border-style: double;
+
+    .tablediv {
+        display: flex;
+        flex: 2;
+        justify-content: center;
+        // position: relative;
+        // left: 35%;
+        // top: 100px;
+        // width: 100vw;
+        font-size: 1rem;
+        border: 1ch;
+        border-style: double;
 
 
-}
-.addbtn{
-    width:30vw;
-    position: relative;
-    left: 40vw;
-  
-}
+    }
+
+    .addbtn {
+        width: 40vw;
+        font-size: small;
+        position: relative;
+        left: 30vw;
+
+    }
 }

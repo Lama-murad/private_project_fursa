@@ -15,7 +15,8 @@
   border-style: double;
 }
 .admCouDiv .addbtn {
-  width: 30vw;
+  width: 40vw;
+  font-size: small;
   position: relative;
-  left: 40vw;
+  left: 30vw;
 }

@@ -7,7 +7,6 @@ var Menu_1 = require("@mui/material/Menu");
 var MenuItem_1 = require("@mui/material/MenuItem");
 var Person_1 = require("@mui/icons-material/Person");
 var react_1 = require("@iconify/react");
-React.createElement("script", { src: "https://code.iconify.design/2/2.2.0/iconify.min.js" });
 function Header() {
     var _a = React.useState(null), anchorEl = _a[0], setAnchorEl = _a[1];
     var open = Boolean(anchorEl);

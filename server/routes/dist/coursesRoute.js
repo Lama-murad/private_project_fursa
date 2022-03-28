@@ -106,14 +106,18 @@ router.get('/get-all-single-courses', function (req, res) { return __awaiter(voi
 }); });
 router.use(signInController_1.loginStatus);
 router.post("/add-new-single-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, cost, participants, lessons, hours, newCourse, err_3;
+    var _a, name, cost, participants, lessons, hours, courseName, newCourse, err_3;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
+                _b.trys.push([0, 5, , 6]);
                 _a = req.body, name = _a.name, cost = _a.cost, participants = _a.participants, lessons = _a.lessons, hours = _a.hours;
                 if (!name || !cost || !participants || !lessons || !hours)
                     throw new Error("No data");
+                return [4 /*yield*/, groupCourseModel_1["default"].find({ "name": name })];
+            case 1:
+                courseName = _b.sent();
+                if (!!courseName) return [3 /*break*/, 3];
                 newCourse = new singleCourseModel_1["default"]({
                     name: name,
                     cost: cost,
@@ -124,15 +128,19 @@ router.post("/add-new-single-course", function (req, res) { return __awaiter(voi
                 return [4 /*yield*/, newCourse.save().then(function (res) {
                         console.log(res);
                     })];
-            case 1:
+            case 2:
                 _b.sent();
                 res.send({ val: "OK" });
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
+                res.send({ "course name exists": false });
+                _b.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
                 err_3 = _b.sent();
                 res.send({ error: err_3.message });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); });
@@ -171,13 +179,13 @@ router.get('/get-all-group-courses', function (req, res) { return __awaiter(void
 }); });
 router.use(signInController_1.loginStatus);
 router.post("/add-new-group-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, cost, participants, lessons, hours, time, level, newCourse, err_5;
+    var _a, name, cost, participants, lessons, hours, time, level, availableSpaces, newCourse, err_5;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, name = _a.name, cost = _a.cost, participants = _a.participants, lessons = _a.lessons, hours = _a.hours, time = _a.time, level = _a.level;
-                if (!name || !cost || !participants || !lessons || !hours || !time || !level)
+                _a = req.body, name = _a.name, cost = _a.cost, participants = _a.participants, lessons = _a.lessons, hours = _a.hours, time = _a.time, level = _a.level, availableSpaces = _a.availableSpaces;
+                if (!name || !cost || !participants || !lessons || !hours || !time || !level || !availableSpaces)
                     throw new Error("No data");
                 newCourse = new groupCourseModel_1["default"]({
                     name: name,
@@ -186,7 +194,8 @@ router.post("/add-new-group-course", function (req, res) { return __awaiter(void
                     lessons: lessons,
                     hours: hours,
                     time: time,
-                    level: level
+                    level: level,
+                    availableSpaces: participants
                 });
                 return [4 /*yield*/, newCourse.save().then(function (res) {
                         console.log(res);

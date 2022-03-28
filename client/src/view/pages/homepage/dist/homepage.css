@@ -26,6 +26,7 @@
 .maindivHP .bodyDiv #keep-mounted-modal-title {
   text-decoration: underline;
   font-weight: bold;
+  background-color: aqua;
 }
 .maindivHP .bodyDiv .offerBtn {
   position: fixed;

@@ -51,6 +51,7 @@ var styles_1 = require("@mui/material/styles");
 require("react-calendar/dist/Calendar.css");
 var react_router_dom_1 = require("react-router-dom");
 var Box_1 = require("@mui/material/Box");
+var react_4 = require("@iconify/react");
 var InputLabel_1 = require("@mui/material/InputLabel");
 var MenuItem_1 = require("@mui/material/MenuItem");
 var FormControl_1 = require("@mui/material/FormControl");
@@ -58,8 +59,6 @@ var Select_1 = require("@mui/material/Select");
 var TextField_1 = require("@mui/material/TextField");
 var Button_1 = require("@mui/material/Button");
 require("react-datetime-picker/dist/DateTimePicker.css");
-// import { registerLocale } from "react-datepicker";
-// import ro from 'date-fns/locale/ro';
 require("react-datepicker/dist/react-datepicker.css");
 require("react-time-picker/dist/TimePicker.css");
 var hooks_1 = require("../../../app/hooks");
@@ -74,6 +73,14 @@ var material_1 = require("@mui/material");
 var header_1 = require("../../components/header/header");
 var colors_1 = require("@mui/material/colors");
 var primary = colors_1.orange[100]; // #f44336
+// interface Data {
+//   name: string;
+//   participants: number;
+//   lessons: number;
+//   hours: string;
+//   cost: number;
+//   time:string
+// }
 var coursesRegis = [
     {
         start: new Date(2022, 3, 22, 4, 30),
@@ -125,7 +132,8 @@ function CourseRegistration() {
     var _j = react_2.useState(false), isChecked = _j[0], setIsChecked = _j[1];
     var _k = react_2.useState(new Array(groupcourses.length).fill(false)), checkedState = _k[0], setCheckedState = _k[1];
     var _l = react_2.useState(0), total = _l[0], setTotal = _l[1];
-    var _m = react_2.useState([]), chosenCourse = _m[0], setChosenCourse = _m[1];
+    var _m = react_2.useState([]), availableSpaces = _m[0], setAvailableSpaces = _m[1];
+    var _o = react_2.useState([]), chosenCourse = _o[0], setChosenCourse = _o[1];
     react_3.useEffect(function () {
         //fetch courses using mongo
         fetch('/courses/get-all-group-courses')
@@ -137,19 +145,6 @@ function CourseRegistration() {
             console.error(err);
         });
     }, []);
-    var filterDays = function (date) {
-        // Disable Weekends
-        if (date.getDay() === 0 || date.getDay() === 6) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    };
-    function handleRegistration() {
-        setAllReg(__spreadArrays(allReg, [registration]));
-        console.log(allReg);
-    }
     function handleRegister(ev) {
         ev.preventDefault();
         var form = ev.target;
@@ -157,6 +152,8 @@ function CourseRegistration() {
         axios_1["default"].post('/registrations/add-new-registration', { level: level, name: form[2].value, age: form[4].value, course: chosenCourse })
             .then(function (data) {
             console.log(data);
+            // setAvailableSpaces(availableSpaces-1);
+            setAllReg(__spreadArrays(allReg, [registration]));
             alert("you have successfully registered");
             nav('/homepage');
         })["catch"](function (err) {
@@ -171,9 +168,14 @@ function CourseRegistration() {
                         console.log(req.level);
                         return [4 /*yield*/, axios_1["default"].post('/courses/get-course-by-level', { level: req.level })
                                 .then(function (data) {
-                                console.log(data, "dataaaa");
+                                console.log(data.data.courses, "dataaaa");
                                 setcoursesByLvl(data.data.courses);
-                                console.log(data.data.courses);
+                                {
+                                    coursesByLvl.map(function (row, index) { return (setAvailableSpaces(row.availableSpaces)); });
+                                }
+                                ;
+                                //           console.log(data.data.courses[0].name,"spacessssssss");
+                                // console.log(availableSpaces);
                             })["catch"](function (err) {
                                 console.error(err);
                             })];
@@ -191,14 +193,14 @@ function CourseRegistration() {
     };
     // position:any,value:any
     function handleCheck(event) {
-        // position.preventDefault();
-        console.log(event);
+        // console.log(event)
         console.log(event.target);
         var updatedCheckedState = checkedState.map(function (item, index) {
             return index === event.target.id ? item : !item;
         }
         // console.log(item)
         );
+        console.log(checkedState, "checked state");
         setCheckedState(updatedCheckedState);
         console.log(updatedCheckedState);
         var totalPrice = updatedCheckedState.reduce(function (sum, currentState, index) {
@@ -212,11 +214,6 @@ function CourseRegistration() {
         console.log("total", total);
         setTotal(totalPrice);
     }
-    var validate = function (event) {
-        event.preventDefault();
-        setAlert(true);
-        return;
-    };
     return (react_1["default"].createElement("div", { className: 'mydiv' },
         react_1["default"].createElement(header_1["default"], null),
         react_1["default"].createElement("form", { onSubmit: handleRegister, className: 'inputDiv' },
@@ -232,7 +229,7 @@ function CourseRegistration() {
             alertt &&
                 react_1["default"].createElement("div", { className: "popup" },
                     react_1["default"].createElement(TableContainer_1["default"], { className: "table", component: material_1.Paper },
-                        react_1["default"].createElement(Table_1["default"], { sx: { minWidth: 300 }, "aria-label": "customized table" },
+                        react_1["default"].createElement(Table_1["default"], { sx: { Width: 300 }, "aria-label": "customized table" },
                             react_1["default"].createElement(TableHead_1["default"], null,
                                 react_1["default"].createElement(TableRow_1["default"], null,
                                     react_1["default"].createElement(StyledTableCell, { align: "center" }, "name"),
@@ -241,7 +238,8 @@ function CourseRegistration() {
                                     react_1["default"].createElement(StyledTableCell, { align: "center" }, " hours "),
                                     react_1["default"].createElement(StyledTableCell, { align: "center" }, " cost "),
                                     react_1["default"].createElement(StyledTableCell, { align: "center" }, " time "),
-                                    react_1["default"].createElement(StyledTableCell, { align: "center" }, " choose "))),
+                                    react_1["default"].createElement(StyledTableCell, { align: "center" }, " available spaces "),
+                                    react_1["default"].createElement(StyledTableCell, { align: "center" }, " book! "))),
                             react_1["default"].createElement(TableBody_1["default"], null, coursesByLvl.map(function (row, index) { return (react_1["default"].createElement(StyledTableRow, { key: index },
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.name),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.participants),
@@ -249,8 +247,10 @@ function CourseRegistration() {
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.hours),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.cost),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.time),
+                                react_1["default"].createElement(StyledTableCell, { align: "center" }, row.availableSpaces),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" },
                                     react_1["default"].createElement("input", { type: "checkbox", id: index, name: row.name, value: row.name, checked: checkedState[index], onChange: handleCheck })))); }))))),
-            react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" }, "register"))));
+            react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" },
+                react_1["default"].createElement(react_4.Icon, { icon: "academicons:preregistered", width: "25", height: "25" })))));
 }
 exports["default"] = CourseRegistration;

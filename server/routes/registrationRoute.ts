@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 import groupCourseRegistrations from '../model/schema/registrationModel';
 import singleRegistrations from '../model/schema/singleCourseRegModel';
+import groupCourses from '../model/schema/groupCourseModel';
+
 
 
 async function getRegistrations(): Promise<any> {
@@ -25,6 +27,17 @@ router.post("/add-new-registration", async (req, res) => {
     try {
         const {level,name, age,  course } = req.body;
         if (!level || !name || !age || !course) throw new Error("No data");
+        const courseName = await groupCourses.find({"name":course});
+        console.log(courseName,"aaaaaaaaaaa")
+        if (courseName) {
+            console.log
+            const filter={name:courseName[0].name};
+            const updatedAvailable=(courseName[0].availableSpaces)-1;
+            console.log(updatedAvailable,"aavailableeeeeeeeee");
+            const update={availableSpaces:updatedAvailable};
+            console.log(update,"updateee")
+           
+        groupCourses.findOneAndUpdate(filter, update);
         const newRegis = new groupCourseRegistrations({
             level: level,
             name: name,
@@ -35,7 +48,7 @@ router.post("/add-new-registration", async (req, res) => {
             console.log(res);
         });
         res.send({ val: "OK" });
-    } catch (err) {
+    }} catch (err) {
         res.send({ error: err.message });
     }
 });

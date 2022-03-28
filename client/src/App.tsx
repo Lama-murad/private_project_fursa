@@ -14,6 +14,7 @@ import { selectProducts } from './features/products';
  import { selectOffers} from './features/offers'
 import SignUp from './view/pages/signUp/signup';
 import SignIn from './view/pages/signIn/signin';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 // const students:Array<Place> = [{name:'Saleem', place:'Mashad'},{name:'Mona',place:"Nazereth"}];
 // interface Place{

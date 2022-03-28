@@ -8,6 +8,7 @@ const groupCourseSchema = new mongoose.Schema({
     lessons:Number,
     time:String,
     level:String,
+    availableSpaces:Number,
   });
 
 //the collection

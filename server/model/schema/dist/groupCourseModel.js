@@ -8,7 +8,8 @@ var groupCourseSchema = new mongoose.Schema({
     hours: Number,
     lessons: Number,
     time: String,
-    level: String
+    level: String,
+    availableSpaces: Number
 });
 //the collection
 var groupCourses = mongoose.model("groupCourses", groupCourseSchema);

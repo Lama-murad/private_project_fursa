@@ -29,7 +29,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
+  bgcolor: 'rgba(211, 184, 168,0.95)',
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
@@ -77,10 +77,23 @@ function Homepage() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        // style={{backgroundColor: "lightblue"}}
+      
       >
+          {/* <View style={{
+          flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'}}>
+    <View style={{
+            width: 300,
+            height: 300}}>
+  
+    </View>
+  </View> */}
         <Box sx={style}>
           {offer.map((offer:any, index:any) => (
-        <><Typography id="keep-mounted-modal-title" variant="h6" component="h2" >
+        <><Typography id="keep-mounted-modal-title" variant="h6" component="h2" style={{fontWeight: "bold"}}>
               {offer.name}
             </Typography><Typography id="keep-mounted-modal-description" sx={{ mt: 2 }} >
                 {offer.description}

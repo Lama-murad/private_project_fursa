@@ -11,8 +11,8 @@
   border-style: double;
   font-size: large;
   position: relative;
-  justify-content: center;
-  align-content: center;
+  display: flex;
+  flex-direction: column;
 }
 .signin .avatar {
   left: 45%;
@@ -28,13 +28,22 @@
   height: 20vh;
   border-radius: 100px;
 }
-.signin .btn {
+.signin .loginform {
+  display: flex;
+  flex-direction: column;
+}
+.signin .loginform .loginbtn {
   position: relative;
-  left: 40%;
-  width: 18vw;
+  top: 5%;
   color: black;
   font-weight: bold;
 }
-.signin p {
+.signin .loginform .forgotbtn {
+  position: relative;
+  top: 10%;
+  justify-content: center;
+}
+.signin .loginform p {
+  background-color: rgba(255, 255, 255, 0.747);
   font-size: 1rem;
 }

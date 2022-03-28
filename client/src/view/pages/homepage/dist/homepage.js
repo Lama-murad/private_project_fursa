@@ -19,7 +19,7 @@ var style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgcolor: 'background.paper',
+    bgcolor: 'rgba(211, 184, 168,0.95)',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4
@@ -56,7 +56,7 @@ function Homepage() {
                 React.createElement(react_2.Icon, { icon: "ooui:special-pages-ltr", width: "25", height: "25" })),
             React.createElement(Modal_1["default"], { open: open, onClose: handleClose, "aria-labelledby": "modal-modal-title", "aria-describedby": "modal-modal-description" },
                 React.createElement(Box_1["default"], { sx: style }, offer.map(function (offer, index) { return (React.createElement(React.Fragment, null,
-                    React.createElement(Typography_1["default"], { id: "keep-mounted-modal-title", variant: "h6", component: "h2" }, offer.name),
+                    React.createElement(Typography_1["default"], { id: "keep-mounted-modal-title", variant: "h6", component: "h2", style: { fontWeight: "bold" } }, offer.name),
                     React.createElement(Typography_1["default"], { id: "keep-mounted-modal-description", sx: { mt: 2 } }, offer.description),
                     React.createElement(Typography_1["default"], { id: "keep-mounted-modal-description", sx: { mt: 2 } },
                         "cost: ",

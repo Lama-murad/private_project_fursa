@@ -6,21 +6,13 @@
   width: 100vw;
   height: 100vh;
 }
-.mydiv .backbtn {
-  position: fixed;
-  top: 0%;
-  left: 0%;
-  text-align: center;
-  width: 10vw;
-}
 .mydiv .inputDiv {
   flex: auto;
   position: absolute;
   white-space: 5px;
   top: 10vh;
   padding: 20px;
-  width: 80vw;
-  margin: 20px;
+  width: 90vw;
   justify-content: center;
 }
 .mydiv .inputDiv .txtfield {
@@ -32,18 +24,9 @@
 }
 .mydiv .inputDiv .regBtn {
   position: fixed;
-  left: 10%;
+  left: 5%;
   bottom: 20%;
   font-size: small;
-}
-.mydiv .cal {
-  position: absolute;
-  left: 200px;
-  top: 0px;
-  width: 10vw;
-}
-.mydiv .cal .cal1 {
-  width: 20vw;
 }
 .mydiv .caldiv {
   position: absolute;
@@ -57,6 +40,13 @@
   font-size: 1rem;
   border: 1mm;
   border-style: solid;
+}
+.mydiv .table {
+  font-size: small;
+  margin-top: 5%;
+}
+.mydiv StyledTableCell {
+  width: fit-content;
 }
 .mydiv .aaa {
   position: relative;

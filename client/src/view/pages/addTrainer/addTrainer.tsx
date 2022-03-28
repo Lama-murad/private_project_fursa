@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import './addTrainer.scss';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import AdminHeader from '../../components/adminHeader/adminHeader';
 
 function AddTrainer(){
@@ -23,6 +24,16 @@ function AddTrainer(){
       console.error(err);
     })
   },[])
+
+  function handleDelete(event:any){
+    event.preventDefault();
+    const id=event.target.value;
+    axios.delete(`http://localhost:3004/courses/${id}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+  }
 
   function addTrainer(ev: any) {
     ev.preventDefault();
@@ -50,9 +61,47 @@ function AddTrainer(){
           <Button className='addbtn'  type="submit">Add</Button>
         </form>
         {/* <h1>courses</h1> */}
-        {trainer.map((t: any) => {
+        {/* {trainer.map((t: any) => {
           return <p key={t._id}>{t.name}</p>
-        })}
+        })} */}
+
+
+<div className='tablediv1'>
+     <table className="table table-striped">
+                <thead>
+                    <tr>
+                    {/* <th>Id</th> */}
+                    <th>Name</th>
+                    <th>age</th>
+                    <th>level</th>
+                    <th>description</th>
+                    {/* <th>image</th> */}
+                    <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+              {trainer.map((info:any,index)=>{
+              return(
+                  <tr key={index}>
+                      {/* <td>{info.id}</td> */}
+                      <td>{info.name}</td>
+                      <td>{info.age}</td>
+                      <td>{info.level}</td>
+                      <td>{info.description}</td>
+                      <td>
+     
+    <DeleteOutlinedIcon onClick={handleDelete}/>
+                        </td>
+                  </tr>
+              )
+          }
+          
+      )}
+                    
+                </tbody>
+            </table>
+     </div>
 
 </div>
         

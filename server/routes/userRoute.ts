@@ -85,6 +85,29 @@ router.get('/get-user',async (req:any, res:any)=>{
 
   })
 
+
+  router.patch("/update-user-password", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!password || !email) throw ' invalid fields'
+        const _user = await User.findOne({ email: email });
+        console.log(_user)
+        if (_user) {
+            const filter={email:email};
+            const update={password:password};
+           
+            let doc = await User.findOneAndUpdate(filter, update);
+            res.send({ ok: true, doc });
+
+        }
+        else {
+            res.send({ ok: false })
+        }
+    } catch (error) {
+        res.send({ error: error.message });
+    }
+})
+
  
 
 //   router.get("/get-users", async (req, res) => {});

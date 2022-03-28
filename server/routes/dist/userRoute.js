@@ -38,7 +38,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var express = require('express');
 var router = express.Router();
+var jwt_simple_1 = require("jwt-simple");
 var userModel_1 = require("../model/schema/userModel");
+//controller
+var signInController_1 = require("../controllers/signInController");
 router.get('/get-user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, pass, user, err_1;
     return __generator(this, function (_b) {
@@ -67,20 +70,32 @@ router.get('/get-user', function (req, res) { return __awaiter(void 0, void 0, v
         }
     });
 }); });
-router.get('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, email, pass, user, err_2;
+router.post('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, email, password, JWT_SECRET, encodedJWT, user, err_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                _a = req.body, email = _a.email, pass = _a.pass;
-                if (!email || !pass)
+                _a = req.body, email = _a.email, password = _a.password;
+                //check if user exist in DB
+                //check if password equal to that in the database
+                //if yes, send cookie with jwt
+                console.log(req.body);
+                if (!email || !password)
                     throw "password or name is not correct";
-                return [4 /*yield*/, userModel_1["default"].findOne({ "email": email, "password": pass })];
+                JWT_SECRET = process.env.JWT_SECRET;
+                encodedJWT = jwt_simple_1["default"].encode({ userEmail: email, role: "admin" }, JWT_SECRET);
+                return [4 /*yield*/, userModel_1["default"].findOne({ email: email, password: password })];
             case 1:
                 user = _b.sent();
+                console.log({ user: user });
                 if (user) {
-                    res.coockie('userID', { id: user._id });
+                    // console.log("faaaat")
+                    res.cookie("userInfo", encodedJWT, {
+                        httpOnly: true,
+                        maxAge: 60 * 60 * 1000
+                    });
+                    // res.coockie('userID',{id:user._id})
                     res.send({ "log": true, "user": user });
                 }
                 else {
@@ -90,19 +105,30 @@ router.get('/login', function (req, res) { return __awaiter(void 0, void 0, void
             case 2:
                 err_2 = _b.sent();
                 res.send({ err: err_2 });
+                console.error(err_2.message);
+                res.send({ error: err_2.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
-}); });
+}); })
+    .get("/privateInfo", signInController_1.isAdmin, function (req, res) {
+    res.send({ ok: true, info: "my secrets" });
+});
 router.post('/add-new-user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, firstName, lastName, email, password, phoneNumber, user;
     return __generator(this, function (_b) {
         _a = req.body, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, phoneNumber = _a.phoneNumber;
+        console.log(req.body);
+        // console.log(lastName);
+        // console.log(email);
+        // console.log(password);
+        // console.log(phoneNumber);
         if (!firstName || !lastName || !email || !password || !phoneNumber)
             throw 'invalid field values';
         try {
             user = new userModel_1["default"]({ firstName: firstName, lastName: lastName, email: email, password: password, phoneNumber: phoneNumber });
+            console.log(user, "aaaaa");
             user.save().then(function (res) {
                 console.log(res);
             });
@@ -114,4 +140,38 @@ router.post('/add-new-user', function (req, res) { return __awaiter(void 0, void
         return [2 /*return*/];
     });
 }); });
+router.patch("/update-user-password", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, email, password, _user, filter, update, doc, error_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 5, , 6]);
+                _a = req.body, email = _a.email, password = _a.password;
+                if (!password || !email)
+                    throw ' invalid fields';
+                return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
+            case 1:
+                _user = _b.sent();
+                console.log(_user);
+                if (!_user) return [3 /*break*/, 3];
+                filter = { email: email };
+                update = { password: password };
+                return [4 /*yield*/, userModel_1["default"].findOneAndUpdate(filter, update)];
+            case 2:
+                doc = _b.sent();
+                res.send({ ok: true, doc: doc });
+                return [3 /*break*/, 4];
+            case 3:
+                res.send({ ok: false });
+                _b.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                error_1 = _b.sent();
+                res.send({ error: error_1.message });
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
+        }
+    });
+}); });
+//   router.get("/get-users", async (req, res) => {});
 module.exports = router;

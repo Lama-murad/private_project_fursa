@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import './addHorse.scss';
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import AdminHeader from '../../components/adminHeader/adminHeader';
 
 function AddHorse(){
@@ -25,6 +26,17 @@ function AddHorse(){
       console.error(err);
     })
   },[])
+
+  function handleDelete(event:any){
+    event.preventDefault();
+    const id=event.target.value;
+    axios.delete(`http://localhost:3004/courses/${id}`)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+  }
+
 
   function addhorse(ev: any) {
     ev.preventDefault();
@@ -53,9 +65,46 @@ function AddHorse(){
           <Button className='addbtn'  type="submit">Add</Button>
         </form>
         {/* <h1>courses</h1> */}
-        {horsess.map((t: any) => {
+        {/* {horsess.map((t: any) => {
           return <p key={t._id}>{t.name}</p>
-        })}
+        })} */}
+        
+<div className='tablediv2'>
+     <table className="table table-striped">
+                <thead>
+                    <tr>
+                    {/* <th>Id</th> */}
+                    <th>Name</th>
+                    <th>age</th>
+                    <th>level</th>
+                    <th>description</th>
+                    {/* <th>image</th> */}
+                    <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+              {horsess.map((info:any,index)=>{
+              return(
+                  <tr key={index}>
+                      {/* <td>{info.id}</td> */}
+                      <td>{info.name}</td>
+                      <td>{info.age}</td>
+                      <td>{info.level}</td>
+                      <td>{info.description}</td>
+                      <td>
+     
+    <DeleteOutlinedIcon onClick={handleDelete}/>
+                        </td>
+                  </tr>
+              )
+          }
+          
+      )}
+                    
+                </tbody>
+            </table>
+     </div>
 
 </div>
         

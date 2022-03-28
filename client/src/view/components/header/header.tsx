@@ -15,7 +15,6 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 import PersonIcon from '@mui/icons-material/Person';
 import { Icon } from '@iconify/react';
 
-<script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
 function Header() {
   
 

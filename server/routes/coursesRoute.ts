@@ -45,7 +45,8 @@ router.get('/get-all-single-courses',async (req:any, res:any)=>{
     try {
       const { name, cost, participants,lessons,hours } = req.body;
       if (!name || !cost || !participants || !lessons || !hours) throw new Error("No data");
-    
+      const courseName = await groupCourses.find({"name":name});
+      if(!courseName){
       const newCourse = new singleCourses({
         name: name,
         cost: cost,
@@ -56,10 +57,14 @@ router.get('/get-all-single-courses',async (req:any, res:any)=>{
       await newCourse.save().then((res) => {
         console.log(res);
       });
-      res.send({ val: "OK" });
+      res.send({ val: "OK" });}
+      else{
+        res.send({"course name exists":false})
+      }
     } catch (err) {
       res.send({ error: err.message });
     }
+  
   });
 
 
@@ -83,8 +88,8 @@ router.get('/get-all-group-courses',async (req:any, res:any)=>{
   router.use(loginStatus)
   router.post("/add-new-group-course", async (req, res) => {
     try {
-      const { name, cost, participants,lessons,hours,time,level } = req.body;
-      if (!name || !cost || !participants || !lessons || !hours || !time || !level) throw new Error("No data");
+      const { name, cost, participants,lessons,hours,time,level,availableSpaces } = req.body;
+      if (!name || !cost || !participants || !lessons || !hours || !time || !level || !availableSpaces) throw new Error("No data");
     
       const newCourse = new groupCourses({
         name: name,
@@ -93,7 +98,8 @@ router.get('/get-all-group-courses',async (req:any, res:any)=>{
         lessons:lessons,
         hours:hours,
         time:time,
-        level:level
+        level:level,
+        availableSpaces:participants,
 
       });
       await newCourse.save().then((res) => {

@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import './addCourse.scss';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AdminHeader from '../../components/adminHeader/adminHeader';
 
 function AddGroupCourse() {
@@ -31,7 +27,7 @@ function AddGroupCourse() {
     ev.preventDefault();
     const form = ev.target;
     console.log({ form })
-    axios.post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value,time:form[5].value ,level:form[6].value })
+    axios.post('/courses/add-new-group-course', { name: form[0].value, cost: form[1].value, participants: form[2].value, lessons: form[3].value, hours: form[4].value,time:form[5].value ,level:form[6].value,availableSpaces:form[7].value })
       .then(data => {
         console.log(data);
         alert('course added successfully')
@@ -46,7 +42,7 @@ function AddGroupCourse() {
     console.dir(ev.target);
     const form = ev.target
     console.log(form[0]);
-    axios.post('http://localhost:3004/courses', { 'name': form[0].value, 'participants': form[2].value, 'lessons': form[6].value, 'cost': form[2].value }).
+    axios.post('http://localhost:3004/courses', { 'name': form[0].value, 'participants': form[2].value, 'lessons': form[6].value, 'cost': form[2].value,'availableSpaces':form[7].value }).
       then(({ data }) => console.log(data));
     alert("course added successfully");
   }
@@ -65,6 +61,7 @@ function AddGroupCourse() {
         <input type="double" name="hours" placeholder='how much hours' />
         <input type="text" name="time" placeholder='time' />
         <input type="text" name="level" placeholder='insert 1-3 level' />
+        <input type="text" name="availableSpaces" placeholder='insert available spaces' />
         <button type='submit'>Add</button>
       </form>
       <h1>courses</h1>
