@@ -1,16 +1,13 @@
 .signup {
-  background-image: url(https://i.pinimg.com/736x/09/12/1a/09121ad06a3f102099ce22f36c463313.jpg);
+  background-image: url(https://i.pinimg.com/736x/6b/52/7c/6b527c4762f95b65fff4e6e42cd06b44.jpg);
   background-repeat: no-repeat;
+  background-size: cover;
   font-size: small;
-  margin-top: 20px;
-  justify-content: center;
   border-style: double;
-  border-width: 10px;
-  width: 30vw;
-  height: 90vh;
+  width: 100vw;
+  height: 100vh;
   border-color: black;
   position: relative;
-  left: 500px;
   color: white;
 }
 .signup .avatar {
@@ -21,16 +18,25 @@
 }
 .signup .typ {
   position: absolute;
-  top: 10%;
+  top: 2%;
   left: 40%;
 }
 .signup .signupform {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   position: relative;
+  align-items: center;
   top: 60px;
 }
 .signup .signupform .textfield {
-  width: 20vw;
-  height: 10vh;
+  width: 50vw;
+  height: 8vh;
   position: relative;
   text-align: center;
+}
+.signup .signupform .subbtn {
+  position: relative;
+  bottom: -200px;
+  background-color: transparent;
 }

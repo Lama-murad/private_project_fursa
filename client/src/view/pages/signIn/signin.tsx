@@ -1,11 +1,6 @@
 
 import Button from '@mui/material/Button';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import LoginIcon from '@mui/icons-material/Login';
-import GoogleIcon from '@mui/icons-material/Google';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -13,12 +8,12 @@ import './signin.scss';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useAppDispatch } from '../../../app/hooks';
+import { fetchUser} from '../../../features/userReducer';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -47,6 +42,7 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const dispatch = useAppDispatch()
 
   function hadleForgetPassword(ev: any) {
     console.log(email, '///')
@@ -59,20 +55,35 @@ function SignIn() {
     const form = ev.target;
     // console.log({form})
     const email2 = form[0].value;
-    await axios.post('/user/login', { email: form[0].value, password: form[2].value })
-      .then(data => {
-        console.log({ email2 })
-        console.log(data);
-        if (email2 === "Admin@gmail.com") {
-          console.log("fat 3l if")
-          navigate('/admincourses');
-        }
-        else {
-          navigate('/homepage');
-        }
-      }).catch(err => {
-        console.error(err);
-      })
+    // await axios.post('/user/login', { email: form[0].value, password: form[2].value })
+    //   .then(data => {
+    //     console.log({ email2 })
+    //     console.log(data);
+    //     if (email2 === "Admin@gmail.com") {
+    //       console.log("fat 3l if")
+    //       navigate('/admincourses');
+    //     }
+    //     else {
+    //       navigate('/homepage');
+    //     }
+    //   }).catch(err => {
+    //     console.error(err);
+    //   })
+
+
+      dispatch(fetchUser({ "email": email, "password": password }));
+      // if(isLoged)
+      // {
+      //   console.log(isLoged)
+      //   navigate("/profile")
+      // }
+      if (email2 === "Admin@gmail.com") {
+              console.log("fat 3l if")
+              navigate('/admincourses');
+            }
+            else {
+              navigate('/homepage');
+            }
 
   }
 
@@ -96,6 +107,7 @@ function SignIn() {
           id="Email"
           label="Email"
           autoFocus
+          onChange={(e: any) => setEmail(e.target.value)}
         />
         <TextField
           className="textfield"
@@ -107,12 +119,15 @@ function SignIn() {
           label="Password"
           autoFocus
           type="password"
+          onChange={(e: any) => setPassword(e.target.value)}
         />
 
         {/* variant="outlined" */}
         <Button type='submit' className='loginbtn' size="small" startIcon={<LoginIcon />}> login </Button>
-
+     
         <Button onClick={handleOpen} className='forgotbtn'>Forgot password?</Button>
+<Link to='/signup'>
+        <Button  className='signupbtn'>Doesn't have an acoount?Sign up!</Button></Link>
         <Modal
           open={open}
           onClose={handleClose}
@@ -135,8 +150,6 @@ function SignIn() {
 
       </form>
 
-
-      {/* //   onClick={handleSignIn} */}
 
 
     </div>

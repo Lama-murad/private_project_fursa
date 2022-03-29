@@ -6,7 +6,8 @@ var RegistrationSchema = new mongoose.Schema({
     name: String,
     age: Number,
     level: String,
-    course: String
+    course: String,
+    courseTime: String
 });
 //the collection
 var groupCourseRegistrations = mongoose.model("groupCourseRegistrations", RegistrationSchema);

@@ -41,18 +41,20 @@ var router = express.Router();
 var signInController_1 = require("../controllers/signInController");
 var singleCourseModel_1 = require("../model/schema/singleCourseModel");
 var groupCourseModel_1 = require("../model/schema/groupCourseModel");
+var singleCourseRegModel_1 = require("../model/schema/singleCourseRegModel");
+var registrationModel_1 = require("../model/schema/registrationModel");
 function getSingleCourses() {
     return __awaiter(this, void 0, Promise, function () {
-        var courses, err_1;
+        var singleCourses_1, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, singleCourseModel_1["default"].find({})];
+                    return [4 /*yield*/, singleCourseRegModel_1["default"].find({})];
                 case 1:
-                    courses = _a.sent();
-                    console.log(courses);
-                    return [2 /*return*/, courses];
+                    singleCourses_1 = _a.sent();
+                    console.log(singleCourses_1);
+                    return [2 /*return*/, singleCourses_1];
                 case 2:
                     err_1 = _a.sent();
                     console.error(err_1);
@@ -93,13 +95,14 @@ router.post("/get-course-by-level", function (req, res) { return __awaiter(void 
     });
 }); });
 router.get('/get-all-single-courses', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var courses;
+    var singleCourses;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, getSingleCourses()];
             case 1:
-                courses = _a.sent();
-                res.send({ courses: courses });
+                singleCourses = _a.sent();
+                // console.log("")
+                res.send({ singleCourses: singleCourses });
                 return [2 /*return*/];
         }
     });
@@ -177,9 +180,74 @@ router.get('/get-all-group-courses', function (req, res) { return __awaiter(void
         }
     });
 }); });
-router.use(signInController_1.loginStatus);
+function getGroupCoursesReg() {
+    return __awaiter(this, void 0, Promise, function () {
+        var groupCoursesReg, err_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, registrationModel_1["default"].find({})];
+                case 1:
+                    groupCoursesReg = _a.sent();
+                    console.log(groupCoursesReg);
+                    return [2 /*return*/, groupCoursesReg];
+                case 2:
+                    err_5 = _a.sent();
+                    console.error(err_5);
+                    return [2 /*return*/, false];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+router.get('/get-all-group-courses-reg', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var groupCoursesReg;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getGroupCoursesReg()];
+            case 1:
+                groupCoursesReg = _a.sent();
+                res.send({ groupCoursesReg: groupCoursesReg });
+                return [2 /*return*/];
+        }
+    });
+}); });
+function getSingleCoursesReg() {
+    return __awaiter(this, void 0, Promise, function () {
+        var signleCoursesReg, err_6;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, singleCourseRegModel_1["default"].find({})];
+                case 1:
+                    signleCoursesReg = _a.sent();
+                    console.log(signleCoursesReg);
+                    return [2 /*return*/, signleCoursesReg];
+                case 2:
+                    err_6 = _a.sent();
+                    console.error(err_6);
+                    return [2 /*return*/, false];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+router.get('/get-all-single-courses-reg', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var signleCoursesReg;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getSingleCoursesReg()];
+            case 1:
+                signleCoursesReg = _a.sent();
+                res.send({ signleCoursesReg: signleCoursesReg });
+                return [2 /*return*/];
+        }
+    });
+}); });
 router.post("/add-new-group-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, cost, participants, lessons, hours, time, level, availableSpaces, newCourse, err_5;
+    var _a, name, cost, participants, lessons, hours, time, level, availableSpaces, newCourse, err_7;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -205,8 +273,30 @@ router.post("/add-new-group-course", function (req, res) { return __awaiter(void
                 res.send({ val: "OK" });
                 return [3 /*break*/, 3];
             case 2:
-                err_5 = _b.sent();
-                res.send({ error: err_5.message });
+                err_7 = _b.sent();
+                res.send({ error: err_7.message });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+router.post("/delete-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var name, filter, doc, err_8;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                name = req.body.name;
+                filter = { name: name };
+                return [4 /*yield*/, groupCourseModel_1["default"].deleteOne(filter)];
+            case 1:
+                doc = _a.sent();
+                res.send({ ok: true, doc: doc });
+                return [3 /*break*/, 3];
+            case 2:
+                err_8 = _a.sent();
+                console.error(err_8);
+                res.status(400).send({ error: err_8.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import AdminHeader from '../../components/adminHeader/adminHeader';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 
 interface courseProp {
@@ -20,13 +21,9 @@ interface courseProp {
 }
 function Data() {
   const [details, setDetails] = useState<Array<any>>([{ courseid: 0, coursaname: "", userid: 0, username: "" }]);
-  const [courses, setCourses] = useState([{ courseid: 0, userid: 0, username: "" }]);
-  //  axios.get('http://localhost:3004/courses').then(({data})=>console.log(data));
-  // axios.get('http://localhost:3004/participants').then(({ data }) => setDetails(data));
+  const [groupcourses, setGroupCourses] = useState<Array<any>>([{ name: "", age: 0, level: "", course:""}])
+  const [singlecourses, setSingleCourses] = useState<Array<any>>([{ level: "",name: "", age: 0,  date:"",horse:"",trainer:""}])
 
-  function handleData() {
-    axios.get('http://localhost:3004/participants').then(({ data }) => setDetails(data));
-  }
 
   function handleDelete(ev: any) {
     // ev.prevenntDefault();
@@ -36,44 +33,58 @@ function Data() {
 
   }
   useEffect(() => {
-    axios.get('http://localhost:3004/participants').then(({ data }) => setDetails(data));
+    fetch('/courses/get-all-group-courses-reg')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setGroupCourses(data.groupCoursesReg);
+    }).catch(err => {
+      console.error(err);
+    })
+
+    fetch('/courses/get-all-single-courses-reg')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setSingleCourses(data.signleCoursesReg);
+    }).catch(err => {
+      console.error(err);
+    })
   }, []);
 
   return (
 
     <div className='dataDiv'>
       <AdminHeader />
-      <Link to={`/`}>
-        {/* <Button className='backbtn' variant="outlined" onClick={() => {
-          alert('clicked');
-        }}> back</Button> */}
-      </Link>
+
       <h4>participants in courses management</h4>
-      <div className='tablediv1'>
+      <h5>group courses</h5>
+      <div className='tablediv'>
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Course Id</th>
-              <th>Course Name</th>
-              <th>User Id</th>
-              <th>Participant Name</th>
-              <th>Delete</th>
+ 
+              <th>Name</th>
+              <th>age</th>
+              <th>level</th>
+              <th>course</th>
+           <th>Delete</th>
             </tr>
           </thead>
           <tbody>
 
-            {details.map((info, index) => {
+            {groupcourses.map((info, index) => {
               return (
                 <tr key={index}>
-                  <td>{info.courseid}</td>
-                  <td>{info.coursename}</td>
-                  <td>{info.userid}</td>
-                  <td>{info.username}</td>
+                  {/* <td>{info.id}</td> */}
+         
+                  <td>{info.name}</td>
+                  <td>{info.age}</td>
+                  <td>{info.level}</td>
+                  <td>{info.course}</td>
                   <td>
-                    <ButtonGroup className='grpbtn' variant="contained" aria-label="outlined small button group">
-                      {/* <Link to={`/addCourse`}>    <Button className='addbtn'>Add</Button> </Link> */}
-                      <Button onClick={handleDelete}>Delete</Button>
-                    </ButtonGroup>
+
+                    <DeleteOutlinedIcon onClick={handleDelete} />
                   </td>
                 </tr>
               )
@@ -84,18 +95,46 @@ function Data() {
           </tbody>
         </table>
       </div>
-      {/* <Button variant="outlined" startIcon={<DeleteIcon />}>
-        Delete
-      </Button> */}
-      {/* <Button onClick={handleData}> btn</Button> */}
-      {/* {details.map((rest,index)=>{
-  console.log(rest)
-  return(
-    <div> {rest.courseid} </div>
 
-  )
-}
-)} */}
+      <h5>single courses</h5>
+      <div className='tablediv'>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+            <th>level</th>
+              <th>Name</th>
+              <th>age</th>
+              <th>date</th>
+              <th>horse</th>
+              <th>trainer</th>
+           <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {singlecourses.map((info, index) => {
+              return (
+                <tr key={index}>
+                  <td>{info.level}</td>
+                  <td>{info.name}</td>
+                  <td>{info.age}</td>
+                  <td>{info.date}</td>
+                  <td>{info.horse}</td>
+                  <td>{info.trainer}</td>
+                  <td>
+
+                    <DeleteOutlinedIcon onClick={handleDelete} />
+                  </td>
+                </tr>
+              )
+            }
+
+            )}
+
+          </tbody>
+        </table>
+      </div>
+  
 
     </div>
 

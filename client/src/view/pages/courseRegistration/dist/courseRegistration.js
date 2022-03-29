@@ -134,6 +134,7 @@ function CourseRegistration() {
     var _l = react_2.useState(0), total = _l[0], setTotal = _l[1];
     var _m = react_2.useState([]), availableSpaces = _m[0], setAvailableSpaces = _m[1];
     var _o = react_2.useState([]), chosenCourse = _o[0], setChosenCourse = _o[1];
+    var _p = react_2.useState([]), chosenCourseTime = _p[0], setChosenCourseTime = _p[1];
     react_3.useEffect(function () {
         //fetch courses using mongo
         fetch('/courses/get-all-group-courses')
@@ -149,7 +150,7 @@ function CourseRegistration() {
         ev.preventDefault();
         var form = ev.target;
         console.log({ form: form });
-        axios_1["default"].post('/registrations/add-new-registration', { level: level, name: form[2].value, age: form[4].value, course: chosenCourse })
+        axios_1["default"].post('/registrations/add-new-registration', { level: level, name: form[2].value, age: form[4].value, course: chosenCourse, courseTime: chosenCourseTime })
             .then(function (data) {
             console.log(data);
             // setAvailableSpaces(availableSpaces-1);
@@ -211,6 +212,8 @@ function CourseRegistration() {
         }, 0);
         console.log(event.target.name);
         setChosenCourse(event.target.name);
+        setChosenCourseTime(event.target.value);
+        console.log(event.target.value, "id");
         console.log("total", total);
         setTotal(totalPrice);
     }
@@ -249,7 +252,7 @@ function CourseRegistration() {
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.time),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.availableSpaces),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" },
-                                    react_1["default"].createElement("input", { type: "checkbox", id: index, name: row.name, value: row.name, checked: checkedState[index], onChange: handleCheck })))); }))))),
+                                    react_1["default"].createElement("input", { type: "checkbox", id: index, name: row.name, value: row.time, checked: checkedState[index], onChange: handleCheck })))); }))))),
             react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" },
                 react_1["default"].createElement(react_4.Icon, { icon: "academicons:preregistered", width: "25", height: "25" })))));
 }

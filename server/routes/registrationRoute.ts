@@ -25,8 +25,8 @@ router.get('/get-all-registrations', async (req: any, res: any) => {
 
 router.post("/add-new-registration", async (req, res) => {
     try {
-        const {level,name, age,  course } = req.body;
-        if (!level || !name || !age || !course) throw new Error("No data");
+        const {level,name, age,  course,courseTime } = req.body;
+        if (!level || !name || !age || !course || !courseTime) throw new Error("No data");
         const courseName = await groupCourses.find({"name":course});
         console.log(courseName,"aaaaaaaaaaa")
         if (courseName) {
@@ -43,6 +43,7 @@ router.post("/add-new-registration", async (req, res) => {
             name: name,
             age: age,
             course: course,
+            courseTime:courseTime,
         });
         await newRegis.save().then((res) => {
             console.log(res);

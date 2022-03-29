@@ -21,7 +21,7 @@ import Course from "./course";
 //     cost:number;
 //   }
 const courses = [{
-    name: 'group lessons', hours: 5, lessons: 10, participants: "5", cost: 1000,
+    name: 'group lessons', hours: 5, lessons: 10, participants: "4-8", cost: 1000,
     description: 'Saturdays,Tuesdays or Wednesdays.duration 10 weeks , one lesson a week (30 minutes). working hours:9:00-18:00'
 },
 

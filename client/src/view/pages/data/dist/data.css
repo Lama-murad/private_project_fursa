@@ -17,3 +17,16 @@
 .tablediv1 .grpbtn {
   width: 10vw;
 }
+
+.dataDiv {
+  text-align: center;
+}
+
+.tablediv {
+  display: flex;
+  flex: 2;
+  justify-content: center;
+  font-size: 1rem;
+  border: 1ch;
+  border-style: double;
+}

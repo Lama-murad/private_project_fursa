@@ -116,28 +116,38 @@ router.post('/login', function (req, res) { return __awaiter(void 0, void 0, voi
     res.send({ ok: true, info: "my secrets" });
 });
 router.post('/add-new-user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, firstName, lastName, email, password, phoneNumber, user;
+    var _a, firstName, lastName, email, password, phoneNumber, existeduser, user, err_3;
     return __generator(this, function (_b) {
-        _a = req.body, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, phoneNumber = _a.phoneNumber;
-        console.log(req.body);
-        // console.log(lastName);
-        // console.log(email);
-        // console.log(password);
-        // console.log(phoneNumber);
-        if (!firstName || !lastName || !email || !password || !phoneNumber)
-            throw 'invalid field values';
-        try {
-            user = new userModel_1["default"]({ firstName: firstName, lastName: lastName, email: email, password: password, phoneNumber: phoneNumber });
-            console.log(user, "aaaaa");
-            user.save().then(function (res) {
-                console.log(res);
-            });
-            res.send({ val: "OK" });
+        switch (_b.label) {
+            case 0:
+                _a = req.body, firstName = _a.firstName, lastName = _a.lastName, email = _a.email, password = _a.password, phoneNumber = _a.phoneNumber;
+                if (!firstName || !lastName || !email || !password || !phoneNumber)
+                    throw 'invalid field values';
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, userModel_1["default"].find({ "email": email })];
+            case 2:
+                existeduser = _b.sent();
+                console.log(existeduser, "existed user");
+                if (!existeduser) {
+                    user = new userModel_1["default"]({ firstName: firstName, lastName: lastName, email: email, password: password, phoneNumber: phoneNumber });
+                    console.log(user, "aaaaa");
+                    user.save().then(function (res) {
+                        console.log(res);
+                    });
+                    res.send({ val: "OK" });
+                }
+                else {
+                    res.send("user already existes");
+                }
+                return [3 /*break*/, 4];
+            case 3:
+                err_3 = _b.sent();
+                res.send({ err: err_3 });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
-        catch (err) {
-            res.send({ err: err });
-        }
-        return [2 /*return*/];
     });
 }); });
 router.patch("/update-user-password", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -162,7 +172,7 @@ router.patch("/update-user-password", function (req, res) { return __awaiter(voi
                 res.send({ ok: true, doc: doc });
                 return [3 /*break*/, 4];
             case 3:
-                res.send({ ok: false });
+                res.send({ "false": false });
                 _b.label = 4;
             case 4: return [3 /*break*/, 6];
             case 5:

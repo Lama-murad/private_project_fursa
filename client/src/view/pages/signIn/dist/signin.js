@@ -38,6 +38,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var Button_1 = require("@mui/material/Button");
 var Login_1 = require("@mui/icons-material/Login");
+var react_router_dom_1 = require("react-router-dom");
 var react_1 = require("react");
 var LockOutlined_1 = require("@mui/icons-material/LockOutlined");
 require("./signin.scss");
@@ -45,9 +46,11 @@ var Avatar_1 = require("@mui/material/Avatar");
 var TextField_1 = require("@mui/material/TextField");
 var Box_1 = require("@mui/material/Box");
 var axios_1 = require("axios");
-var react_router_dom_1 = require("react-router-dom");
+var react_router_dom_2 = require("react-router-dom");
 var Typography_1 = require("@mui/material/Typography");
 var Modal_1 = require("@mui/material/Modal");
+var hooks_1 = require("../../../app/hooks");
+var userReducer_1 = require("../../../features/userReducer");
 var style = {
     position: 'absolute',
     top: '50%',
@@ -64,13 +67,14 @@ var clientId = "Your-Client-Id";
 function SignIn() {
     var _a = react_1.useState(true), showloginButton = _a[0], setShowloginButton = _a[1];
     var _b = react_1.useState(false), showlogoutButton = _b[0], setShowlogoutButton = _b[1];
-    var navigate = react_router_dom_1.useNavigate();
+    var navigate = react_router_dom_2.useNavigate();
     var _c = react_1["default"].useState(false), open = _c[0], setOpen = _c[1];
     var handleOpen = function () { return setOpen(true); };
     var handleClose = function () { return setOpen(false); };
     var _d = react_1.useState(""), email = _d[0], setEmail = _d[1];
     var _e = react_1.useState(""), password = _e[0], setPassword = _e[1];
     var _f = react_1.useState(""), newPassword = _f[0], setNewPassword = _f[1];
+    var dispatch = hooks_1.useAppDispatch();
     function hadleForgetPassword(ev) {
         console.log(email, '///');
         axios_1["default"].patch('/user/update-user-password', { email: email, password: newPassword });
@@ -80,29 +84,37 @@ function SignIn() {
         return __awaiter(this, void 0, void 0, function () {
             var form, email2;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        ev.preventDefault();
-                        form = ev.target;
-                        email2 = form[0].value;
-                        return [4 /*yield*/, axios_1["default"].post('/user/login', { email: form[0].value, password: form[2].value })
-                                .then(function (data) {
-                                console.log({ email2: email2 });
-                                console.log(data);
-                                if (email2 === "Admin@gmail.com") {
-                                    console.log("fat 3l if");
-                                    navigate('/admincourses');
-                                }
-                                else {
-                                    navigate('/homepage');
-                                }
-                            })["catch"](function (err) {
-                                console.error(err);
-                            })];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
+                ev.preventDefault();
+                form = ev.target;
+                email2 = form[0].value;
+                // await axios.post('/user/login', { email: form[0].value, password: form[2].value })
+                //   .then(data => {
+                //     console.log({ email2 })
+                //     console.log(data);
+                //     if (email2 === "Admin@gmail.com") {
+                //       console.log("fat 3l if")
+                //       navigate('/admincourses');
+                //     }
+                //     else {
+                //       navigate('/homepage');
+                //     }
+                //   }).catch(err => {
+                //     console.error(err);
+                //   })
+                dispatch(userReducer_1.fetchUser({ "email": email, "password": password }));
+                // if(isLoged)
+                // {
+                //   console.log(isLoged)
+                //   navigate("/profile")
+                // }
+                if (email2 === "Admin@gmail.com") {
+                    console.log("fat 3l if");
+                    navigate('/admincourses');
                 }
+                else {
+                    navigate('/homepage');
+                }
+                return [2 /*return*/];
             });
         });
     }
@@ -110,10 +122,12 @@ function SignIn() {
         react_1["default"].createElement(Avatar_1["default"], { className: 'avatar' },
             react_1["default"].createElement(LockOutlined_1["default"], null)),
         react_1["default"].createElement("form", { className: 'loginform', onSubmit: handleSignIn },
-            react_1["default"].createElement(TextField_1["default"], { className: "textfield", autoComplete: "given-name", name: "Email", required: true, fullWidth: true, id: "Email", label: "Email", autoFocus: true }),
-            react_1["default"].createElement(TextField_1["default"], { className: "textfield", autoComplete: "given-name", name: "passowrd", required: true, fullWidth: true, id: "passowrd", label: "Password", autoFocus: true, type: "password" }),
+            react_1["default"].createElement(TextField_1["default"], { className: "textfield", autoComplete: "given-name", name: "Email", required: true, fullWidth: true, id: "Email", label: "Email", autoFocus: true, onChange: function (e) { return setEmail(e.target.value); } }),
+            react_1["default"].createElement(TextField_1["default"], { className: "textfield", autoComplete: "given-name", name: "passowrd", required: true, fullWidth: true, id: "passowrd", label: "Password", autoFocus: true, type: "password", onChange: function (e) { return setPassword(e.target.value); } }),
             react_1["default"].createElement(Button_1["default"], { type: 'submit', className: 'loginbtn', size: "small", startIcon: react_1["default"].createElement(Login_1["default"], null) }, " login "),
             react_1["default"].createElement(Button_1["default"], { onClick: handleOpen, className: 'forgotbtn' }, "Forgot password?"),
+            react_1["default"].createElement(react_router_dom_1.Link, { to: '/signup' },
+                react_1["default"].createElement(Button_1["default"], { className: 'signupbtn' }, "Doesn't have an acoount?Sign up!")),
             react_1["default"].createElement(Modal_1["default"], { open: open, onClose: handleClose, "aria-labelledby": "modal-modal-title", "aria-describedby": "modal-modal-description" },
                 react_1["default"].createElement(Box_1["default"], { sx: style },
                     react_1["default"].createElement(Typography_1["default"], { id: "modal-modal-title", variant: "h6", component: "h2" }, "enter new password"),

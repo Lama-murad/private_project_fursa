@@ -64,13 +64,11 @@ router.get('/get-user',async (req:any, res:any)=>{
 
   router.post('/add-new-user',async (req:any, res:any)=>{
     const{firstName,lastName,email,password,phoneNumber}=req.body;
-    console.log(req.body);
-    // console.log(lastName);
-    // console.log(email);
-    // console.log(password);
-    // console.log(phoneNumber);
     if(!firstName || !lastName || !email || !password || !phoneNumber) throw 'invalid field values'
     try{
+        const existeduser = await User.find({"email":email});
+        console.log(existeduser,"existed user")
+        if(!existeduser){
         const user=new User({firstName:firstName,lastName:lastName,email:email,password:password,phoneNumber:phoneNumber})
         console.log(user ,"aaaaa")
     user.save().then((res)=>{
@@ -78,7 +76,10 @@ router.get('/get-user',async (req:any, res:any)=>{
     });
     res.send({val:"OK"})
 }
-     
+else{
+    res.send("user already existes");
+}
+}
     catch(err){
         res.send({err});
     }
@@ -101,7 +102,7 @@ router.get('/get-user',async (req:any, res:any)=>{
 
         }
         else {
-            res.send({ ok: false })
+            res.send({ "false": false })
         }
     } catch (error) {
         res.send({ error: error.message });

@@ -3,13 +3,15 @@ const router = express.Router();
 import { isAdmin, loginStatus } from '../controllers/signInController';
 import singleCourses from '../model/schema/singleCourseModel';
 import groupCourses from '../model/schema/groupCourseModel';
+import singleRegistrations from '../model/schema/singleCourseRegModel';
+import groupCourseRegistrations from '../model/schema/registrationModel';
 
 async function getSingleCourses():Promise<any> {
     try{
      
-    const courses = await singleCourses.find({});
-    console.log(courses);
-    return courses;
+    const singleCourses = await singleRegistrations.find({});
+    console.log(singleCourses);
+    return singleCourses;
     } catch(err:any){
       console.error(err)
       return false;
@@ -36,8 +38,9 @@ async function getSingleCourses():Promise<any> {
   });
 
 router.get('/get-all-single-courses',async (req:any, res:any)=>{
-    const courses = await getSingleCourses();
-    res.send({courses:courses});
+    const singleCourses = await getSingleCourses();
+    // console.log("")
+    res.send({singleCourses:singleCourses});
   })
   
   router.use(loginStatus)
@@ -84,8 +87,43 @@ router.get('/get-all-group-courses',async (req:any, res:any)=>{
     const courses = await getGroupCourses();
     res.send({courses:courses});
   })
+
+
+  async function getGroupCoursesReg():Promise<any> {
+    try{
+     
+    const groupCoursesReg = await groupCourseRegistrations.find({});
+    console.log(groupCoursesReg);
+    return groupCoursesReg;
+    } catch(err:any){
+      console.error(err)
+      return false;
+    }
+  }
+
+router.get('/get-all-group-courses-reg',async (req:any, res:any)=>{
+    const groupCoursesReg = await getGroupCoursesReg();
+    res.send({groupCoursesReg:groupCoursesReg});
+  })
+
+  async function getSingleCoursesReg():Promise<any> {
+    try{
+     
+    const signleCoursesReg = await singleRegistrations.find({});
+    console.log(signleCoursesReg);
+    return signleCoursesReg;
+    } catch(err:any){
+      console.error(err)
+      return false;
+    }
+  }
+
+router.get('/get-all-single-courses-reg',async (req:any, res:any)=>{
+    const signleCoursesReg = await getSingleCoursesReg();
+    res.send({signleCoursesReg:signleCoursesReg});
+  })
+
   
-  router.use(loginStatus)
   router.post("/add-new-group-course", async (req, res) => {
     try {
       const { name, cost, participants,lessons,hours,time,level,availableSpaces } = req.body;
@@ -108,6 +146,21 @@ router.get('/get-all-group-courses',async (req:any, res:any)=>{
       res.send({ val: "OK" });
     } catch (err) {
       res.send({ error: err.message });
+    }
+  });
+
+  router.post("/delete-course", async (req, res) => {
+    try {
+      const { name } = req.body;
+      const filter = { name: name };
+  
+      //delet on  DB
+      let doc = await groupCourses.deleteOne(filter);
+  
+      res.send({ ok: true, doc });
+    } catch (err) {
+      console.error(err);
+      res.status(400).send({ error: err.message });
     }
   });
 

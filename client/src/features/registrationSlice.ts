@@ -12,15 +12,24 @@ export interface registration{
     name:string;
   }
 
+  export interface signleCourseRegistration{
+    course:string;    
+    start:Date;
+    name:string;
+  }
+
   export interface registrationArr{
     //[x: string]: any;
     registrations:Array<registration>;
+    singleCouReg:Array<signleCourseRegistration>;
   
   }
 
 
+
   const initialState:registrationArr  = {
     registrations :CourseRegistData,
+    singleCouReg:CourseRegistData,
   };
 
 

@@ -75,13 +75,13 @@ router.get('/get-all-registrations', function (req, res) { return __awaiter(void
     });
 }); });
 router.post("/add-new-registration", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, level, name, age, course, courseName, filter, updatedAvailable, update, newRegis, err_2;
+    var _a, level, name, age, course, courseTime, courseName, filter, updatedAvailable, update, newRegis, err_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 4, , 5]);
-                _a = req.body, level = _a.level, name = _a.name, age = _a.age, course = _a.course;
-                if (!level || !name || !age || !course)
+                _a = req.body, level = _a.level, name = _a.name, age = _a.age, course = _a.course, courseTime = _a.courseTime;
+                if (!level || !name || !age || !course || !courseTime)
                     throw new Error("No data");
                 return [4 /*yield*/, groupCourseModel_1["default"].find({ "name": course })];
             case 1:
@@ -99,7 +99,8 @@ router.post("/add-new-registration", function (req, res) { return __awaiter(void
                     level: level,
                     name: name,
                     age: age,
-                    course: course
+                    course: course,
+                    courseTime: courseTime
                 });
                 return [4 /*yield*/, newRegis.save().then(function (res) {
                         console.log(res);

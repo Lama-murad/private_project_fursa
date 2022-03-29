@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import AdminHeader from '../../components/adminHeader/adminHeader';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { Icon } from '@iconify/react';
 
 
 function AdminCourses() {
@@ -27,13 +28,34 @@ function AdminCourses() {
   }, [])
 
   function handleDelete(event: any) {
-    event.preventDefault();
-    const id = event.target.value;
-    axios.delete(`http://localhost:3004/courses/${id}`)
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
+    console.log(event.target)
+    // app.post("/delete-cat", async (req, res) => {
+    //   try {
+    //     const { id } = req.body;
+    
+    //     const filter = { _id: id };
+    
+    //     //delet on  DB
+    //     let doc = await Cats.deleteOne(filter);
+    
+    //     res.send({ ok: true, doc });
+    //   } catch (err) {
+    //     console.error(err);
+    //     res.status(400).send({ error: err.message });
+    //   }
+    // });
+
+    // ************
+    axios.post('/courses/delete-course', { course: event.target.name})
+
+
+    // event.preventDefault();
+    // const id = event.target.value;
+    // axios.delete(`http://localhost:3004/courses/${id}`)
+    //   .then(res => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //   })
   }
 
 
@@ -63,7 +85,6 @@ function AdminCourses() {
             {groupcourses.map((info, index) => {
               return (
                 <tr key={index}>
-                  {/* <td>{info.id}</td> */}
                   <td>{info.name}</td>
                   <td>{info.participants}</td>
                   <td>{info.lessons}</td>
@@ -72,8 +93,7 @@ function AdminCourses() {
                   <td>{info.time}</td>
                   <td>{info.level}</td>
                   <td>
-
-                    <DeleteOutlinedIcon onClick={handleDelete} />
+<button onClick={handleDelete} name={info.name} className='deleteIcon'> <Icon icon="ant-design:delete-outlined" width="25" height="25" /></button>
                   </td>
                 </tr>
               )
@@ -84,7 +104,7 @@ function AdminCourses() {
           </tbody>
         </table>
       </div>
-      <Link to={`/addGroupCourse`}>    <Button className='addbtn'>Add new group course</Button> </Link>
+      <Link to={`/addGroupCourse`}>  <Button className='addbtn'>Add new group course</Button> </Link>
     </div>
   );
 }

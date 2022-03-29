@@ -4,7 +4,8 @@ exports.selectAppointment = exports.addAppointment = exports.registrationSlice =
 var toolkit_1 = require("@reduxjs/toolkit");
 var data_1 = require("./data");
 var initialState = {
-    registrations: data_1.CourseRegistData
+    registrations: data_1.CourseRegistData,
+    singleCouReg: data_1.CourseRegistData
 };
 exports.registrationSlice = toolkit_1.createSlice({
     name: 'selectedDate',

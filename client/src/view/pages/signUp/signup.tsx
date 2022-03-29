@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { Icon } from '@iconify/react';
+import Alert from '@mui/material/Alert';
 
 
 function SignUp() {
@@ -28,7 +30,9 @@ function SignUp() {
   console.log({form})
   axios.post('/user/add-new-user', {firstName: form[0].value,lastName: form[2].value ,email: form[4].value, password: form[6].value,phoneNumber: form[8].value})
     .then(data => {
-      console.log(data);
+      console.log(data.data);
+      alert(data.data)
+
       navigate('/signIn');
       
     }).catch(err => {
@@ -103,7 +107,7 @@ function SignUp() {
         <br />
         <br />
         {/* <Link to={`/signIn`}> */}
-          <button className='subbtn' type='submit'>submit</button>
+          <button className='subbtn' type='submit'><Icon icon="eva:person-done-outline" width="25" height="25" /></button>
         {/* </Link> */}
       </form>
     </div>

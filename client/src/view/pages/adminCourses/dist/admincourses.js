@@ -7,7 +7,7 @@ var react_2 = require("react");
 var Button_1 = require("@mui/material/Button");
 var react_router_dom_1 = require("react-router-dom");
 var adminHeader_1 = require("../../components/adminHeader/adminHeader");
-var DeleteOutlined_1 = require("@mui/icons-material/DeleteOutlined");
+var react_3 = require("@iconify/react");
 function AdminCourses() {
     var _a = react_2.useState([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "", level: "" }]), groupcourses = _a[0], setGroupCourses = _a[1];
     var _b = react_2.useState([{ id: 0, name: "", participants: 0, lessons: 0, cost: 0 }]), details = _b[0], setDetails = _b[1];
@@ -24,13 +24,28 @@ function AdminCourses() {
         });
     }, []);
     function handleDelete(event) {
-        event.preventDefault();
-        var id = event.target.value;
-        axios_1["default"]["delete"]("http://localhost:3004/courses/" + id)
-            .then(function (res) {
-            console.log(res);
-            console.log(res.data);
-        });
+        console.log(event.target);
+        // app.post("/delete-cat", async (req, res) => {
+        //   try {
+        //     const { id } = req.body;
+        //     const filter = { _id: id };
+        //     //delet on  DB
+        //     let doc = await Cats.deleteOne(filter);
+        //     res.send({ ok: true, doc });
+        //   } catch (err) {
+        //     console.error(err);
+        //     res.status(400).send({ error: err.message });
+        //   }
+        // });
+        // ************
+        axios_1["default"].post('/courses/delete-course', { course: event.target.name });
+        // event.preventDefault();
+        // const id = event.target.value;
+        // axios.delete(`http://localhost:3004/courses/${id}`)
+        //   .then(res => {
+        //     console.log(res);
+        //     console.log(res.data);
+        //   })
     }
     return (React.createElement("div", { className: 'admCouDiv' },
         React.createElement(adminHeader_1["default"], null),
@@ -57,10 +72,12 @@ function AdminCourses() {
                         React.createElement("td", null, info.time),
                         React.createElement("td", null, info.level),
                         React.createElement("td", null,
-                            React.createElement(DeleteOutlined_1["default"], { onClick: handleDelete }))));
+                            React.createElement("button", { onClick: handleDelete, name: info.name, className: 'deleteIcon' },
+                                " ",
+                                React.createElement(react_3.Icon, { icon: "ant-design:delete-outlined", width: "25", height: "25" })))));
                 })))),
         React.createElement(react_router_dom_1.Link, { to: "/addGroupCourse" },
-            "    ",
+            "  ",
             React.createElement(Button_1["default"], { className: 'addbtn' }, "Add new group course"),
             " ")));
 }

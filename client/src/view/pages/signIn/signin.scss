@@ -16,14 +16,15 @@
     position: relative;
     display: flex;
     flex-direction: column;
+ 
     // justify-content: center;
     // align-content: center;
     // top: 10px;
 
     .avatar {
         // position: relative;
-
-        left: 45%;
+        margin-top: 5%;
+        left: 47%;
         background-color: 'secondary.main';
     }
 
@@ -43,6 +44,7 @@
     .loginform {
         display: flex;
         flex-direction: column;
+        margin: 2%;
 
         .loginbtn {
             position: relative;
@@ -58,6 +60,13 @@
             position: relative;
             top: 10%;
             justify-content: center;
+        }
+        .signupbtn{
+            position: relative;
+            left: 25%;
+            top: 10%;
+            justify-content: center;
+
         }
 
         p {

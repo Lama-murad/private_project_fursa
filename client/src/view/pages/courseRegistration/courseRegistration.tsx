@@ -103,6 +103,8 @@ function CourseRegistration() {
   const [total, setTotal] = useState(0);
   const [availableSpaces, setAvailableSpaces] = useState([]);
   const [chosenCourse, setChosenCourse] = useState([]);
+  const [chosenCourseTime, setChosenCourseTime] = useState([]);
+  
 
 
   useEffect(() => {
@@ -121,7 +123,7 @@ function CourseRegistration() {
     ev.preventDefault();
     const form = ev.target;
     console.log({ form })
-    axios.post('/registrations/add-new-registration', { level: level, name: form[2].value, age: form[4].value, course: chosenCourse })
+    axios.post('/registrations/add-new-registration', { level: level, name: form[2].value, age: form[4].value, course: chosenCourse,courseTime:chosenCourseTime })
       .then(data => {
         console.log(data);
         // setAvailableSpaces(availableSpaces-1);
@@ -181,6 +183,8 @@ function CourseRegistration() {
     );
     console.log(event.target.name)
     setChosenCourse(event.target.name)
+    setChosenCourseTime(event.target.value)
+    console.log(event.target.value,"id")
     console.log("total", total)
     setTotal(totalPrice);
   }
@@ -262,7 +266,7 @@ function CourseRegistration() {
                           type="checkbox"
                           id={index}
                           name={row.name}
-                          value={row.name}
+                          value={row.time}
                           checked={checkedState[index]}
                           onChange={handleCheck}
                         />

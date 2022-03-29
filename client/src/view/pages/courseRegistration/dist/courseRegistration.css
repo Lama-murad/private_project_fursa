@@ -41,6 +41,10 @@
   border: 1mm;
   border-style: solid;
 }
+.mydiv .aaaa {
+  position: relative;
+  top: 50%;
+}
 .mydiv .table {
   font-size: small;
   margin-top: 5%;

@@ -6,6 +6,7 @@ const RegistrationSchema = new mongoose.Schema({
     age:Number,
     level:String,
     course: String,
+    courseTime:String,
   });
 
 //the collection

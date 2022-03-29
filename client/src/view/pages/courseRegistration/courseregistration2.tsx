@@ -24,7 +24,6 @@ import DatePicker from "react-datepicker";
 import DateTimePicker from 'react-datetime-picker';
 import "react-datetime-picker/dist/DateTimePicker.css";
 import "react-datepicker/dist/react-datepicker.css";
-import TimePicker, { TimePickerValue } from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 //import { selectTreatment } from '../../../features/treatment/treatmentSlice';

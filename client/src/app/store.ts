@@ -5,6 +5,7 @@ import registartionReducer from '../features/registrationSlice';
 import productsReducer from '../features/products';
 import  TrainersReducer  from '../features/trainerReducer';
 import  offersReducer  from '../features/offers';
+import  userReducer  from '../features/userReducer';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     products:productsReducer,
     offers:offersReducer,
     trainers:TrainersReducer,
+    user:userReducer,
   },
 });
 

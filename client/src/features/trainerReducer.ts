@@ -28,7 +28,7 @@ export const fetchTrainerByLevel = createAsyncThunk(
     async (levell:any) => {
         try {
             const {level}=levell;
-            console.log("faaaaaaaaat",levell)
+            // console.log("faaaaaaaaat",levell)
             const response = await axios.post('/trainer/getTrainerByLevel', { "level": level })
             const data = response.data
             console.log("data",data)

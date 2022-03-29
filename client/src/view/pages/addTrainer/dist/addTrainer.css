@@ -1,6 +1,6 @@
 .tablediv1 {
-  position: absolute;
-  bottom: 15%;
+  position: relative;
+  top: 8%;
   display: flex;
   flex: 2;
   justify-content: center;

@@ -8,8 +8,6 @@ import 'react-calendar/dist/Calendar.css';
 import moment from 'moment'
 import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
-// import "react-big-calendar/lib/css/react-big-calendar.css";
-// import DatePicker from "react-datepicker";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -23,8 +21,6 @@ import 'react-time-picker/dist/TimePicker.css';
 import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 import axios from 'axios';
 import { Icon } from '@iconify/react';
-// import Horses from '../../../../../server/model/schema/horsesModel';
-
 import DatePicker from "react-datepicker";
 // import { addAppointment, selectAppointment } from '../../../features/coursesRegistrations/registrationSlice'
 // import { registration } from '../../../features/coursesRegistrations/registrationSlice';
@@ -39,30 +35,19 @@ interface TimeManagement {
 
 }
 
-const coursesRegis: Array<TimeManagement> = [
-  {
-    start: new Date(2022, 3, 22, 4, 30),
-    end: new Date(2022, 3, 22, 5, 30),
-    name: "lama",
-    course: "Group lessons",
-
-  }
-];
 
 
 function PrivateCourseReg() {
   const [levell, setLevel] = React.useState('');
   const [alertt, setAlert] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [dateState, setDateState] = useState(new Date())
   const [startDate, setStartDate] = useState(new Date());
   const [value, onChange] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [registration, setRegistration] = useState({ name: "", start: new Date(), end: new Date(), course: "" });
-  const [allReg, setAllReg] = useState(coursesRegis);
+  const [registration, setRegistration] = useState({ name: "", start: new Date(), course: "" });
   let dt = new Date();
-  // const maxTime = dt.setDate(dt.getDate() + 5);
-  const includeDatesArray = [new Date('02-27-2022'), new Date('02-28-2022')]
+  const [singleCourseReg, setSingleCoursesReg] = useState([]);
+  const includeDatesArray = [new Date('02-27-2022'), new Date('02-28-2022')];
+  const notIncludeDatesArray = [] as any;
   const [groupcourses, setGroupCourses] = useState<Array<any>>([{ name: "", participants: 0, lessons: 0, hours: 0, cost: 0, time: "" }])
   const [horsess, setHorse] = useState([])
   const [horsesByLvl, setHorsesByLvl] = useState([])
@@ -76,6 +61,17 @@ function PrivateCourseReg() {
 
 
   useEffect(() => {
+
+    fetch('/courses/get-all-single-courses')
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.singleCourses, "dateeee");
+        setSingleCoursesReg(data.singleCourses);
+      }).catch(err => {
+        console.error(err);
+      })
+
+
     //fetch courses
     fetch('/trainer/get-all-trainer')
       .then(res => res.json())
@@ -96,47 +92,74 @@ function PrivateCourseReg() {
         console.error(err);
       })
 
+
+    //   {singleCourseReg.map((reg: any, index) => (
+    //     // console.log("aaaaaaaaaa",reg.date)
+    //  notIncludeDatesArray.push(reg.date)
+
+    //   ))}
+
+
+    //   console.log(notIncludeDatesArray,"all reg not included arr")
+
   }, [])
 
+
+
+  function handledates() {
+    console.log(singleCourseReg, "all reg datesssssssssss single")
+
+  }
+
   async function getHorsesByLevel(req: any) {
-    console.log(req.level)
     await axios.post('/addHorse/get-horse-by-level', { level: req.level })
       .then(data => {
         console.log(data, "dataaaa");
         setHorsesByLvl(data.data.horses);
-        console.log(horsesByLvl);
+        // console.log(horsesByLvl);
       }).catch(err => {
         console.error(err);
       })
 
   }
 
+  function checkDateAvailabilty(ev: any) {
+    // console.log(ev, " " , notIncludeDatesArray);
+    // console.log(notIncludeDatesArray.indexOf(ev) > -1);
+    //  return(notIncludeDatesArray.indexOf(ev) > -1);
+
+  }
 
 
 
   const filterDays = (date: any) => {
     // Disable Weekends and group cpurses days
-    if (date.getDay() === 5 || date.getDay() === 6 || date.getDay() === 3 || date.getDay() === 2 || date.getMonth() < dt.getMonth() || (date.getDate() < dt.getDate() && date.getMonth() === dt.getMonth())) {
+    if (date.getDay() === 5 || date.getDay() === 6 || date.getDay() === 3 || date.getDay() === 2 || date.getMonth() < dt.getMonth() ||
+      (date.getDate() < dt.getDate() && date.getMonth() === dt.getMonth())) {
+      // || checkDateAvailabilty(date)
 
       return false;
     } else {
       return true;
     }
-  }
 
-  const changeDate = (e: any) => {
-    setDateState(e)
+
   }
 
 
   function handleRegister(ev: any) {
     ev.preventDefault();
+    if (notIncludeDatesArray.includes(startDate)) {
+      alert('hour is not available');
+    }
     const form = ev.target;
     console.log({ form })
-    axios.post('/registrations/add-new-single-registration', { level: levell, name: form[2].value, age: form[4].value, date: form[6].value, horse: chosenhorse, trainer: chosentrainer })
+    console.log(startDate, "start date")
+    //  form[6].value
+    axios.post('/registrations/add-new-single-registration', { level: levell, name: form[2].value, age: form[4].value, date: startDate, horse: chosenhorse, trainer: chosentrainer })
       .then(data => {
-        console.log(data.data);
-        setAllReg([...allReg, registration]);
+        const newRegDate = form[6].value;
+
         alert("you have successfully registered");
 
       }).catch(err => {
@@ -148,9 +171,18 @@ function PrivateCourseReg() {
     setLevel(event.target.value);
     // console.log(levell)
     dispatch(fetchTrainerByLevel({ "level": event.target.value }));
-    // console.log("passed the dispatch")
-    getHorsesByLevel({ "level": event.target.value });
-    console.log("passed the horses func call")
+    getHorsesByLevel({ "level": event.target.value })
+
+    {
+      singleCourseReg.map((reg: any, index) => (
+        // console.log("aaaaaaaaaa",reg.date)
+        notIncludeDatesArray.push(reg.date)
+
+      ))
+    }
+
+
+    console.log(notIncludeDatesArray, "all reg not included arr")
 
   };
 
@@ -164,11 +196,37 @@ function PrivateCourseReg() {
     setchosenTrainer(event.target.value);
   };
 
+
   function changeStartDate(date: any) {
     // date=>setStartDate(date)
     setStartDate(date);
     // console.log(date.getHours.getMinutes)
+    // console.log(typeof(date)," ",date)
     setEndDate(date);
+    console.log(startDate, "start date")
+
+    singleCourseReg.map((reg: any, index) => (
+      // console.log("aaaaaaaaaa",reg.date)
+      notIncludeDatesArray.push(reg.date)
+
+    ))
+  console.log(startDate,"starttd ate")
+  console.log(notIncludeDatesArray, "all reg not included arr")
+    // console.log(date.toString(),"aaaaaaaaaaaaaaaaaaa")
+    // console.log(form[6].value,"bbbbbbbbbbbbb")
+    if (notIncludeDatesArray.includes(startDate.toString())) {
+      alert('hour is not available');
+    }
+
+    if (notIncludeDatesArray.indexOf(startDate) > -1) {
+      console.log("hoho")
+      alert('hour is not available');
+    }
+
+    console.log(notIncludeDatesArray)
+    console.log(notIncludeDatesArray.includes('Thu Mar 31 2022 14:00:00 GMT+0300 (Israel Daylight Time)'))
+
+
   }
 
 
@@ -184,7 +242,7 @@ function PrivateCourseReg() {
   return (
     <div className='mydiv'>
       <Header></Header>
-
+      {/* <Button variant="contained" onClick={handledates} className="aaaa">get dates</Button> */}
       {/* //registration inputs */}
       <form onSubmit={handleRegister} className='inputDiv'>
 
@@ -225,26 +283,20 @@ function PrivateCourseReg() {
           autoFocus
         />
 
-        {/* <DateTimePicker className='DateTimePicker' onChange={onChange} value={value}
-      //  includeDates={includeDatesArray} 
-      /> */}
-        {/* <input type="datetime-local" id="meeting-time"
-        name="meeting-time"
-        // filterDate={filterDays}
-        > */}
-
         <DatePicker
           id="meeting-time"
           isClearable
           placeholderText="Select Start Date"
           showTimeSelect
-          dateFormat="MMMM d, yyyy h:mmaa"
+          dateFormat="MMMM d, yyyy h:mm"
           selected={startDate}
           selectsStart
           startDate={startDate}
           endDate={endDate}
+          // events={singleCourseReg}
           //  includeDates={includeDatesArray}
           filterDate={filterDays}
+
           onChange={changeStartDate}
 
         />
@@ -255,10 +307,7 @@ function PrivateCourseReg() {
 
         {alertt &&
           <div className="popup">
-            {/* <span role="img" aria-label="allowed">✅</span> Alphanumeric Characters
-             <br />
-             <span role="img" aria-label="not allowed">⛔️</span> * */}
-            {/* <form> */}
+
 
             <Box className='mybox1' sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
