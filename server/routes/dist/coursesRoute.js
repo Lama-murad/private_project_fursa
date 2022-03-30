@@ -71,10 +71,40 @@ router.post("/get-course-by-level", function (req, res) { return __awaiter(void 
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 level = req.body.level;
-                console.log("hooooon");
+                // console.log("hooooon")
                 if (!level)
                     throw new Error("No data");
                 return [4 /*yield*/, groupCourseModel_1["default"].find({ "level": level })];
+            case 1:
+                courses = _a.sent();
+                if (courses) {
+                    res.send({ "log": true, "courses": courses });
+                    // console.log(courses)
+                }
+                else {
+                    res.send({ "log": false });
+                    console.log("falsee");
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                res.send({ err: err_2 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+router.post("/get-all-my-Gcourses", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var emailname, courses, err_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                emailname = "lama@gmail.com";
+                // console.log(emailname,"aaaaaaaa")
+                if (!emailname)
+                    throw new Error("No data");
+                return [4 /*yield*/, registrationModel_1["default"].find({ "name": { emailname: emailname } })];
             case 1:
                 courses = _a.sent();
                 if (courses) {
@@ -87,8 +117,39 @@ router.post("/get-course-by-level", function (req, res) { return __awaiter(void 
                 }
                 return [3 /*break*/, 3];
             case 2:
-                err_2 = _a.sent();
-                res.send({ err: err_2 });
+                err_3 = _a.sent();
+                res.send({ err: err_3 });
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+router.post("/get-all-my-Scourses", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var emailname, courses, err_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                emailname = req.body.emailname;
+                console.log(emailname);
+                console.log("hooooon");
+                if (!emailname)
+                    throw new Error("No data");
+                return [4 /*yield*/, singleCourseRegModel_1["default"].find({ "name": emailname })];
+            case 1:
+                courses = _a.sent();
+                if (courses) {
+                    res.send({ "log": true, "courses": courses });
+                    console.log(courses);
+                }
+                else {
+                    res.send({ "log": false });
+                    console.log("falsee");
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                err_4 = _a.sent();
+                res.send({ err: err_4 });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -109,7 +170,7 @@ router.get('/get-all-single-courses', function (req, res) { return __awaiter(voi
 }); });
 router.use(signInController_1.loginStatus);
 router.post("/add-new-single-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, cost, participants, lessons, hours, courseName, newCourse, err_3;
+    var _a, name, cost, participants, lessons, hours, courseName, newCourse, err_5;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -140,8 +201,8 @@ router.post("/add-new-single-course", function (req, res) { return __awaiter(voi
                 _b.label = 4;
             case 4: return [3 /*break*/, 6];
             case 5:
-                err_3 = _b.sent();
-                res.send({ error: err_3.message });
+                err_5 = _b.sent();
+                res.send({ error: err_5.message });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }
@@ -149,7 +210,7 @@ router.post("/add-new-single-course", function (req, res) { return __awaiter(voi
 }); });
 function getGroupCourses() {
     return __awaiter(this, void 0, Promise, function () {
-        var courses, err_4;
+        var courses, err_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -160,8 +221,8 @@ function getGroupCourses() {
                     console.log(courses);
                     return [2 /*return*/, courses];
                 case 2:
-                    err_4 = _a.sent();
-                    console.error(err_4);
+                    err_6 = _a.sent();
+                    console.error(err_6);
                     return [2 /*return*/, false];
                 case 3: return [2 /*return*/];
             }
@@ -182,7 +243,7 @@ router.get('/get-all-group-courses', function (req, res) { return __awaiter(void
 }); });
 function getGroupCoursesReg() {
     return __awaiter(this, void 0, Promise, function () {
-        var groupCoursesReg, err_5;
+        var groupCoursesReg, err_7;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -193,8 +254,8 @@ function getGroupCoursesReg() {
                     console.log(groupCoursesReg);
                     return [2 /*return*/, groupCoursesReg];
                 case 2:
-                    err_5 = _a.sent();
-                    console.error(err_5);
+                    err_7 = _a.sent();
+                    console.error(err_7);
                     return [2 /*return*/, false];
                 case 3: return [2 /*return*/];
             }
@@ -215,7 +276,7 @@ router.get('/get-all-group-courses-reg', function (req, res) { return __awaiter(
 }); });
 function getSingleCoursesReg() {
     return __awaiter(this, void 0, Promise, function () {
-        var signleCoursesReg, err_6;
+        var signleCoursesReg, err_8;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -226,8 +287,8 @@ function getSingleCoursesReg() {
                     console.log(signleCoursesReg);
                     return [2 /*return*/, signleCoursesReg];
                 case 2:
-                    err_6 = _a.sent();
-                    console.error(err_6);
+                    err_8 = _a.sent();
+                    console.error(err_8);
                     return [2 /*return*/, false];
                 case 3: return [2 /*return*/];
             }
@@ -247,7 +308,7 @@ router.get('/get-all-single-courses-reg', function (req, res) { return __awaiter
     });
 }); });
 router.post("/add-new-group-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, cost, participants, lessons, hours, time, level, availableSpaces, newCourse, err_7;
+    var _a, name, cost, participants, lessons, hours, time, level, availableSpaces, newCourse, err_9;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -273,15 +334,15 @@ router.post("/add-new-group-course", function (req, res) { return __awaiter(void
                 res.send({ val: "OK" });
                 return [3 /*break*/, 3];
             case 2:
-                err_7 = _b.sent();
-                res.send({ error: err_7.message });
+                err_9 = _b.sent();
+                res.send({ error: err_9.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); });
 router.post("/delete-course", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var name, filter, doc, err_8;
+    var name, filter, doc, err_10;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -294,9 +355,9 @@ router.post("/delete-course", function (req, res) { return __awaiter(void 0, voi
                 res.send({ ok: true, doc: doc });
                 return [3 /*break*/, 3];
             case 2:
-                err_8 = _a.sent();
-                console.error(err_8);
-                res.status(400).send({ error: err_8.message });
+                err_10 = _a.sent();
+                console.error(err_10);
+                res.status(400).send({ error: err_10.message });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

@@ -12,6 +12,8 @@ import TableRow from '@mui/material/TableRow';
 import { Paper } from '@mui/material';
 import Header from '../../components/header/header';
 import { styled } from '@mui/material/styles';
+import { useAppDispatch ,useAppSelector} from '../../../app/hooks';
+import { fetchUser, userInfo } from '../../../features/userReducer';
 
 
 
@@ -40,21 +42,37 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 function MyData() {
   const [details, setDetails] = useState<Array<any>>([{ courseid: 0, coursaname: "", userid: 0, username: "" }]);
-  const [myCourses, setMyCourses] = useState([]);
+  const [myGCourses, setMyGCourses] = useState([]);
+  const [mySCourses, setMySCourses] = useState([]);
+  const dispatch = useAppDispatch()
+  const user = useAppSelector(userInfo)
+  const emaill = user.email;
+  const emailll="lama@gmail.com";
   
 
   
 
   useEffect(() => {
     //fetch courses using mongo
-    fetch('/courses/get-all-my-courses')
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        setMyCourses(data.courses);
-      }).catch(err => {
-        console.error(err);
-      })
+
+     axios.post('/courses/get-all-my-Gcourses', { email:emailll})
+    .then(data => {
+      console.log(data, "dataaaa");
+      setMyGCourses(data.data.courses);
+      // console.log(horsesByLvl);
+    }).catch(err => {
+      console.error(err);
+    })
+
+     axios.post('/courses/get-all-my-Scourses', { email:emailll})
+    .then(data => {
+      console.log(data, "dataaaa");
+      setMySCourses(data.data.courses);
+      // console.log(horsesByLvl);
+    }).catch(err => {
+      console.error(err);
+    })
+
   }, [])
 
   return (
@@ -62,7 +80,7 @@ function MyData() {
     <div className='dataDiv'>
       <Header />
    
-      <h4>my courses</h4>
+      <h4>group lessons</h4>
       <div className="popup">
 
 <TableContainer className="table" component={Paper}>
@@ -71,28 +89,20 @@ function MyData() {
       <TableRow>
 
         <StyledTableCell align="center">name</StyledTableCell>
-        <StyledTableCell align="center"> participants</StyledTableCell>
-        <StyledTableCell align="center"> lessons </StyledTableCell>
-        <StyledTableCell align="center"> hours </StyledTableCell>
-        <StyledTableCell align="center"> cost </StyledTableCell>
-        <StyledTableCell align="center"> time </StyledTableCell>
-        <StyledTableCell align="center"> available spaces </StyledTableCell>
+        <StyledTableCell align="center"> age</StyledTableCell>
+        <StyledTableCell align="center"> level </StyledTableCell>
+        <StyledTableCell align="center"> course </StyledTableCell>
+      
 
       </TableRow>
     </TableHead>
     <TableBody>
-      {myCourses.map((row: any, index: any) => (
+      {myGCourses.map((row: any, index: any) => (
         <StyledTableRow key={index}>
-
-          <StyledTableCell align="center">{row.name}</StyledTableCell>
-          <StyledTableCell align="center">{row.participants}</StyledTableCell>
-          <StyledTableCell align="center">{row.lessons}</StyledTableCell>
-          <StyledTableCell align="center">{row.hours}</StyledTableCell>
-          <StyledTableCell align="center">{row.cost}</StyledTableCell>
-          <StyledTableCell align="center">{row.time}</StyledTableCell>
-          <StyledTableCell align="center">{row.availableSpaces}</StyledTableCell>
-        
-
+      <StyledTableCell align="center">{row.name}</StyledTableCell>
+          <StyledTableCell align="center">{row.age}</StyledTableCell>
+          <StyledTableCell align="center">{row.level}</StyledTableCell>
+          <StyledTableCell align="center">{row.course}</StyledTableCell>
 
         </StyledTableRow>
 
@@ -101,11 +111,40 @@ function MyData() {
     </TableBody>
   </Table>
 </TableContainer>
-
-
-
 </div>
+<h4>signle lessons</h4>
+<div className="popup">
 
+<TableContainer className="table" component={Paper}>
+  <Table sx={{ Width: 300 }} aria-label="customized table">
+    <TableHead>
+      <TableRow>
+      <StyledTableCell align="center"> level </StyledTableCell>
+        <StyledTableCell align="center">name</StyledTableCell>
+        <StyledTableCell align="center"> age</StyledTableCell>
+     
+        <StyledTableCell align="center"> date </StyledTableCell>
+      
+
+      </TableRow>
+    </TableHead>
+    <TableBody>
+      {myGCourses.map((row: any, index: any) => (
+        <StyledTableRow key={index}>
+             <StyledTableCell align="center">{row.level}</StyledTableCell>
+      <StyledTableCell align="center">{row.name}</StyledTableCell>
+          <StyledTableCell align="center">{row.age}</StyledTableCell>
+       
+          <StyledTableCell align="center">{row.date}</StyledTableCell>
+
+        </StyledTableRow>
+
+
+      ))}
+    </TableBody>
+  </Table>
+</TableContainer>
+</div>
 
     </div>
 

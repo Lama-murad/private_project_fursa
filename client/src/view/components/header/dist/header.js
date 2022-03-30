@@ -40,9 +40,7 @@ function Header() {
                     React.createElement(react_router_dom_1.Link, { to: "/SignIn" },
                         React.createElement(react_1.Icon, { icon: "clarity:logout-line", width: "25", height: "25" }))),
                 React.createElement(MenuItem_1["default"], { onClick: handleClose1 },
-                    React.createElement(react_1.Icon, { icon: "ci:off-close", width: "25", height: "25" })),
-                React.createElement(MenuItem_1["default"], null,
-                    React.createElement(react_1.Icon, { icon: "fluent:more-circle-20-regular", width: "25", height: "25" })))))
+                    React.createElement(react_1.Icon, { icon: "ci:off-close", width: "25", height: "25" })))))
     // </div>
     );
 }

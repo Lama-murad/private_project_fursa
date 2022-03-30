@@ -21,9 +21,28 @@ async function getSingleCourses():Promise<any> {
   router.post("/get-course-by-level", async (req, res) => {
     try {
       const {level} = req.body;
-      console.log("hooooon")
+      // console.log("hooooon")
       if (!level ) throw new Error("No data");
       const courses = await groupCourses.find({"level":level});
+      if(courses){
+        res.send({"log":true,"courses":courses})
+        // console.log(courses)
+    }
+    else{
+        res.send({"log":false})
+        console.log("falsee")
+    }
+}catch(err){
+    res.send({err});
+}
+  });
+
+  router.post("/get-all-my-Gcourses", async (req, res) => {
+    try {
+      const emailname ="lama@gmail.com";
+      // console.log(emailname,"aaaaaaaa")
+      if (!emailname ) throw new Error("No data");
+      const courses = await groupCourseRegistrations.find({"name":{emailname}});
       if(courses){
         res.send({"log":true,"courses":courses})
         console.log(courses)
@@ -36,6 +55,27 @@ async function getSingleCourses():Promise<any> {
     res.send({err});
 }
   });
+
+  router.post("/get-all-my-Scourses", async (req, res) => {
+    try {
+      const {emailname} = req.body;
+      console.log(emailname)
+      console.log("hooooon")
+      if (!emailname ) throw new Error("No data");
+      const courses = await singleRegistrations.find({"name":emailname});
+      if(courses){
+        res.send({"log":true,"courses":courses})
+        console.log(courses)
+    }
+    else{
+        res.send({"log":false})
+        console.log("falsee")
+    }
+}catch(err){
+    res.send({err});
+}
+  });
+
 
 router.get('/get-all-single-courses',async (req:any, res:any)=>{
     const singleCourses = await getSingleCourses();

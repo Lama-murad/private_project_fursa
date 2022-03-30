@@ -10,7 +10,7 @@ router.get('/get-user',async (req:any, res:any)=>{
     try{
         const{email,pass}=req.query
         if(!email || !pass) throw "password or name is not correct"
-        const user = await User.findOne({"email":email,"password":pass});
+        const user = await User.find({"email":email,"password":pass});
         if(user){
             res.coockie('userID',{id:user._id})
             res.send({"log":true,"user":user})
@@ -68,7 +68,7 @@ router.get('/get-user',async (req:any, res:any)=>{
     try{
         const existeduser = await User.find({"email":email});
         console.log(existeduser,"existed user")
-        if(!existeduser){
+        if(!existeduser===false){
         const user=new User({firstName:firstName,lastName:lastName,email:email,password:password,phoneNumber:phoneNumber})
         console.log(user ,"aaaaa")
     user.save().then((res)=>{
@@ -76,7 +76,7 @@ router.get('/get-user',async (req:any, res:any)=>{
     });
     res.send({val:"OK"})
 }
-else{
+    else{
     res.send("user already existes");
 }
 }
@@ -91,9 +91,11 @@ else{
     try {
         const { email, password } = req.body;
         if (!password || !email) throw ' invalid fields'
-        const _user = await User.findOne({ email: email });
+        // User.find({"email":email})
+        const _user = await User.find({ "email": email});
         console.log(_user)
-        if (_user) {
+        if (_user!=null) {
+            console.log('faaaaaaat')
             const filter={email:email};
             const update={password:password};
            

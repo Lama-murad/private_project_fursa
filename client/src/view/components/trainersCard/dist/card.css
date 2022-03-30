@@ -1,7 +1,6 @@
 .MainCard {
   display: flex;
   position: relative;
-  background-color: #eed9c48a;
   border: 0.0625rem solid #4164b1;
   text-align: left;
   justify-content: left;

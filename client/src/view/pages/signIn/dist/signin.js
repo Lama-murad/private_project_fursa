@@ -75,10 +75,13 @@ function SignIn() {
     var _e = react_1.useState(""), password = _e[0], setPassword = _e[1];
     var _f = react_1.useState(""), newPassword = _f[0], setNewPassword = _f[1];
     var dispatch = hooks_1.useAppDispatch();
+    var user = hooks_1.useAppSelector(userReducer_1.userInfo);
+    var emaill = user.email;
     function hadleForgetPassword(ev) {
         console.log(email, '///');
         axios_1["default"].patch('/user/update-user-password', { email: email, password: newPassword });
         console.log(newPassword);
+        navigate('/');
     }
     function handleSignIn(ev) {
         return __awaiter(this, void 0, void 0, function () {

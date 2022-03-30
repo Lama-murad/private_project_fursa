@@ -16,7 +16,7 @@ function SignUp() {
         axios_1["default"].post('/user/add-new-user', { firstName: form[0].value, lastName: form[2].value, email: form[4].value, password: form[6].value, phoneNumber: form[8].value })
             .then(function (data) {
             console.log(data.data);
-            alert(data.data);
+            // alert(data.data)
             navigate('/signIn');
         })["catch"](function (err) {
             console.error(err);

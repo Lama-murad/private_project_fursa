@@ -86,8 +86,9 @@ function Header() {
                 >
                     <MenuItem>  <Link to="/SignIn"><Icon icon="clarity:logout-line" width="25" height="25" /></Link>
                     </MenuItem>
+                    {/* <MenuItem><Link to="/myData"><Icon icon="fluent:more-circle-20-regular" width="25" height="25" /></Link></MenuItem> */}
                     <MenuItem onClick={handleClose1}><Icon icon="ci:off-close" width="25" height="25" /></MenuItem>
-                    <MenuItem><Icon icon="fluent:more-circle-20-regular" width="25" height="25" /></MenuItem>
+   
                 </Menu>
             </div>
         </div>

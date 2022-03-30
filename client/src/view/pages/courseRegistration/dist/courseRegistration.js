@@ -51,7 +51,6 @@ var styles_1 = require("@mui/material/styles");
 require("react-calendar/dist/Calendar.css");
 var react_router_dom_1 = require("react-router-dom");
 var Box_1 = require("@mui/material/Box");
-var react_4 = require("@iconify/react");
 var InputLabel_1 = require("@mui/material/InputLabel");
 var MenuItem_1 = require("@mui/material/MenuItem");
 var FormControl_1 = require("@mui/material/FormControl");
@@ -94,8 +93,7 @@ var StyledTableCell = styles_1.styled(TableCell_1["default"])(function (_a) {
     var theme = _a.theme;
     return (_b = {},
         _b["&." + TableCell_1.tableCellClasses.head] = {
-            backgroundColor: theme.palette.secondary.light,
-            // backgroundColor:{main},
+            backgroundColor: theme.palette.primary.main,
             color: theme.palette.common.white,
             innerWidth: 10
         },
@@ -227,7 +225,7 @@ function CourseRegistration() {
                         react_1["default"].createElement(MenuItem_1["default"], { value: 1 }, "Beginner"),
                         react_1["default"].createElement(MenuItem_1["default"], { value: 2 }, "Intermediate"),
                         react_1["default"].createElement(MenuItem_1["default"], { value: 3 }, "Advanced")))),
-            react_1["default"].createElement(TextField_1["default"], { className: "txtfield", autoComplete: "given-name", name: "Name", required: true, id: "Name", label: "Name", autoFocus: true }),
+            react_1["default"].createElement(TextField_1["default"], { className: "txtfield", autoComplete: "given-name", name: "Name", required: true, id: "Name", label: "Email", autoFocus: true }),
             react_1["default"].createElement(TextField_1["default"], { className: "agefield", autoComplete: "given-age", name: "Age", required: true, id: "Age", label: "Age", autoFocus: true }),
             alertt &&
                 react_1["default"].createElement("div", { className: "popup" },
@@ -253,7 +251,6 @@ function CourseRegistration() {
                                 react_1["default"].createElement(StyledTableCell, { align: "center" }, row.availableSpaces),
                                 react_1["default"].createElement(StyledTableCell, { align: "center" },
                                     react_1["default"].createElement("input", { type: "checkbox", id: index, name: row.name, value: row.time, checked: checkedState[index], onChange: handleCheck })))); }))))),
-            react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" },
-                react_1["default"].createElement(react_4.Icon, { icon: "academicons:preregistered", width: "25", height: "25" })))));
+            react_1["default"].createElement(Button_1["default"], { variant: "contained", type: "submit", className: "regBtn" }, "register"))));
 }
 exports["default"] = CourseRegistration;

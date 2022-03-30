@@ -51,7 +51,7 @@ router.get('/get-user', function (req, res) { return __awaiter(void 0, void 0, v
                 _a = req.query, email = _a.email, pass = _a.pass;
                 if (!email || !pass)
                     throw "password or name is not correct";
-                return [4 /*yield*/, userModel_1["default"].findOne({ "email": email, "password": pass })];
+                return [4 /*yield*/, userModel_1["default"].find({ "email": email, "password": pass })];
             case 1:
                 user = _b.sent();
                 if (user) {
@@ -130,7 +130,7 @@ router.post('/add-new-user', function (req, res) { return __awaiter(void 0, void
             case 2:
                 existeduser = _b.sent();
                 console.log(existeduser, "existed user");
-                if (!existeduser) {
+                if (!existeduser === false) {
                     user = new userModel_1["default"]({ firstName: firstName, lastName: lastName, email: email, password: password, phoneNumber: phoneNumber });
                     console.log(user, "aaaaa");
                     user.save().then(function (res) {
@@ -159,11 +159,12 @@ router.patch("/update-user-password", function (req, res) { return __awaiter(voi
                 _a = req.body, email = _a.email, password = _a.password;
                 if (!password || !email)
                     throw ' invalid fields';
-                return [4 /*yield*/, userModel_1["default"].findOne({ email: email })];
+                return [4 /*yield*/, userModel_1["default"].find({ "email": email })];
             case 1:
                 _user = _b.sent();
                 console.log(_user);
-                if (!_user) return [3 /*break*/, 3];
+                if (!(_user != null)) return [3 /*break*/, 3];
+                console.log('faaaaaaat');
                 filter = { email: email };
                 update = { password: password };
                 return [4 /*yield*/, userModel_1["default"].findOneAndUpdate(filter, update)];

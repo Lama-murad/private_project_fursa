@@ -61,8 +61,7 @@ const coursesRegis: Array<TimeManagement> = [
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.secondary.light,
-    // backgroundColor:{main},
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
     innerWidth: 10,
   },
@@ -218,7 +217,7 @@ function CourseRegistration() {
           name="Name"
           required
           id="Name"
-          label="Name"
+          label="Email"
           autoFocus
         />
         <TextField
@@ -288,7 +287,7 @@ function CourseRegistration() {
         }
 
 
-        <Button variant="contained" type="submit" className="regBtn"><Icon icon="academicons:preregistered" width="25" height="25" /></Button>
+        <Button variant="contained" type="submit" className="regBtn">register</Button>
       </form>
     </div>
   )

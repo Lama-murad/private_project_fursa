@@ -31,7 +31,7 @@ function SignUp() {
   axios.post('/user/add-new-user', {firstName: form[0].value,lastName: form[2].value ,email: form[4].value, password: form[6].value,phoneNumber: form[8].value})
     .then(data => {
       console.log(data.data);
-      alert(data.data)
+      // alert(data.data)
 
       navigate('/signIn');
       

@@ -12,8 +12,8 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useAppDispatch } from '../../../app/hooks';
-import { fetchUser} from '../../../features/userReducer';
+import { useAppDispatch ,useAppSelector} from '../../../app/hooks';
+import { fetchUser, userInfo } from '../../../features/userReducer';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -43,11 +43,14 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const dispatch = useAppDispatch()
+  const user = useAppSelector(userInfo)
+  const emaill = user.email;
 
   function hadleForgetPassword(ev: any) {
     console.log(email, '///')
-    axios.patch('/user/update-user-password', { email: email, password: newPassword })
+    axios.patch('/user/update-user-password', {email: email, password: newPassword })
     console.log(newPassword)
+    navigate('/')
   }
 
   async function handleSignIn(ev: any) {
